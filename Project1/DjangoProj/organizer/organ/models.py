@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Tasks(models.Model):
+    objects = None
     userID = models.IntegerField(blank=False)
     title = models.CharField(max_length=25, default="Название задачи")
     descriptionn = models.CharField(blank=False, max_length=255, default="Описание задачи")

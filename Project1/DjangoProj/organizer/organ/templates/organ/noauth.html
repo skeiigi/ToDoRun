@@ -1,13 +1,15 @@
-<!DOCTYPE html>
+{% extends 'organ/header.html' %}
+
+{% block title %}
+гостевая страница
+{% endblock %}
+
+{% block body %}
 {% load static %}
-<html>
-<head>
-    <title>АГАСЬ</title>
-</head>
 <body>
     <h1>Привет медвед</h1>
     <img src="{% static 'images/cake.jpg' %}" alt="торт (маленбкий)"><br>
     <h3>Общедоступная информация для неудачников</h3>
     <button onclick="window.location.href='{% url 'home' %}'">Назад</button>
 </body>
-</html>
+{% endblock %}

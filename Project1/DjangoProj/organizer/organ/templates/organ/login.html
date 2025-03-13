@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+{% extends 'organ/header.html' %}
+
+{% block title %}
+вход в аккаунт
+{% endblock %}
+
+{% block body %}
 {% load static %}
-<html>
-<head>
-    <title>to do rka</title>
-    <style>
-    </style>
-  <!--<link rel="stylesheet" href="{% static 'css/styles.css' %}"/>-->
-</head>
-<body>
+<div class="container">
     <header>
         <h1>Добро пожаловать в замечательные заметки!</h1>
     </header>
@@ -17,7 +16,9 @@
         <button type="submit">Отправить</button>
     </form><br>
     <p>Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a>.</p>
-    <a href="{% url 'noauth' %}">Продолжить без авторизации</a><br><br>
-    <a href="{% url 'faq_page' %}">FAQ</a>
-</body>
-</html>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" onclick="location.href='{% url 'noauth' %}'">продолжить без авторизации</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="location.href='{% url 'faq_page' %}'">FAQ</button>
+    </div>
+</div>
+{% endblock %}

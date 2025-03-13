@@ -1,17 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+{% extends 'organ/header.html' %}
+
+{% block title %}
+регистрация
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<div class="container">
     <h2>Регистрация</h2>
-<form method="post">
+<!--<form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-</form>
-    <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>.</p>
+    <div class="px-4 py-5 my-5 text-center">
+        <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>.</p>
     <a href="{% url 'noauth' %}">Продолжить без регистрации</a><br><br>
     <a href="{% url 'faq_page' %}">FAQ</a>
-</body>
-</html>
+        {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+    </div>
+</form>-->
+    <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form">
+      <input type="text" placeholder="E-mail"/>
+      <input type="password" placeholder="пароль"/>
+      <input type="checkbox" id="checkbox1"/>
+      <label for="checkbox1">вы точно не робот?</label>
+      <button>войти</button>
+      <p class="message">не зарегистрированы? <a href="#">Создать аккаунт</a></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
