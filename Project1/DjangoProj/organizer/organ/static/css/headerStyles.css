@@ -1,0 +1,88 @@
+/* Общие стили для body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Светлый фон */
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для контейнера шапки */
+.container {
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */
+    padding: 0 15px; /* Отступы по бокам */
+}
+
+/* Стили для шапки */
+header {
+    background-color: #ffffff; /* Белый фон для шапки */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для шапки */
+}
+
+/* Стили для навигации */
+.nav {
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
+    margin: 0; /* Убираем маргины */
+    display: flex; /* Используем flexbox для выравнивания */
+}
+
+/* Стили для элементов навигации */
+.nav li {
+    margin: 0 15px; /* Отступы между элементами навигации */
+}
+
+.nav a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #333; /* Цвет текста */
+    padding: 10px 15px; /* Отступы внутри ссылок */
+    transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+/* Стили для наведения на ссылки */
+.nav a:hover {
+    background-color: #e9ecef; /* Цвет фона при наведении */
+    border-radius: 5px; /* Скругление углов */
+}
+
+/* Стили для кнопок */
+.btn {
+    padding: 10px 20px; /* Отступы внутри кнопок */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+/* Стили для кнопки "Login" */
+.btn-outline-primary {
+    background-color: transparent; /* Прозрачный фон */
+    color: #007bff; /* Цвет текста */
+    border: 1px solid #007bff; /* Рамка */
+}
+
+/* Стили для кнопки "Sign-up" */
+.btn-primary {
+    background-color: #007bff; /* Цвет фона */
+    color: #ffffff; /* Цвет текста */
+}
+
+/* Стили для кнопок при наведении */
+.btn-outline-primary:hover {
+    background-color: #007bff; /* Цвет фона при наведении */
+    color: #ffffff; /* Цвет текста при наведении */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column; /* Вертикальное выравнивание для мобильных */
+    }
+
+    .nav li {
+        margin: 5px 0; /* Отступы между элементами навигации */
+    }
+}

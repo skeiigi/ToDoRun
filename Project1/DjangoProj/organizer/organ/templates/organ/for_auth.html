@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+{% extends 'organ/header.html' %}
+
+{% block title %}
+гостевая страница
+{% endblock %}
+
+{% block body %}
 {% load static %}
-<html>
-<head>
-    <title>ВАУ</title>
-</head>
 <body>
     <h1><a href="{% url 'for_auth' %}">Список задач</a>.....<a href="{% url 'task_calendar' %}">Календарь задач</a>
         .....<a href="{% url 'faq_page' %}">FAQ</a></h1><br>
@@ -14,4 +16,4 @@
     <button type="submit">Выйти</button>
 </form>
 </body>
-</html>
+{% endblock %}
