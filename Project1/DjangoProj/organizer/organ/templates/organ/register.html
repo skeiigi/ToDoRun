@@ -12,10 +12,10 @@
     <div class="px-4 py-5 my-5 text-center">
         {% csrf_token %}
         {{ form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
         <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>.</p>
     <a href="{% url 'noauth' %}">Продолжить без регистрации</a><br><br>
     <a href="{% url 'faq_page' %}">FAQ</a>
-    <button type="submit">Зарегистрироваться</button>
     </div>
 </form>-->
 <!--    <div class="form">-->

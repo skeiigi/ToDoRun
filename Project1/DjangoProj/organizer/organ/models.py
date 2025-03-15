@@ -9,11 +9,11 @@ class Tasks(models.Model):
         related_name="tasks",
         blank=False
     )
-    title = models.CharField(max_length=25, default="Название задачи")
-    descriptionn = models.CharField(blank=True, max_length=255, default="Описание задачи")
-    statuss = models.BooleanField(default=False)
+    title = models.CharField(max_length=25)
+    descriptionn = models.CharField(blank=True, max_length=255)
+    statuss = models.BooleanField(default=False, verbose_name="Выполнено")
     time_create = models.DateTimeField(auto_now_add=True)
-    time_finish = models.DateTimeField(blank=True)
+    time_finish = models.DateTimeField(blank=True, null=True, verbose_name="Время завершения")
 
     def __str__(self):
         return self.title

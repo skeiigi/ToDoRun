@@ -1,16 +1,64 @@
 {% extends 'organ/header.html' %}
 
 {% block title %}
-календарь задач
+список задач
 {% endblock %}
 
 {% block body %}
 {% load static %}
+
+<!--тоже пришлось чуть-чуть не в свою область (css) залезть(((-->
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
 <body>
-<ul>
-  {% for task in tasks %}
-    <li>Задача: {{ task.title }} <br> Описание: {{ task.descriptionn }} <br> Дата и время создания: {{ task.time_create|date:"d.m.Y H:i" }}</li>
-  {% endfor %}
-</ul>
+
+    <h1>Ваши задачи, {{ user.username }}</h1>
+  {% if tasks %}
+
+    <table>
+        <tr>
+            <th>Статус</th>
+            <th>Задача</th>
+            <th>Описание</th>
+            <th>Начало</th>
+            <th>Завершение</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="task_id" value="{{ task.id }}">
+                    <input type="checkbox"
+                        name="statuss"
+                        {% if task.statuss %}checked{% endif %}
+                        onchange="this.form.submit()">
+                </form>
+            </td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.descriptionn|truncatechars:100 }}</td>
+            <td>{{ task.time_create|date:"d.m.Y H:i" }}</td>
+            <td>{{ task.time_finish|date:"d.m.Y H:i" }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+
+  {% else %}
+    <p>У вас еще нет задач</p>
+  {% endif %}
+
+
+<!--сделать видимым только название задачи, а при нажатии показывать полную информацию-->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить задачу</button>
+</form>
 </body>
 {% endblock %}

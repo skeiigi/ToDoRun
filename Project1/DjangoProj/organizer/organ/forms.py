@@ -1,10 +1,44 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Tasks
 
-#There is kokoin?
+
+class TaskStatusForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['statuss']
+        widgets = {
+            'statuss': forms.CheckboxInput(attrs={'class': 'status-checkbox'})
+        }
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['title', 'descriptionn']
+
+        labels = {
+            'title': 'Название',
+            'descriptionn': 'Описание',
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'size': 50,  # Ширина поля в символах
+                'style': 'width: 300px;',  # Или задайте размер через CSS
+                'placeholder': 'Назовите задачу',
+            }),
+            'descriptionn': forms.Textarea(attrs={
+                'placeholder': 'Опишите задачу',
+            }),
+        }
+
+
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(
+        help_text="Введите действительный email (например: user@example.com)"
+    )
 
     class Meta:
         model = User

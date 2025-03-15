@@ -1,21 +1,47 @@
-from django.shortcuts import render, redirect
+from datetime import datetime
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
+from .forms import RegisterForm, TaskForm, TaskStatusForm
 from .models import Tasks
 
 
 @login_required
 def list_tasks(request):
-    return render(request, 'organ/list_tasks.html')
+    if request.method == 'POST':
+        # Обработка формы создания задачи
+        if 'title' in request.POST:
+            form = TaskForm(request.POST)
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.user = request.user
+                task.save()
 
+        # Обработка изменения статуса
+        elif 'task_id' in request.POST:
+            task = get_object_or_404(Tasks,
+                                     id=request.POST.get('task_id'),
+                                     user=request.user)
+            form = TaskStatusForm(request.POST, instance=task)
 
+            if form.is_valid():
+                task = form.save(commit=False)  # Не сохраняем сразу в БД
+                # Обновляем время завершения
+                if task.statuss:  # Если статус стал "выполнено"
+                    task.time_finish = datetime.now()
+                else:  # Если статус сброшен
+                    task.time_finish = None
+                task.save()  # Сохраняем все изменения
 
-@login_required
-def list_tasks(request):
+        return redirect('list_tasks')
+
+    # GET-запрос
     tasks = Tasks.objects.filter(user=request.user)
-    return render(request, 'organ/list_tasks.html', {'tasks': tasks})
+    return render(request, 'organ/list_tasks.html', {
+        'tasks': tasks,
+        'form': TaskForm()
+    })
 
 
 @login_required
@@ -24,7 +50,10 @@ def for_auth(request):
 
 
 def task_calendar(request):
-    return render(request, 'organ/task_calendar.html')
+    tasks = Tasks.objects.all()
+    return render(request, 'organ/task_calendar.html', {
+        'tasks': tasks
+    })
 
 
 def faq_page(request):
@@ -63,5 +92,5 @@ def register(request):
             return redirect('for_auth')
     else:
         form = RegisterForm()
-        return render(request, 'organ/register.html', {'form': form})
-    return redirect('home')
+
+    return render(request, 'organ/register.html', {'form': form})
