@@ -1,0 +1,16 @@
+{% extends 'organ/header.html' %}
+
+{% block title %}
+календарь задач
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<body>
+<ul>
+  {% for task in tasks %}
+    <li>Задача: {{ task.title }} <br> Описание: {{ task.descriptionn }} <br> Дата и время создания: {{ task.time_create|date:"d.m.Y H:i" }}</li>
+  {% endfor %}
+</ul>
+</body>
+{% endblock %}

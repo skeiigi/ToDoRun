@@ -12,6 +12,6 @@ urlpatterns = [
     path('noauth/', views.noauth, name='noauth'),
     path('for_auth/', views.for_auth, name="for_auth"),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
-    path('task_calendar/', views.task_calendar, name='task_calendar')
-    #path('home/', views.home, name='')
+    path('task_calendar/', views.task_calendar, name='task_calendar'),
+    path('list_tasks/', views.list_tasks, name='list_tasks')
 ]

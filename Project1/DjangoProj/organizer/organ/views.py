@@ -5,16 +5,26 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm
 from .models import Tasks
 
+
+@login_required
+def list_tasks(request):
+    return render(request, 'organ/list_tasks.html')
+
+
+
+@login_required
+def list_tasks(request):
+    tasks = Tasks.objects.filter(user=request.user)
+    return render(request, 'organ/list_tasks.html', {'tasks': tasks})
+
+
 @login_required
 def for_auth(request):
     return render(request, 'organ/for_auth.html')
 
 
 def task_calendar(request):
-
-    _tasks = Tasks.objects.all()
-
-    return render(request, 'organ/task_calendar.html', {'tasks': _tasks})
+    return render(request, 'organ/task_calendar.html')
 
 
 def faq_page(request):
