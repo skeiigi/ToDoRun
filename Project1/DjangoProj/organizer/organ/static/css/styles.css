@@ -112,6 +112,12 @@ body {
     align-items: center;
     text-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
+span{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container-enter {
     width: 30px;
     height: 50px;
@@ -185,17 +191,21 @@ a:hover{
 
 /*стили кнопок*/
 .button-container{
-    justify-content: flex-end;
-    align: right; /* Выравниваем кнопки по центру по вертикали */
-    gap: 10px; /* Отступ между кнопками */
- box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    gap: 0px; /* Отступ между кнопками */
+    position: relative;
+    max-width: 100%;
+    width: auto;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .btn {
     padding: 10px 20px; /* Отступы внутри кнопок */
     border: none; /* Убираем рамку */
-    border-radius: 5px; /* Скругление углов */
+    border-radius: 10px; /* Скругление углов */
     cursor: pointer; /* Указатель при наведении */
-    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 20%), 1px 5px 5px 0 rgb(0 0 0 / 12%);
 }
 .btn-outline-primary {
     width: 120px;
@@ -240,11 +250,16 @@ a:hover{
 .btn-home-primary:hover {
     background-color: #283618; /* Темнее при наведении */
 }
-
+.btn-form-outline:hover {
+    background-color: #FEFAE0; /* Цвет фона при наведении */
+    color: #ffffff; /* Цвет текста при наведении */
+}
 
 
 /*стили домашней страницы*/
 .home-container{
+    width: 100%;
+    height: auto;
     position: absolute;
     padding: 0;
 }
@@ -282,6 +297,15 @@ display: flex;
 
 
 
+/*страница для незарегавшихся*/
+.cake-container{
+    width: 50%;
+    height: auto;
+    position: absolute;
+    padding: 0;
+}
+
+
 
 
 
@@ -293,19 +317,16 @@ display: flex;
     margin: 1px; /* Убираем маргины */
     display: flex; /* Используем flexbox для выравнивания */
 }
-
 /* Стили для элементов навигации */
 .nav li {
     margin: 15px 25px; /* Отступы между элементами навигации */
 }
-
 .nav a {
     text-decoration: none; /* Убираем подчеркивание */
     color: #333; /* Цвет текста */
     padding: 10px 1px; /* Отступы внутри ссылок */
     transition: background-color 0.3s; /* Плавный переход для фона */
 }
-
 .nav button {
     display: flex;
     align: right;
@@ -332,52 +353,168 @@ display: flex;
     }
 }
 
-.login-page {
-  width: 360px;
-  padding: 2% 0 0;
-  margin: auto;
-}
+
+/*стили для окна входа*/
 .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   position: relative;
-  top: 250px;
+  width: 400px;
+  height: auto;
+  top: 100px;
   left: 0px;
   z-index: 1;
   background: #f3c99c12;
-  max-width: 160px;
-  margin: 0 auto 1200px;
-  padding: 45px;
+  margin: auto auto;
+  padding: 18px;
   text-align: center;
   border-radius: 20px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 6%), 0 5px 5px 0 rgb(0 0 0 / 7%);
+}
+.form label{
+    margin-left: 10px;
+    font-size: 20px;
+    width: 200px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    color: #837f7f;
 }
 .form input {
-  font-family: "Roboto", sans-serif;
   outline: 0;
   background: #ffffff29;
+  color: #837f7f;
   width: 100%;
   border: 0;
-  margin-bottom: 20px;
   padding: 15px;
   box-sizing: border-box;
   border-radius: 15px;
-  box-shadow: 0 1px 1px rgb(0 0 0 / 6%), 0 5px 5px 0 rgb(0 0 0 / 17%);
-  font-size: 24px;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 6%), 0 5px 5px 0 rgb(0 0 0 / 7%);
+  font-size: 26px;
+}
+.btn-form-primary {
+    width: 160px;
+    height: 52px;
+    margin-left: 5px;
+    padding: 5px;
+    font-size: 28px;
+    background: #DDA15E; /* Цвет фона */
+    color: #ffffff; /* Цвет текста */
+    transition:0.5s;
 }
 .form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: ;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  background: #dc9d57;
-  width: 70%;
-  border-radius: 15px;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
   cursor: pointer;
+}
+p{
+    height: 80px;
+    margin: 20px;
+}
+p label{
+    width: 40px;
+}
+.link-container{
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+.register-container{
+    margin: 40px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    width: auto;
+    height: auto;
+}
+form h4{
+    font-size: 16px;
+    text-decoration: none;
+}
+
+
+
+/*стили для окна регистрации*/
+.login-page {
+  width: 560px;
+  padding: 2% 0 0;
+  margin: auto;
+}
+.form-register {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+  position: relative;
+  width: 800px;
+  height: auto;
+  top: 30px;
+  left: 0px;
+  z-index: 1;
+  background: #f3c99c12;
+  margin-bottom: 50px;
+  padding: 18px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px rgb(0 0 0 / 8%), 0px 3px 3px 3px rgb(0 0 0 / 10%);
+}
+.text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+}
+.form-register label{
+    margin-left: 10px;
+    font-size: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    color: #837f7f;
+}
+.form-register input {
+  outline: 0;
+  background: #ffffff29;
+  color: #837f7f;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 6%), 0 5px 5px 0 rgb(0 0 0 / 7%);
+  font-size: 26px;
+}
+.btn-register-primary {
+    width: 300px;
+    height: 57px;
+    padding: 5px;
+    font-size: 30px;
+    background: #DDA15E; /* Цвет фона */
+    color: #ffffff; /* Цвет текста */
+    transition:0.5s;
+}
+.btn-register-primary: hover {
+    color: #ffffff;
+}
+.btn-form-outline {
+    width: 160px;
+    height: 52px;
+    padding: 5px;
+    font-size: 25px;
+    justify-content: center;
+    margin: 10px;
+    background-color: transparent; /* Прозрачный фон */
+    color:rgb(107 146 104 / 50%); /* Цвет текста */
+    border-top: 2px solid rgb(216 205 181 / 15%); /* Рамка */
+    transition: 0.7s;
+}
+.btn-form-outline: hover{
+    color: #ffffff;
 }
 input[type = "checkbox"]{
   align-content:
@@ -386,17 +523,59 @@ input[type = "checkbox"]{
   height: 20px;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #8b9861;
 }
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
+.form a {
+    margin: 0px;
+    padding: 0px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  color: #77a15a;
 }
-.form .message a {
-  color: #4CAF50;
-  text-decoration: none;
+.form a: hover{
+    color: #ffffff;
+}
+.form message{
+    color: #77a15a;
 }
 .form .register-form {
   display: none;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+h1 {
+    margin: 15px;
+}
+
+
+
+.forauth-container{
+    margin-left: 10px;
+    padding: 20px;
+    background-color: #DDA15E;
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+
+}
+.forauth-container a{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 350px;
+    color: #FF218C;
+}
+.forauth-container a: hover{
+    color: #ffffff;
+}
+.forauth-container h1{
+    margin: 1px;
 }
