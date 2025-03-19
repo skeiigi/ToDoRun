@@ -12,4 +12,6 @@
   --transition: 0.3s ease;
   --font-family: 'Comfortaa', sans-serif;
   --body-background: #f7f5e5;
+  --mx-size-page: 1500px;
+  --global-title-size: clamp(2.5rem, -3.125rem + 18vw, 7rem);
 }

@@ -7,6 +7,7 @@
 <main class="home">
     <section class="home__hero hero">
         <div class="hero__content">
+            <h1 class="hero__title">To Do Run</h1>
             <p class="hero__text">
                 Добро пожаловать на главную страницу! Это лучшее приложение для создания заметок и составления планов.
             </p>
@@ -26,6 +27,23 @@
                     Админам
                 </button>
             </div>
+        </div>
+        <div class="hero__container-img">
+            <article>
+                <a href="{% url 'tasks' %}">
+                    <div class="hero__container-link task-list"></div>
+                </a>
+            </article>
+            <article>
+                <a href="{% url 'calendar' %}">
+                    <div class="hero__container-link task-calendar"></div>
+                </a>
+            </article>
+            <article>
+                <a href="{% url 'about' %}">
+                    <div class="hero__container-link about-us"></div>
+                </a>
+            </article>
         </div>
     </section>
 </main>

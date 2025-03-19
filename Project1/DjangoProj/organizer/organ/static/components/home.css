@@ -4,46 +4,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--background-color);
   padding: 20px;
   box-sizing: border-box;
 }
 
 .hero {
-  width: 100%;
-  max-width: 1200px;
-  text-align: center;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 20px;
+  
+  width: 100%;
+  max-width: var(--mx-size-page);
 }
 
 .hero__content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   color: var(--text-color);
-  text-align: center;
-  block-size: 65vh;
-  background-image: url(../images/пират.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 20px;
-  border-radius: 100px;
+  /* text-align: center; */
+  padding: 40px;
+  background-color: var(--base-color);
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+}
+
+.hero__title {
+  font-size: var(--global-title-size);
+  color: var(--text-alternative-color);
+  margin-block-end: 20px;
 }
 
 .hero__text {
   font-size: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   margin-bottom: 20px;
+  color: var(--text-alternative-color);
 }
 
 .hero__buttons {
   display: flex;
-  justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
 }
@@ -59,7 +58,7 @@
 
 .hero__button--primary {
   background-color: var(--primary-color);
-  color: var(--text-color);
+  color: var(--text-alternative-color);
 }
 
 .hero__button--primary:hover {
@@ -74,7 +73,38 @@
 
 .hero__button--outline:hover {
   background-color: var(--primary-color);
-  color: var(--text-color);
+  color: var(--text-alternative-color);
+}
+
+.hero__container-img {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__container-link {
+  height: 728px;
+  width: 240px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.task-list {
+  background-color: #42aaff;
+  background-image: url(../images/list-task.jpg);
+}
+
+.task-calendar {
+  background-color: #ffc0cb;
+  background-image: url(../images/calendar.jpg);
+}
+
+.about-us {
+  background-color: #008000;
+  background-image: url(../images/scale_1200.jpg);
 }
 
 @media (max-width: 768px) {
