@@ -2,3 +2,4 @@
 .idea/InfoSecurity.iml
 .idea/misc.xml
 Project1/DjangoProj/organizer/db.sqlite3
+.mypy_cache
