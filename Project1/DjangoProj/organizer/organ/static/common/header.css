@@ -1,0 +1,62 @@
+/* Стили шапки */
+.top {
+  width: 100vw;
+  height: 100vh;
+  background-color: #DDA15E;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  width: 80%;
+  height: 70px;
+  background-color: #DDA15E;
+  display: flex;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.home, .task_list, .task_calendar, .donuts, .FAQ {
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.span-enter, .span-logo {
+  font-size: 40px;
+  color: #ffffff;
+  height: 50px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.enter {
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.container-enter, .container-logo {
+  width: 30px;
+  height: 50px;
+  margin-left: 10px;
+  max-width: 1500px;
+  padding: 5px;
+}
