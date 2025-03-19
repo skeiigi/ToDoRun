@@ -6,12 +6,12 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls, name='admin'),
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register, name='register'),
-    path('faq_page/', views.faq_page, name='faq_page'),
-    path('noauth/', views.noauth, name='noauth'),
-    path('for_auth/', views.for_auth, name="for_auth"),
+    path('login/', views.auth_login, name='auth_login'),
+    path('register/', views.auth_register, name='auth_register'),
+    path('about/', views.about, name='about'),
+    path('guest/', views.guest, name='guest'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
-    path('task_calendar/', views.task_calendar, name='task_calendar'),
-    path('list_tasks/', views.list_tasks, name='list_tasks')
+    path('calendar/', views.calendar, name='calendar'),
+    path('tasks/', views.tasks, name='tasks'),
 ]

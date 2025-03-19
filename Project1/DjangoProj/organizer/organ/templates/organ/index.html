@@ -1,0 +1,21 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block body %}
+{% load static %}
+<div class="home-container">
+    <div class="pirate-image">
+        <img src="{% static 'images/пират.png' %}" alt="Мем с пиратом" width="100%" height="auto">
+    </div>
+    <div class="text-overlay">
+        <div class="image-text-container">
+            Добро пожаловать на главную страницу! Это лучшее приложение для создания заметок и составления планов.
+        </div>
+        <div class="image-button-container">
+            <button type="button" class="btn btn-home-primary btn-lg px-4 gap-3" onclick="location.href='{% url 'auth_login' %}'">Войти</button>
+            <button type="button" class="btn btn-outline-primary btn-lg px-4" onclick="location.href='{% url 'admin:index' %}'">Админам</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
-from datetime import datetime
-from django.shortcuts import render, redirect, get_object_or_404
+# from datetime import datetime
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -8,67 +8,54 @@ from .models import Tasks
 
 
 @login_required
-def list_tasks(request):
+def tasks(request):
     if request.method == 'POST':
-        # Обработка формы создания задачи
         if 'title' in request.POST:
             form = TaskForm(request.POST)
             if form.is_valid():
                 task = form.save(commit=False)
                 task.user = request.user
                 task.save()
-
-        # Обработка изменения статуса
         elif 'task_id' in request.POST:
-            task = get_object_or_404(Tasks,
-                                     id=request.POST.get('task_id'),
-                                     user=request.user)
+            task = Tasks.objects.get(
+                id=request.POST.get('task_id'),
+                user=request.user
+            )
             form = TaskStatusForm(request.POST, instance=task)
-
             if form.is_valid():
-                task = form.save(commit=False)  # Не сохраняем сразу в БД
-                # Обновляем время завершения
-                if task.statuss:  # Если статус стал "выполнено"
-                    task.time_finish = datetime.now()
-                else:  # Если статус сброшен
-                    task.time_finish = None
-                task.save()  # Сохраняем все изменения
-
-        return redirect('list_tasks')
-
-    # GET-запрос
+                task = form.save(commit=False)
+                task.save()
+        return redirect('tasks')
     tasks = Tasks.objects.filter(user=request.user)
-    return render(request, 'organ/list_tasks.html', {
+    return render(request, 'organ/tasks.html', {
         'tasks': tasks,
         'form': TaskForm()
     })
 
 
 @login_required
-def for_auth(request):
-    return render(request, 'organ/for_auth.html')
+def dashboard(request):
+    return render(request, 'organ/dashboard.html')
 
 
-def task_calendar(request):
+def calendar(request):
     tasks = Tasks.objects.all()
-    return render(request, 'organ/task_calendar.html', {
-        'tasks': tasks
-    })
+    return render(request, 'organ/calendar.html', {'tasks': tasks})
 
 
-def faq_page(request):
-    return render(request, 'organ/faq_page.html')
+def about(request):
+    return render(request, 'organ/about.html')
 
 
-def noauth(request):
-    return render(request, 'organ/noauth.html')
+def guest(request):
+    return render(request, 'organ/guest.html')
 
 
 def home(request):
-    return render(request, 'organ/home.html')
+    return render(request, 'organ/index.html')
 
 
-def login_view(request):
+def auth_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -77,20 +64,19 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('for_auth')
+                return redirect('dashboard')
     else:
         form = AuthenticationForm()
-    return render(request, 'organ/login.html', {'form': form})
+    return render(request, 'organ/auth_login.html', {'form': form})
 
 
-def register(request):
+def auth_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('for_auth')
+            return redirect('dashboard')
     else:
         form = RegisterForm()
-
-    return render(request, 'organ/register.html', {'form': form})
+    return render(request, 'organ/auth_register.html', {'form': form})

@@ -1,24 +1,17 @@
-{% extends 'organ/header.html' %}
+{% extends 'organ/base.html' %}
 
-{% block title %}
-список задач
-{% endblock %}
+{% block title %}Список задач{% endblock %}
 
 {% block body %}
 {% load static %}
-
-<!--тоже пришлось чуть-чуть не в свою область (css) залезть(((-->
 <style>
 table, th, td {
-  border:1px solid black;
+  border: 1px solid black;
 }
 </style>
 
-<body>
-
-    <h1>Ваши задачи, {{ user.username }}</h1>
-  {% if tasks %}
-
+<h1>Ваши задачи, {{ user.username }}</h1>
+{% if tasks %}
     <table>
         <tr>
             <th>Статус</th>
@@ -44,21 +37,15 @@ table, th, td {
             <td>{{ task.time_create|date:"d.m.Y H:i" }}</td>
             <td>{{ task.time_finish|date:"d.m.Y H:i" }}</td>
         </tr>
-
         {% endfor %}
     </table>
-
-
-  {% else %}
+{% else %}
     <p>У вас еще нет задач</p>
-  {% endif %}
+{% endif %}
 
-
-<!--сделать видимым только название задачи, а при нажатии показывать полную информацию-->
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Добавить задачу</button>
 </form>
-</body>
 {% endblock %}
