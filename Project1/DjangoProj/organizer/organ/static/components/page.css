@@ -1,9 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+/* 
+ * @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+ * нелья так подключать шрифты, если интересно почему почитай про CRP в браузере
+ */
 
-/* Основные стили */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f5e5; /* Светлый фон */
+    background-color: #f7f5e5;
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -11,8 +13,8 @@ body {
 
 .container {
     margin-left: 10px;
-    max-width: 1500px; /* Максимальная ширина контейнера */
-    margin: 0 auto; /* Центрирование контейнера */
+    max-width: 1500px;
+    margin: 0 auto;
     padding: 5px;
 }
 
