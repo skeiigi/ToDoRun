@@ -6,19 +6,26 @@
 
 {% block body %}
 {% load static %}
-<div class="container">
+<body>
     <header>
         <h1>Добро пожаловать в замечательные заметки!</h1>
     </header>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
+        <div class="form">
+            <div class="form-input">
+                {{ form.as_p }}
+                <div class="button-container">
+                    <button type="submit" class="btn btn-form-primary">войти</button>
+                    <button type="button" class="btn btn-form-outline" onclick="location.href='{% url 'noauth' %}'">не входить</button>
+                </div>
+                <!--<button type="button" class="btn btn-outline-secondary" onclick="location.href='{% url 'faq_page' %}'">FAQ</button>-->
+                <div class="link-container">
+                    <h4>Ещё нет аккаунта?</h4>
+                    <a href="{% url 'register' %}">Зарегистрируйтесь</a>
+                </div>
+            </div>
+        </div>
     </form><br>
-    <p>Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a>.</p>
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" onclick="location.href='{% url 'noauth' %}'">продолжить без авторизации</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="location.href='{% url 'faq_page' %}'">FAQ</button>
-    </div>
-</div>
+</body>>
 {% endblock %}

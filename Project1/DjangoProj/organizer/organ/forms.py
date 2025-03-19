@@ -39,7 +39,14 @@ class RegisterForm(UserCreationForm):
     email = forms.EmailField(
         help_text="Введите действительный email (например: user@example.com)"
     )
-
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+        widget=forms.TextInput(
+            attrs={
+                "class": "special",
+                "size": "40",
+                "label": "comment",
+                "placeholder": "Comma Seperated",
+            }
+        ),

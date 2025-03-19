@@ -6,18 +6,19 @@
 
 {% block body %}
 {% load static %}
-<div class="container">
-    <h2>Регистрация</h2>
-<form method="post">
-    <div class="px-4 py-5 my-5 text-center">
-        {% csrf_token %}
+    <h1>Регистрация</h1>
+<form method="post">{% csrf_token %}
+    <div class="form-register">
         {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-        <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>.</p>
-    <a href="{% url 'noauth' %}">Продолжить без регистрации</a><br><br>
-    <a href="{% url 'faq_page' %}">FAQ</a>
+        <div class="register-container">
+            <button type="submit" class="btn btn-register-primary">Зарегистрироваться</button>
+        </div>
+        <div class="link-container">
+            <h4>Уже есть аккаунт?</h4>
+            <a href="{% url 'login' %}">Зарегистрируйтесь</a>
+        </div>
     </div>
-</form>-->
+</form>
 <!--    <div class="form">-->
 <!--    <form class="register-form">-->
 <!--      <input type="text" placeholder="name"/>-->
