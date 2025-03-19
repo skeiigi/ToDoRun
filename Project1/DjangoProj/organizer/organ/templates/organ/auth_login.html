@@ -4,21 +4,25 @@
 
 {% block body %}
 {% load static %}
-<h1>Добро пожаловать в ToDoRun!</h1>
-<form method="post">
-    {% csrf_token %}
-    <div class="form">
-        <div class="form-input">
-            {{ form.as_p }}
-            <div class="button-container">
-                <button type="submit" class="btn btn-form-primary">Войти</button>
-                <button type="button" class="btn btn-form-outline" onclick="location.href='{% url 'guest' %}'">Отмена</button>
+<main class="home">
+    <div class="home__container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form">
+                <div class="form-input">
+                    <h2 class="form-title">Вход в аккаунт</h2>
+                    {{ form.as_p }}
+                    <div class="button-container">
+                        <button type="submit" class="btn btn-form-primary">Войти</button>
+                        <button type="button" class="btn btn-form-outline" onclick="location.href='{% url 'guest' %}'">Отмена</button>
+                    </div>
+                    <div class="link-container">
+                        <h4>Ещё нет аккаунта?</h4>
+                        <a href="{% url 'auth_register' %}" class="register-link">Зарегистрируйтесь</a>
+                    </div>
+                </div>
             </div>
-            <div class="link-container">
-                <h4>Ещё нет аккаунта?</h4>
-                <a href="{% url 'auth_register' %}">Зарегистрируйтесь</a>
-            </div>
-        </div>
+        </form>
     </div>
-</form>
+</main>
 {% endblock %}
