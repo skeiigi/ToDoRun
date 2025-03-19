@@ -6,50 +6,49 @@
 {% load static %}
 <main class="home">
     <div class="home__container">
-        <h1 class="about__naming">Команда "Наггетсы и сырный соус"</h1>
-        {% comment %} <a href="{% url 'dashboard' %}" class="back-button">Назад</a> {% endcomment %}
+        <div class="about">
 
-        <section class="about__team">
-            <div class="about__team-member">
-                <img src="{% static 'images/nigger-1.jpeg' %}" alt="Участник 1" class="about__team-photo">
-                <h2 class="about__team-name">Иван Иванов</h2>
-                <p class="about__team-role">Главный разработчик</p>
-                <p class="about__team-description">Иван отвечает за архитектуру проекта и основную разработку.</p>
-            </div>
+            {% comment %} как по мне эта хуйня не смотрится (то что закомментено) {% endcomment %}
+            {% comment %} <h1 class="about__naming">Наггетсы и сырный соус</h1> {% endcomment %}
+            {% comment %} <a href="{% url 'dashboard' %}" class="back-button">Назад</a> {% endcomment %}
 
-            <div class="about__team-member">
-                <img src="{% static 'images/nigger-2.jpg' %}" alt="Участник 2" class="about__team-photo">
-                <h2 class="about__team-name">Мария Петрова</h2>
-                <p class="about__team-role">Дизайнер интерфейсов</p>
-                <p class="about__team-description">Мария создает удобные и красивые интерфейсы для наших пользователей.</p>
-            </div>
+            <section class="about__team">
+                <article class="about__team-member">
+                    <img src="{% static 'images/nigger-1.jpeg' %}" alt="Участник 1" class="about__team-photo">
+                    <h2 class="about__team-name">Артём Рудницкий</h2>
+                    <p class="about__team-role">Главный разработчик</p>
+                    <p class="about__team-description">Артём Рудницкий отвечает за архитектуру проекта и основную разработку.</p>
+                </article>
 
-            <div class="about__team-member">
-                <img src="{% static 'images/nigger-3.jpg' %}" alt="Участник 3" class="about__team-photo">
-                <h2 class="about__team-name">Алексей Смирнов</h2>
-                <p class="about__team-role">Тестировщик</p>
-                <p class="about__team-description">Алексей обеспечивает качество продукта, находя и устраняя баги.</p>
-            </div>
+                <article class="about__team-member">
+                    <img src="{% static 'images/nigger-2.jpg' %}" alt="Участник 2" class="about__team-photo">
+                    <h2 class="about__team-name">Артём Рудницкий</h2>
+                    <p class="about__team-role">Дизайнер интерфейсов</p>
+                    <p class="about__team-description">Артём Рудницкий создает удобные и красивые интерфейсы для наших пользователей.</p>
+                </article>
 
-            <div class="about__team-member">
-                <img src="{% static 'images/nigger-4.jpg' %}" alt="Участник 3" class="about__team-photo">
-                <h2 class="about__team-name">Алексей Смирнов</h2>
-                <p class="about__team-role">Тестировщик</p>
-                <p class="about__team-description">Алексей обеспечивает качество продукта, находя и устраняя баги.</p>
-            </div>
+                <article class="about__team-member">
+                    <img src="{% static 'images/nigger-3.jpg' %}" alt="Участник 3" class="about__team-photo">
+                    <h2 class="about__team-name">Артём Рудницкий</h2>
+                    <p class="about__team-role">Тестировщик</p>
+                    <p class="about__team-description">Артём Рудницкий обеспечивает качество продукта, находя и устраняя баги.</p>
+                </article>
 
-            <div class="about__team-member">
-                <img src="{% static 'images/nigger-5.jpg' %}" alt="Участник 3" class="about__team-photo">
-                <h2 class="about__team-name">Алексей Смирнов</h2>
-                <p class="about__team-role">Тестировщик</p>
-                <p class="about__team-description">Алексей обеспечивает качество продукта, находя и устраняя баги.</p>
-            </div>
-        </section>
+                <article class="about__team-member">
+                    <img src="{% static 'images/nigger-4.jpg' %}" alt="Участник 3" class="about__team-photo">
+                    <h2 class="about__team-name">Артём Рудницкий</h2>
+                    <p class="about__team-role">Тестировщик</p>
+                    <p class="about__team-description">Артём Рудницкий обеспечивает качество продукта, находя и устраняя баги.</p>
+                </article>
 
-        <section class="about__mission">
-            <h2 class="about__mission-title">Наша миссия</h2>
-            <p class="about__mission-text">Мы стремимся создавать инновационные решения, которые делают жизнь наших пользователей проще и удобнее. Наша команда объединена общей страстью к технологиям и желанием делать мир лучше.</p>
-        </section>
+                <article class="about__team-member">
+                    <img src="{% static 'images/nigger-5.jpg' %}" alt="Участник 3" class="about__team-photo">
+                    <h2 class="about__team-name">Артём Рудницкий</h2>
+                    <p class="about__team-role">Маркетолог</p>
+                    <p class="about__team-description">Артём Рудницкий чето-делает.</p>
+                </article>
+            </section>
+        </div>
     </div>
 </main>
 {% endblock %}
