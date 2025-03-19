@@ -6,17 +6,17 @@
 {% load static %}
 <main class="home">
     <div class="home__container">
-        <h1>Регистрация</h1>
         <form method="post">
             {% csrf_token %}
             <div class="form-register">
+                <h2 class="register-title">Регистрация</h2>
                 {{ form.as_p }}
                 <div class="register-container">
                     <button type="submit" class="btn btn-register-primary">Зарегистрироваться</button>
                 </div>
                 <div class="link-container">
                     <h4>Уже есть аккаунт?</h4>
-                    <a href="{% url 'auth_login' %}">Войти</a>
+                    <a href="{% url 'auth_login' %}" class="login-link">Войти</a>
                 </div>
             </div>
         </form>

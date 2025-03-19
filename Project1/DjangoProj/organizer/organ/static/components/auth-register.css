@@ -1,26 +1,36 @@
-.form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 450px;
-  background: rgba(255, 255, 255, 0.9);
-  margin: 100px auto;
-  padding: 30px;
+.register-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
   text-align: center;
+}
+
+.form-register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.form-title {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 600;
+.form-register p {
+  margin-bottom: 15px;
 }
 
-.form input {
+.form-register label {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-register input {
   outline: 0;
   background: rgba(255, 255, 255, 0.8);
   color: #333;
@@ -34,52 +44,38 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form input:focus {
+.form-register input:focus {
   border-color: #DDA15E;
   box-shadow: 0 0 8px rgba(221, 161, 94, 0.3);
 }
 
-.button-container {
+.register-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
   margin-top: 20px;
 }
 
-.btn-form-primary, .btn-form-outline {
-  width: 48%;
+.btn-register-primary {
+  width: 100%;
+  max-width: 300px;
   height: 50px;
-  font-size: 16px;
+  font-size: 18px;
+  background: #DDA15E;
+  color: #fff;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.btn-form-primary {
-  background: #DDA15E;
-  color: #fff;
-  border: none;
-}
-
-.btn-form-outline {
-  background: transparent;
-  color: #DDA15E;
-  border: 2px solid #DDA15E;
-}
-
-.btn-form-primary:hover {
+.btn-register-primary:hover {
   background: #BC8A5C;
-  transform: translateY(-2px);
-}
-
-.btn-form-outline:hover {
-  background: rgba(221, 161, 94, 0.1);
   transform: translateY(-2px);
 }
 
 .link-container {
   margin-top: 20px;
+  text-align: center;
 }
 
 .link-container h4 {
@@ -88,13 +84,13 @@
   margin-bottom: 10px;
 }
 
-.register-link {
+.login-link {
   color: #DDA15E;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
-.register-link:hover {
+.login-link:hover {
   color: #BC8A5C;
 }
