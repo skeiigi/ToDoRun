@@ -27,6 +27,34 @@
   box-shadow: var(--box-shadow);
 }
 
+.hero__tags-container {
+  display: flex;
+  flex-direction: row;
+  margin-block-end: 20px;
+  gap: 20px;
+  color: var(--text-alternative-color);
+}
+
+.hero__tag {
+  padding: 10px 20px;
+  border: 1px solid var(--text-alternative-color);
+  background-color: black;
+  color: white;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition), 
+              background-color var(--transition),
+              color var(--transition),
+              transform var(--transition);
+}
+
+.hero__tag:hover {
+  border-color: #000000;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  transform: rotateX(360deg);
+}
+
 .hero__title {
   font-size: var(--global-title-size);
   color: var(--text-alternative-color);
@@ -56,22 +84,24 @@
 
 .hero__button--primary {
   background-color: var(--primary-color);
-  color: var(--text-alternative-color);
+  color: var(--text-color);
+  border: 1px solid #000;
 }
 
 .hero__button--primary:hover {
-  background-color: var(--primary-hover-color);
+  background-color: var(--text-color);
+  color: var(--text-alternative-color);
 }
 
 .hero__button--outline {
   background-color: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid var(--text-alternative-color);
+  color: var(--text-alternative-color);
 }
 
 .hero__button--outline:hover {
   background-color: var(--primary-color);
-  color: var(--text-alternative-color);
+  color: var(--text-color);
 }
 
 .hero__container-img {
@@ -81,7 +111,7 @@
   position: relative;
 }
 
-.hero__container-img article {
+.hero__container-img a article {
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -152,9 +182,31 @@
   .hero {
     flex-direction: column;
   }
-  
+
+  .hero__container-img {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero__container-img article {
+    width: 100%;
+  }
+
   .hero__container-link {
     width: 100%;
+    height: 400px;
+  }
+
+  .hero__container-img article::after {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    right: 0;
+    top: -100%;
+    transition: top 0.3s ease;
+  }
+
+  .hero__container-img article:hover::after {
+    top: 0;
   }
 }
 
@@ -180,8 +232,14 @@
 
 @media (max-width: 480px) {
 
-  .hero__container-img {
-    display: none;
+  .hero__tags-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hero__tag {
+    padding: 5px 10px;
+    text-align: center;
   }
 
   .hero__text {
