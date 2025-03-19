@@ -36,8 +36,8 @@
   margin: 5px;
   padding: 5px;
   font-size: 27px;
-  background-color: #707b4b;
-  color: #ffffff;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
   transition: 0.5s;
 }
 
@@ -47,16 +47,16 @@
   margin: 5px;
   padding: 5px;
   font-size: 20px;
-  background-color: #707b4b;
-  color: #ffffff;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
   transition: 0.5s;
 }
 
 .btn-outline-primary:hover {
   background-color: #FEFAE0;
-  color: #707b4b;
+  color: var(--secondary-color);
 }
 
 .btn-primary:hover, .btn-home-primary:hover {
-  background-color: #283618;
+  background-color: var(--secondary-hover-color);
 }

@@ -3,9 +3,9 @@
  * нелья так подключать шрифты, если интересно почему почитай про CRP в браузере
  */
 
-body {
-    font-family: 'Comfortaa', sans-serif;
-    background-color: #f7f5e5;
+ body {
+    font-family: var(--font-family);
+    background-color: var(--body-background);
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -19,7 +19,7 @@ body {
 }
 
 a {
-    color: #ffffff;
+    color: var(--text-color);
     text-decoration: none;
     transition: 0.5s;
 }
