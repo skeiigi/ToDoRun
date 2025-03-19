@@ -1,3 +1,5 @@
+@import url(../common/buttons.css);
+
 @import url(../components/header.css);
 
 @import url(../components/page.css);
@@ -190,72 +192,6 @@ a:hover{
 }
 
 
-
-/*стили кнопок*/
-.button-container{
-    gap: 0px; /* Отступ между кнопками */
-    position: relative;
-    max-width: 100%;
-    width: auto;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.btn {
-    padding: 10px 20px; /* Отступы внутри кнопок */
-    border: none; /* Убираем рамку */
-    border-radius: 10px; /* Скругление углов */
-    cursor: pointer; /* Указатель при наведении */
-    box-shadow: 0 1px 1px rgb(0 0 0 / 20%), 1px 5px 5px 0 rgb(0 0 0 / 12%);
-}
-.btn-outline-primary {
-    width: 120px;
-    height: 50px;
-    padding: 3px;
-    font-size: 25px;
-    justify-content: center;
-    margin: 10px;
-    background-color: transparent; /* Прозрачный фон */
-    color:rgb(216 205 181 / 30%); /* Цвет текста */
-    border: 3px solid rgb(216 205 181 / 25%); /* Рамка */
-    transition: 0.7s;
-}
-.btn-home-primary {
-    width: 120px;
-    height: 50px;
-    margin: 5px;
-    padding: 5px;
-    font-size: 27px;
-    background-color: #707b4b; /* Цвет фона */
-    color: #ffffff; /* Цвет текста */
-    transition:0.5s;
-}
-.btn-primary {
-    width: 100px;
-    height: 40px;
-    margin: 5px;
-    padding: 5px;
-    font-size: 20px;
-    background-color: #707b4b; /* Цвет фона */
-    color: #ffffff; /* Цвет текста */
-    transition:0.5s;
-}
-/* Стили для кнопок при наведении */
-.btn-outline-primary:hover {
-    background-color: #FEFAE0; /* Цвет фона при наведении */
-    color: #707b4b; /* Цвет текста при наведении */
-}
-.btn-primary:hover {
-    background-color: #283618; /* Темнее при наведении */
-}
-.btn-home-primary:hover {
-    background-color: #283618; /* Темнее при наведении */
-}
-.btn-form-outline:hover {
-    background-color: #FEFAE0; /* Цвет фона при наведении */
-    color: #ffffff; /* Цвет текста при наведении */
-}
 
 
 /*стили домашней страницы*/

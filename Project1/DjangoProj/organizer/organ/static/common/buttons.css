@@ -1,0 +1,63 @@
+/* Стили кнопок */
+.button-container {
+  gap: 0px;
+  position: relative;
+  max-width: 100%;
+  width: auto;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 1px 5px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn-outline-primary {
+  width: 120px;
+  height: 50px;
+  padding: 3px;
+  font-size: 25px;
+  justify-content: center;
+  margin: 10px;
+  background-color: transparent;
+  color: rgba(216, 205, 181, 0.3);
+  border: 3px solid rgba(216, 205, 181, 0.25);
+  transition: 0.7s;
+}
+
+.btn-home-primary {
+  width: 120px;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+  font-size: 27px;
+  background-color: #707b4b;
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+.btn-primary {
+  width: 100px;
+  height: 40px;
+  margin: 5px;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #707b4b;
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+.btn-outline-primary:hover {
+  background-color: #FEFAE0;
+  color: #707b4b;
+}
+
+.btn-primary:hover, .btn-home-primary:hover {
+  background-color: #283618;
+}
