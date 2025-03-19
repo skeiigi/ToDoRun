@@ -19,6 +19,9 @@
 - ```register.html``` → ```auth_register.html```
 - ```task_calendar.html → calendar.html```
 
+## Добавленные темплейты
+- ```header.html``` - вынес шапку в отдельный компонент
+
 ## Рефактор views.py
 Изменил названия подключаемых темплейтов  
 Пример:  
