@@ -1,6 +1,6 @@
-@import url(../common/header.css);
+@import url(../components/header.css);
 
-@import url(../common/page.css);
+@import url(../components/page.css);
 
 /*основные стили*/
 body {

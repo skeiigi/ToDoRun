@@ -1,7 +1,5 @@
 /* Стили шапки */
 .top {
-  width: 100vw;
-  height: 100vh;
   background-color: #DDA15E;
   display: flex;
   justify-content: center;
