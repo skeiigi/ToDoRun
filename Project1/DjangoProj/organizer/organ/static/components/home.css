@@ -19,10 +19,8 @@
 .hero__content {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   flex-direction: column;
   color: var(--text-color);
-  /* text-align: center; */
   padding: 40px;
   background-color: var(--base-color);
   border-radius: var(--border-radius);
