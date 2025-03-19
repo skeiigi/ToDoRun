@@ -4,29 +4,23 @@
 
 {% block body %}
 {% load static %}
-<main class="home-container">
-    <section class="hero-section">
-        <img 
-            src="{% static 'images/пират.png' %}" 
-            alt="Мем с пиратом" 
-            class="hero-image"
-            loading="lazy"
-        >
-        <div class="hero-content">
-            <p class="hero-text">
+<main class="home">
+    <section class="home__hero hero">
+        <div class="hero__content">
+            <p class="hero__text">
                 Добро пожаловать на главную страницу! Это лучшее приложение для создания заметок и составления планов.
             </p>
-            <div class="hero-buttons">
+            <div class="hero__buttons">
                 <button 
                     type="button" 
-                    class="btn btn-home-primary" 
+                    class="hero__button hero__button--primary" 
                     onclick="location.href='{% url 'auth_login' %}'"
                 >
                     Войти
                 </button>
                 <button 
                     type="button" 
-                    class="btn btn-home-outline" 
+                    class="hero__button hero__button--outline" 
                     onclick="location.href='{% url 'admin:index' %}'"
                 >
                     Админам

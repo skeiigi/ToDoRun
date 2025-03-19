@@ -1,6 +1,6 @@
-.home-container {
+.home {
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,66 +9,106 @@
   box-sizing: border-box;
 }
 
-.hero-section {
-  position: relative;
+.hero {
   width: 100%;
   max-width: 1200px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+.hero__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  block-size: 65vh;
+  background-image: url(../images/пират.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 100px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.hero-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  width: 90%;
-  max-width: 600px;
-}
-
-.hero-text {
+.hero__text {
   font-size: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   margin-bottom: 20px;
 }
 
-.hero-buttons {
+.hero__buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
 }
 
+.hero__button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.hero__button--primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.hero__button--primary:hover {
+  background-color: #0056b3;
+}
+
+.hero__button--outline {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.hero__button--outline:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
 @media (max-width: 768px) {
-  .hero-text {
+  .home {
+    min-height: 68vh;
+  }
+
+  .hero__content {
+    block-size: 40vh;
+    border-radius: 50px;
+  }
+
+  .hero__text {
       font-size: 1.2rem;
   }
 
-  .btn {
+  .hero__button {
       font-size: 0.9rem;
       padding: 8px 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-text {
+  .hero__text {
       font-size: 1rem;
   }
 
-  .hero-buttons {
+  .hero__buttons {
       flex-direction: column;
       gap: 10px;
   }
 
-  .btn {
+  .hero__button {
       width: 100%;
   }
 }
