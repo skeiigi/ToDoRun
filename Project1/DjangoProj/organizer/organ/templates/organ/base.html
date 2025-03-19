@@ -8,38 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 </head>
 <body>
-   <div class="top">
-       <div class="header">
-           <div class="menu">
-               <div class="container-logo">
-                   <div class="logo">
-                       <img class="logo-image" src="{% static 'images/tip.png' %}" alt="Логотип">
-                       <a href="{% url 'home' %}" class="span-logo">ToDoRun</a>
-                   </div>
-               </div>
-               <div class="home">
-                   <a href="{% url 'home' %}" class="span">Домой</a>
-               </div>
-               <div class="task_list">
-                   <a href="{% url 'tasks' %}" class="span">Список задач</a>
-               </div>
-               <div class="task_calendar">
-                   <a href="{% url 'calendar' %}" class="span">Календарь задач</a>
-               </div>
-               <div class="donuts">
-                   <a href="#" class="span">Донаты</a>
-               </div>
-               <div class="FAQ">
-                   <a href="{% url 'about' %}" class="span">О нас</a>
-               </div>
-               <div class="container-enter">
-                   <div class="enter">
-                       <button type="button" class="btn btn-primary" onclick="location.href='{% url 'auth_login' %}'">Войти</button>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+   {% include 'organ/header.html' %} 
    {% block body %}{% endblock %}
 </body>
 </html>
