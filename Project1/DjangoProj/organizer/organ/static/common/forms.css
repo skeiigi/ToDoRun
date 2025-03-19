@@ -1,0 +1,56 @@
+/* Стили для форм */
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 400px;
+  height: auto;
+  top: 100px;
+  left: 0px;
+  z-index: 1;
+  background: rgba(243, 201, 156, 0.07);
+  margin: auto auto;
+  padding: 18px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), 0 5px 5px 0 rgba(0, 0, 0, 0.07);
+}
+
+.form label {
+  margin-left: 10px;
+  font-size: 20px;
+  width: 200px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  color: #837f7f;
+}
+
+.form input {
+  outline: 0;
+  background: rgba(255, 255, 255, 0.16);
+  color: #837f7f;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), 0 5px 5px 0 rgba(0, 0, 0, 0.07);
+  font-size: 26px;
+}
+
+.btn-form-primary {
+  width: 160px;
+  height: 52px;
+  margin-left: 5px;
+  padding: 5px;
+  font-size: 28px;
+  background: #DDA15E;
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+  background: #8b9861;
+}
