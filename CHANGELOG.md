@@ -20,9 +20,25 @@
 - ```task_calendar.html → calendar.html```
 
 ## Рефактор views.py
-Изменил названия подключаемых темплейтов
+Изменил названия подключаемых темплейтов  
+Пример:  
+```python
+def about(request):
+  return render(request, 'organ/about.html') <- новое название
+```
 
 ## Рефактор urls.py
-Изменил названия темплейтов
+Изменил названия темплейтов  
+Пример:
+```python
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('admin/', admin.site.urls, name='admin'),
+    path('login/', views.auth_login, name='auth_login'),
+    path('register/', views.auth_register, name='auth_register'),
+    path('about/', views.about, name='about'),
+    path('guest/', views.guest, name='guest'),
+    ...
+```
 
 
