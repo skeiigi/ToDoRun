@@ -4,18 +4,22 @@
 
 {% block body %}
 {% load static %}
-<h1>Регистрация</h1>
-<form method="post">
-    {% csrf_token %}
-    <div class="form-register">
-        {{ form.as_p }}
-        <div class="register-container">
-            <button type="submit" class="btn btn-register-primary">Зарегистрироваться</button>
-        </div>
-        <div class="link-container">
-            <h4>Уже есть аккаунт?</h4>
-            <a href="{% url 'auth_login' %}">Войти</a>
-        </div>
+<main class="home">
+    <div class="home__container">
+        <h1>Регистрация</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-register">
+                {{ form.as_p }}
+                <div class="register-container">
+                    <button type="submit" class="btn btn-register-primary">Зарегистрироваться</button>
+                </div>
+                <div class="link-container">
+                    <h4>Уже есть аккаунт?</h4>
+                    <a href="{% url 'auth_login' %}">Войти</a>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+</main>
 {% endblock %}
