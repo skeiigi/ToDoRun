@@ -42,6 +42,21 @@
         </button>
       </div>
       {% endif %}
+
+      {% if user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <div class="header__auth">
+          <button
+            type="submit"
+            class="header__auth-button"
+            onclick="location.href='{% url 'auth_login' %}'"
+          >
+            Выйти
+          </button>
+        </div>
+      </form>
+      {% endif %}
     </div>
   </div>
 </header>

@@ -1,24 +1,27 @@
 {% extends 'organ/header.html' %}
 
+{% comment %} эта страница уже не нужна {% endcomment %}
+
 {% block title %}
 гостевая страница
 {% endblock %}
 
 {% block body %}
 {% load static %}
-<body>
-<h1>Здравствуйте, {{ request.user.username }}</h1>
-<div class="forauth-container">
-    <h1><a href="{% url 'list_tasks' %}">Список задач</a>.....<a href="{% url 'task_calendar' %}">Календарь задач</a>
-        .....<a href="{% url 'faq_page' %}">FAQ</a></h1><br>
+<main>
+    <h1>Здравствуйте, {{ request.user.username }}</h1>
+    <div class="forauth-container">
+        <h1><a href="{% url 'list_tasks' %}">Список задач</a>.....<a href="{% url 'task_calendar' %}">Календарь задач</a>
+            .....<a href="{% url 'faq_page' %}">FAQ</a></h1><br>
 
-</div>
-<div>
-    <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <!--<a href="{% url 'noauth' %}">перейти к странице для лошков</a><br><br>-->
-    <button type="submit">Выйти</button>
-</form>
-</div>
-</body>
+    </div>
+    <div>
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <a href="{% url 'noauth' %}">перейти к странице для лошков</a><br><br>
+        <button type="submit">Выйти</button>
+    </form>
+    </div>
+</main>
+
 {% endblock %}

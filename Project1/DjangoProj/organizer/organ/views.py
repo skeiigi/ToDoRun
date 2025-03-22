@@ -68,7 +68,7 @@ def auth_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('guest')
     else:
         form = AuthenticationForm()
     return render(request, 'organ/auth_login.html', {'form': form})
