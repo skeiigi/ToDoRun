@@ -1,4 +1,4 @@
-# from datetime import datetime
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -24,6 +24,10 @@ def tasks(request):
             form = TaskStatusForm(request.POST, instance=task)
             if form.is_valid():
                 task = form.save(commit=False)
+                if task.statuss:
+                    task.time_finish = datetime.now()
+                else:
+                    task.time_finish = None
                 task.save()
         return redirect('tasks')
     tasks = Tasks.objects.filter(user=request.user)
