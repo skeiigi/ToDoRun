@@ -31,6 +31,7 @@
         </ul>
       </nav>
 
+      {% if not user.is_authenticated %}
       <div class="header__auth">
         <button
           type="button"
@@ -40,6 +41,7 @@
           Войти
         </button>
       </div>
+      {% endif %}
     </div>
   </div>
 </header>

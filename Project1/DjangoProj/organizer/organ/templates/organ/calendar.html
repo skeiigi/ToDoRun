@@ -19,7 +19,7 @@ table, th, td {
         <thead>
             <tr>
                 <th>Номер задачи</th>
-                <th>ID пользователя</th>
+                <th>Имя пользователя</th>
                 <th>Задача</th>
                 <th>Описание</th>
                 <th>Статус</th>
@@ -31,7 +31,7 @@ table, th, td {
             {% for task in tasks %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td>{{ task.user_id }}</td>
+                    <td>{{ task.user.username }}</td>
                     <td>{{ task.title }}</td>
                     <td>{{ task.descriptionn }}</td>
                     <td>{{ task.statuss }}</td>
