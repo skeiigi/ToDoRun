@@ -19,6 +19,7 @@ table, th, td {
             <th>Описание</th>
             <th>Начало</th>
             <th>Завершение</th>
+            <th>Удалить</th>
         </tr>
         {% for task in tasks %}
         <tr>
@@ -36,6 +37,12 @@ table, th, td {
             <td>{{ task.descriptionn|truncatechars:100 }}</td>
             <td>{{ task.time_create|date:"d.m.Y H:i" }}</td>
             <td>{{ task.time_finish|date:"d.m.Y H:i" }}</td>
+            <td>
+                <form method="post" action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>

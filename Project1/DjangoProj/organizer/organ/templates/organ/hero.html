@@ -1,48 +1,52 @@
 {% load static %}
 <section class="home__hero hero">
   <div class="hero__content">
-      <div class="hero__tags-container">
-          <div class="hero__tag">заметки</div>
-          <div class="hero__tag">упращаю</div>
-          <div class="hero__tag">жизнь</div>
-      </div>
-      <h1 class="hero__title">To Do Run</h1>
-      <p class="hero__text">
-          Добро пожаловать на главную страницу! Это лучшее приложение для создания заметок и составления планов.
-      </p>
-      <div class="hero__buttons">
-          <button 
-              type="button" 
-              class="hero__button hero__button--primary" 
-              onclick="location.href='{% url 'auth_login' %}'"
-          >
-              Войти
-          </button>
-          <button 
-              type="button" 
-              class="hero__button hero__button--primary" 
-              onclick="location.href='{% url 'admin:index' %}'"
-          >
-              Админам
-          </button>
-      </div>
+    <div class="hero__tags-container">
+      <div class="hero__tag">заметки</div>
+      <div class="hero__tag">упращаю</div>
+      <div class="hero__tag">жизнь</div>
+    </div>
+    <h1 class="hero__title">To Do Run</h1>
+    <p class="hero__text">
+      Добро пожаловать на главную страницу! Это лучшее приложение для создания
+      заметок и составления планов.
+    </p>
+
+    {% if not user.is_authenticated %}
+    <div class="hero__buttons">
+      <button
+        type="button"
+        class="hero__button hero__button--primary"
+        onclick="location.href='{% url 'auth_login' %}'"
+      >
+        Войти
+      </button>
+      <button
+        type="button"
+        class="hero__button hero__button--primary"
+        onclick="location.href='{% url 'admin:index' %}'"
+      >
+        Админам
+      </button>
+    </div>
+    {% endif %}
   </div>
   <div class="hero__container-img">
-      <a href="{% url 'tasks' %}">
-          <article>
-              <div class="hero__container-link task-list"></div>
-          </article>
-      </a>
-      <a href="{% url 'calendar' %}">
-          <article>
-              <div class="hero__container-link task-calendar"></div>
-          </article>
-      </a>
-      <a href="{% url 'about' %}">
-          <article>
-              <div class="hero__container-link about-us"></div>
-          </article>
-      </a>
+    <a href="{% url 'tasks' %}">
+      <article>
+        <div class="hero__container-link task-list"></div>
+      </article>
+    </a>
+    <a href="{% url 'calendar' %}">
+      <article>
+        <div class="hero__container-link task-calendar"></div>
+      </article>
+    </a>
+    <a href="{% url 'about' %}">
+      <article>
+        <div class="hero__container-link about-us"></div>
+      </article>
+    </a>
   </div>
 </section>
 

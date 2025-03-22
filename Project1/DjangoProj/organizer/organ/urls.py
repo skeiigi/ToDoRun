@@ -14,4 +14,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
     path('calendar/', views.calendar, name='calendar'),
     path('tasks/', views.tasks, name='tasks'),
+    path('tasks/delete/<int:task_id>/', views.delete_task, name='delete_task')
 ]

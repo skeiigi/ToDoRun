@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -35,6 +35,13 @@ def tasks(request):
         'tasks': tasks,
         'form': TaskForm()
     })
+
+
+@login_required
+def delete_task(request, task_id):
+    task = get_object_or_404(Tasks, id=task_id, user=request.user)
+    task.delete()
+    return redirect('tasks')
 
 
 @login_required
