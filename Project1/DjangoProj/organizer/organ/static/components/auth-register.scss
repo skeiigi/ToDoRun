@@ -19,80 +19,80 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-}
 
-.form-register p {
-  margin-bottom: 15px;
-}
+  p {
+    margin-bottom: 15px;
+  }
 
-.form-register label {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 5px;
-  display: block;
-}
+  label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+  }
 
-.form-register input {
-  outline: 0;
-  background: rgba(255, 255, 255, 0.8);
-  color: #333;
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border-radius: $border-radius;
-  font-size: 16px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
+  input {
+    outline: 0;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: $border-radius;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-.form-register input:focus {
-  border-color: #DDA15E;
-  box-shadow: 0 0 8px rgba(221, 161, 94, 0.3);
+    &:focus {
+      border-color: #DDA15E;
+      box-shadow: 0 0 8px rgba(221, 161, 94, 0.3);
+    }
+  }
 }
 
 .register-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-}
 
-.btn-register-primary {
-  width: 100%;
-  max-width: 300px;
-  height: 50px;
-  font-size: 18px;
-  background: #DDA15E;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
+  .btn-register-primary {
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+    font-size: 18px;
+    background: #DDA15E;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 
-.btn-register-primary:hover {
-  background: #BC8A5C;
-  transform: translateY(-2px);
+    &:hover {
+      background: #BC8A5C;
+      transform: translateY(-2px);
+    }
+  }
 }
 
 .link-container {
   margin-top: 20px;
   text-align: center;
-}
 
-.link-container h4 {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 10px;
-}
+  h4 {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+  }
 
-.login-link {
-  color: #DDA15E;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
+  .login-link {
+    color: #DDA15E;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
 
-.login-link:hover {
-  color: #BC8A5C;
+    &:hover {
+      color: #BC8A5C;
+    }
+  }
 }

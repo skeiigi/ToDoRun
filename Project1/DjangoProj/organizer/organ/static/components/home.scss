@@ -8,14 +8,14 @@
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-}
 
-.home__container {
-  max-width: $mx-size-page;
-}
+  &__container {
+    max-width: $mx-size-page;
+  }
 
-@media (max-width: 768px) {
-  .home {
-    min-height: 68vh;
+  @media (max-width: 768px) {
+    & {
+      min-height: 68vh;
+    }
   }
 }

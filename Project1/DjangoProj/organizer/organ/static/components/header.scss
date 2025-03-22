@@ -1,130 +1,130 @@
-@import '../vendor/variables.scss';
-
 .header {
   background-color: $base-color;
   display: flex;
   justify-content: center;
   padding: 0 20px;
-}
 
-.header__top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 10vh;
-  width: 100%;
-  max-width: $mx-size-page;
-  box-shadow: $box-shadow;
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
-}
-
-.header__container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px; 
-}
-
-.header__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header__logo-image {
-  width: 50px;
-  height: 50px;
-}
-
-.header__logo-text {
-  font-size: 1.5rem;
-  color: $text-alternative-color;
-  text-decoration: none;
-}
-
-.header__nav-list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 20px;
-}
-
-.header__nav-item {
-  display: flex;
-  align-items: center;
-}
-
-.header__nav-link {
-  font-size: 1rem;
-  color: $text-alternative-color;
-  text-decoration: none;
-  transition: color $transition;
-}
-
-.header__nav-link:hover {
-  opacity: .7;
-}
-
-.header__auth-button {
-  padding: 10px 20px;
-  background-color: $primary-color;
-  color: $text-color;
-  border: none;
-  border-radius: $border-radius;
-  cursor: pointer;
-  font-size: 1rem;
-  border: 1px solid #000;
-  transition: background-color $transition;
-}
-
-.header__auth-button:hover {
-  background-color: $text-color;
-  color: $text-alternative-color;
-}
-
-@media (max-width: 768px) {
-  .header__top {
-    min-height: 32vh;
-  }
-
-  .header__container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header__nav {
+  &__top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
     width: 100%;
-    margin-top: 10px;
+    max-width: $mx-size-page;
+    box-shadow: $box-shadow;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
   }
 
-  .header__nav-list {
-    flex-direction: column;
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
     gap: 10px;
+
+    &-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    &-text {
+      font-size: 1.5rem;
+      color: $text-alternative-color;
+      text-decoration: none;
+    }
   }
 
-  .header__auth {
-    width: 100%;
-    margin-top: 10px;
+  &__nav {
+    &-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+    }
+
+    &-link {
+      font-size: 1rem;
+      color: $text-alternative-color;
+      text-decoration: none;
+      transition: color $transition;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 
-  .header__auth-button {
-    width: 100%;
-  }
-}
+  &__auth-button {
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: $text-color;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 1px solid #000;
+    transition: background-color $transition, color $transition;
 
-@media (max-width: 480px) {
-  .header__logo-text {
-    font-size: 1.2rem;
+    &:hover {
+      background-color: $text-color;
+      color: $text-alternative-color;
+    }
   }
 
-  .header__nav-link {
-    font-size: 0.9rem;
+  @media (max-width: 768px) {
+    &__top {
+      min-height: 32vh;
+    }
+
+    &__container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__nav {
+      width: 100%;
+      margin-top: 10px;
+
+      &-list {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    &__auth {
+      width: 100%;
+      margin-top: 10px;
+
+      &-button {
+        width: 100%;
+      }
+    }
   }
 
-  .header__auth-button {
-    font-size: 0.9rem;
+  @media (max-width: 480px) {
+    &__logo-text {
+      font-size: 1.2rem;
+    }
+
+    &__nav-link {
+      font-size: 0.9rem;
+    }
+
+    &__auth-button {
+      font-size: 0.9rem;
+    }
   }
 }
