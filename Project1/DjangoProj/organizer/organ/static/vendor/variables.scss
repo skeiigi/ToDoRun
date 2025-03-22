@@ -12,4 +12,4 @@ $transition: 0.3s ease;
 $font-family: 'Comfortaa', sans-serif;
 $body-background: #f7f5e5;
 $mx-size-page: 1500px;
-$global-title-size: 7rem;
+$global-title-size: clamp(2rem, calc(-1.2125rem + 15.8438vw), 7rem);

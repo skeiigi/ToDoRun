@@ -11,10 +11,16 @@
             <div class="form">
                 <div class="form-input">
                     <h2 class="form-title">Вход в аккаунт</h2>
-                    {{ form.as_p }}
+                    <div class="input-container">
+                        {{ form.username }}
+                        <label for="id_username" class="placeholder">Логин</label>
+                    </div>
+                    <div class="input-container">
+                        {{ form.password }}
+                        <label for="id_password" class="placeholder">Пароль</label>
+                    </div>
                     <div class="button-container">
                         <button type="submit" class="btn btn-form-primary">Войти</button>
-                        {% comment %} <button type="button" class="btn btn-form-outline" onclick="location.href='{% url 'guest' %}'">Отмена</button> {% endcomment %}
                     </div>
                     <div class="link-container">
                         <h4>Ещё нет аккаунта?</h4>

@@ -2,8 +2,12 @@ from datetime import datetime
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm, TaskForm, TaskStatusForm
+from .forms import (
+    CustomAuthenticationForm,
+    RegisterForm,
+    TaskForm,
+    TaskStatusForm
+)
 from .models import Tasks
 
 
@@ -68,7 +72,7 @@ def home(request):
 
 def auth_login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -77,7 +81,7 @@ def auth_login(request):
                 login(request, user)
                 return redirect('guest')
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     return render(request, 'organ/auth_login.html', {'form': form})
 
 
