@@ -108,7 +108,7 @@
       transition: transform 0.3s ease;
 
       &:hover {
-        transform: scaleX(1.2);
+        // transform: scaleX(1.2);
         z-index: 2;
 
         & .hero__container-link {
@@ -118,10 +118,6 @@
         &::after {
           right: 0;
         }
-      }
-
-      &:not(:hover) {
-        transform: scaleX(0.9);
       }
 
       &::after {
