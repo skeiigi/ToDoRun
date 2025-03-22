@@ -1,3 +1,5 @@
+@import '../vendor/variables.scss';
+
 .home {
   width: 100%;
   min-height: 90vh;
@@ -9,7 +11,7 @@
 }
 
 .home__container {
-  max-width: var(--mx-size-page);
+  max-width: $mx-size-page;
 }
 
 @media (max-width: 768px) {

@@ -1,3 +1,4 @@
+{% load sass_tags %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="ru">
@@ -5,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ToDoRun{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'css/index.scss' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/index.css' %}"/> {% endcomment %}
 </head>
 <body>
    {% include 'organ/header.html' %} 

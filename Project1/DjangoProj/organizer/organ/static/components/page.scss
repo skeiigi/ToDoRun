@@ -1,3 +1,5 @@
+@import '../vendor/variables.scss';
+
 /* 
  * @import url(https://fonts.googleapis.com/css?family=Roboto:300);
  */
@@ -133,7 +135,7 @@ q::after {
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: $font-family;
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -154,7 +156,7 @@ table {
 }
 
 a {
-    color: var(--text-color);
+    color: $text-color;
     text-decoration: none;
     transition: 0.5s;
 }

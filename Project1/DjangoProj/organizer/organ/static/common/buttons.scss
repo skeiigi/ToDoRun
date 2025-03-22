@@ -1,3 +1,5 @@
+@import '../vendor/variables.scss';
+
 .button-container {
   gap: 0px;
   position: relative;
@@ -36,8 +38,8 @@
   margin: 5px;
   padding: 5px;
   font-size: 27px;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  background-color: $secondary-color;
+  color: $text-color;
   transition: 0.5s;
 }
 
@@ -47,16 +49,16 @@
   margin: 5px;
   padding: 5px;
   font-size: 20px;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  background-color: $secondary-color;
+  color: $text-color;
   transition: 0.5s;
 }
 
 .btn-outline-primary:hover {
   background-color: #FEFAE0;
-  color: var(--secondary-color);
+  color: $secondary-color;
 }
 
 .btn-primary:hover, .btn-home-primary:hover {
-  background-color: var(--secondary-hover-color);
+  background-color: $secondary-hover-color;
 }
