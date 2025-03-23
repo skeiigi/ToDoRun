@@ -7,20 +7,26 @@
       <div class="hero__tag">жизнь</div>
     </div>
     <h1 class="hero__title">To Do Run</h1>
-    <p class="hero__text">
+
+    {% comment %} <p class="hero__text" style="margin-bottom=0;">
       Добро пожаловать на главную страницу! Это лучшее приложение для создания
       заметок и составления планов.
-    </p>
+    </p> {% endcomment %}
+
+    {% if user.is_authenticated %}
+      <p class="hero__text" style="margin-bottom: 0;">
+        Добро пожаловать на главную страницу! Это лучшее приложение для создания
+        заметок и составления планов.
+      </p>
+    {% else %}
+      <p class="hero__text">
+        Добро пожаловать на главную страницу! Это лучшее приложение для создания
+        заметок и составления планов.
+      </p>
+    {% endif %}
 
     {% if not user.is_authenticated %}
     <div class="hero__buttons">
-      {% comment %} <button
-        type="button"
-        class="hero__button hero__button--primary"
-        onclick="location.href='{% url 'auth_login' %}'"
-      >
-        Войти
-      </button> {% endcomment %}
       <button
         type="button"
         class="hero__button hero__button--primary"
