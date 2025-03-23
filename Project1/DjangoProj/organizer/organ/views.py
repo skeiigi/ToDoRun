@@ -8,6 +8,7 @@ from .forms import (
     TaskForm,
     TaskStatusForm
 )
+from django.contrib.auth import logout
 from .models import Tasks
 
 
@@ -49,8 +50,8 @@ def delete_task(request, task_id):
 
 
 @login_required
-def dashboard(request):
-    return render(request, 'organ/dashboard.html')
+def account(request):
+    return render(request, 'organ/account.html')
 
 
 def calendar(request):
@@ -91,7 +92,16 @@ def auth_register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('dashboard')
+            return redirect('account')
     else:
         form = RegisterForm()
     return render(request, 'organ/auth_register.html', {'form': form})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        logout(request)  # Выход пользователя перед удалением
+        user.delete()    # Удаление аккаунта
+        return redirect('home')  # Перенаправление на главную страницу после удаления
+    return redirect('account')
