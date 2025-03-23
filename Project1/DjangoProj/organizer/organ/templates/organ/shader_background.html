@@ -24,24 +24,20 @@ void coswarp(inout vec3 trip, float warpsScale ){
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - u_resolution * .5) / u_resolution.yy + 0.5;
-  float t = u_time * 0.1; // Уменьшили скорость изменения времени
+  float t = u_time * 0.1;
 
-  // Генерация бежевых цветов
-  vec3 baseColor = vec3(0.9, 0.8, 0.7); // Базовый бежевый цвет (кремовый)
+  vec3 baseColor = vec3(0.9, 0.8, 0.7);
   vec3 variation = vec3(
-      0.05 * cos(t + uv.x * 2.0), // Уменьшили амплитуду вариаций
-      0.05 * cos(t + uv.y * 1.5 + 1.0), // Уменьшили амплитуду вариаций
-      0.05 * cos(t + uv.x * 1.0 + 2.0)  // Уменьшили амплитуду вариаций
+      0.05 * cos(t + uv.x * 2.0),
+      0.05 * cos(t + uv.y * 1.5 + 1.0),
+      0.05 * cos(t + uv.x * 1.0 + 2.0)
   );
 
-  // Смешиваем базовый цвет с вариациями
   vec3 color = baseColor + variation;
 
-  // Применяем coswarp для плавных изменений
-  coswarp(color, 1.5); // Уменьшили интенсивность warping
+  coswarp(color, 1.5);
 
-  // Увеличиваем контрастность
-  color = mix(color, vec3(0.8), 0.3); // Уменьшили смешивание для большей четкости
+  color = mix(color, vec3(0.8), 0.3);
 
   gl_FragColor = vec4(color, 1.0);
 }
