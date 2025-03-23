@@ -14,11 +14,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
 <body class="page">
-    <canvas class="webgl"></canvas>
+    {% if request.path == '/' %}
+        <canvas class="webgl"></canvas>
+        <script type="module" src="{% static 'scripts/shader-squer.js' %}"></script>
+        <script type="module" src="{% static 'scripts/shader-squer-animation.js' %}"></script>
+    {% endif %}
     {% include 'organ/shader_background.html' %}
     {% include 'organ/header.html' %} 
     {% block body %}{% endblock %}
-    <script type="module" src="./static/scripts/shader-squer.js"></script>
-    <script type="module" src="./static/scripts/shader-squer-animation.js"></script>
 </body>
 </html>
