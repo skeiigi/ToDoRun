@@ -8,15 +8,44 @@
     <div class="home__container">
         <form method="post">
             {% csrf_token %}
-            <div class="form-register">
-                <h2 class="register-title">Регистрация</h2>
-                {{ form.as_p }}
-                <div class="register-container">
-                    <button type="submit" class="btn btn-register-primary">Зарегистрироваться</button>
-                </div>
-                <div class="link-container">
-                    <h4>Уже есть аккаунт?</h4>
-                    <a href="{% url 'auth_login' %}" class="login-link">Войти</a>
+            <div class="form">
+                <div class="form-input">
+                    <h2 class="form-title">Регистрация</h2>
+                    
+                    <!-- Поле для имени пользователя -->
+                    <div class="input-container">
+                        {{ form.username }}
+                        <label for="id_username" class="placeholder">Имя пользователя</label>
+                    </div>
+                    
+                    <!-- Поле для email -->
+                    <div class="input-container">
+                        {{ form.email }}
+                        <label for="id_email" class="placeholder">Электронная почта</label>
+                    </div>
+                    
+                    <!-- Поле для пароля -->
+                    <div class="input-container">
+                        {{ form.password1 }}
+                        <label for="id_password1" class="placeholder">Пароль</label>
+                    </div>
+                    
+                    <!-- Поле для подтверждения пароля -->
+                    <div class="input-container">
+                        {{ form.password2 }}
+                        <label for="id_password2" class="placeholder">Подтверждение пароля</label>
+                    </div>
+                    
+                    <!-- Кнопка отправки формы -->
+                    <div class="button-container">
+                        <button type="submit" class="btn btn-form-primary">Зарегистрироваться</button>
+                    </div>
+                    
+                    <!-- Ссылка на вход -->
+                    <div class="link-container">
+                        <h4>Уже есть аккаунт?</h4>
+                        <a href="{% url 'auth_login' %}" class="register-link">Войти</a>
+                    </div>
                 </div>
             </div>
         </form>

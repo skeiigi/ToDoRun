@@ -37,21 +37,34 @@ class TaskForm(forms.ModelForm):
 
 
 class RegisterForm(UserCreationForm):
-    # email = forms.EmailField(
-    #     help_text="Введите действительный email (например: user@example.com)"
-    # )
-
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
-        widget=forms.TextInput(
-            attrs={
-                "class": "special",
-                "size": "40",
-                "label": "comment",
-                "placeholder": "Comma Seperated",
-            }
-        ),
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Убираем help_text для всех полей
+        for field_name in self.fields:
+            self.fields[field_name].help_text = None
+
+        # Добавляем кастомные атрибуты для полей
+        self.fields['username'].widget.attrs.update({
+            'id': 'id_username',
+            'placeholder': ' '  # Пустой placeholder для анимации
+        })
+        self.fields['email'].widget.attrs.update({
+            'id': 'id_email',
+            'placeholder': ' '
+        })
+        self.fields['password1'].widget.attrs.update({
+            'id': 'id_password1',
+            'placeholder': ' '
+        })
+        self.fields['password2'].widget.attrs.update({
+            'id': 'id_password2',
+            'placeholder': ' '
+        })
 
 
 class CustomAuthenticationForm(AuthenticationForm):
