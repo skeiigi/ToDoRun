@@ -8,8 +8,9 @@
     <title>{% block title %}ToDoRun{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% sass_src 'scss/index.scss' %}">
 </head>
-<body>
-   {% include 'organ/header.html' %} 
-   {% block body %}{% endblock %}
+<body class="page">
+    {% include 'organ/base-background.html' %}
+    {% include 'organ/header.html' %} 
+    {% block body %}{% endblock %}
 </body>
 </html>

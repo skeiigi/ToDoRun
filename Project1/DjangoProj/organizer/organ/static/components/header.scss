@@ -1,19 +1,34 @@
 .header {
-  background-color: $base-color;
   display: flex;
   justify-content: center;
   padding: 0 20px;
 
   &__top {
+    // outline: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 10vh;
     width: 100%;
+    background-color: transparent;
+    backdrop-filter: blur(2.5px);
     max-width: $mx-size-page;
-    box-shadow: $box-shadow;
+    // box-shadow: $box-shadow;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 
   &__container {
@@ -92,7 +107,7 @@
     transition: background-color $transition, color $transition, transform $transition;
 
     &:hover {
-      background-color: $text-color;
+      background-color: transparent;
       color: $text-alternative-color;
       transform: scale(1.1);
     }

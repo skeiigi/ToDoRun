@@ -6,14 +6,29 @@
   width: 100%;
 
   &__content {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     color: $text-color;
     padding: 40px;
-    background-color: $base-color;
+    background-color: transparent;
+    backdrop-filter: blur(2.5px);
     border-radius: $border-radius;
-    box-shadow: $box-shadow;
+    // box-shadow: $box-shadow;
+    overflow: hidden;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 
   &__tags-container {
@@ -38,7 +53,7 @@
     &:hover {
       border-color: #000000;
       cursor: pointer;
-      background-color: white;
+      background-color: transparent;
       color: black;
       transform: rotateX(360deg);
     }
@@ -104,7 +119,7 @@
       flex: 1;
       position: relative;
       overflow: hidden;
-      box-shadow: $box-shadow;
+      // box-shadow: $box-shadow;
       border-radius: $border-radius;
       transition: transform 0.3s ease;
 
