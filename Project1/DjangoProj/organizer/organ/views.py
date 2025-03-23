@@ -101,7 +101,7 @@ def auth_register(request):
 def delete_account(request):
     if request.method == 'POST':
         user = request.user
-        logout(request)  # Выход пользователя перед удалением
-        user.delete()    # Удаление аккаунта
-        return redirect('home')  # Перенаправление на главную страницу после удаления
+        logout(request)
+        user.delete()
+        return redirect('home')
     return redirect('account')
