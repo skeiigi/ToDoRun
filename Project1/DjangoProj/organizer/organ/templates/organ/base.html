@@ -8,10 +8,14 @@
     <title>{% block title %}ToDoRun{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% sass_src 'scss/index.scss' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
 <body class="page">
+    <canvas class="webgl"></canvas>
     {% include 'organ/shader_background.html' %}
     {% include 'organ/header.html' %} 
     {% block body %}{% endblock %}
+    <script type="module" src="./static/scripts/shader-squer.js"></script>
+    <script type="module" src="./static/scripts/shader-squer-animation.js"></script>
 </body>
 </html>
