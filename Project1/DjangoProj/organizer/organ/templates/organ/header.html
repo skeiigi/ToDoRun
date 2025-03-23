@@ -32,30 +32,50 @@
       </nav>
 
       {% if not user.is_authenticated %}
-      <div class="header__auth">
-        <button
-          type="button"
-          class="header__auth-button"
-          onclick="location.href='{% url 'auth_login' %}'"
-        >
-          Войти
-        </button>
+      <div class="header__container-acc-active">
+        <div class="header__auth">
+          <button
+            type="button"
+            class="header__auth-button"
+            onclick="location.href='{% url 'auth_login' %}'"
+          >
+            Войти
+          </button>
+        </div>
+        <div class="header__auth">
+          <button
+            type="button"
+            class="header__auth-button"
+            onclick="location.href='{% url 'auth_register' %}'"
+          >
+            Регистрация
+          </button>
+        </div>
       </div>
       {% endif %}
 
       {% if user.is_authenticated %}
-      <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <div class="header__auth">
-          <button
-            type="submit"
-            class="header__auth-button"
-            onclick="location.href='{% url 'auth_login' %}'"
-          >
-            Выйти
-          </button>
+      <div class="header__container-acc-active">
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <div class="header__auth">
+            <button
+              type="submit"
+              class="header__auth-button"
+              onclick="location.href='{% url 'auth_login' %}'"
+            >
+              Выйти
+            </button>
+          </div>
+        </form>
+        <div class="header__container-icon-acc">
+          <a href="{% url 'guest' %}">
+            <svg class="header__icon-acc">
+              <use href="{% static 'images/account.svg' %}#account"></use>
+            </svg>
+          </a>
         </div>
-      </form>
+      </div>
       {% endif %}
     </div>
   </div>
