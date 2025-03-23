@@ -10,7 +10,7 @@
     align-items: center;
     min-height: 10vh;
     width: 100%;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2.5px);
     max-width: $mx-size-page;
     // box-shadow: $box-shadow;
@@ -97,7 +97,7 @@
 
   &__auth-button {
     padding: 10px 20px;
-    background-color: $primary-color;
+    background-color: rgba(0, 0, 0, 0.75);
     color: $text-color;
     border: none;
     border-radius: $border-radius;

@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ToDoRun{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% sass_src 'scss/index.scss' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body class="page">
-    {% include 'organ/base-background.html' %}
+    {% include 'organ/shader_background.html' %}
     {% include 'organ/header.html' %} 
     {% block body %}{% endblock %}
 </body>
