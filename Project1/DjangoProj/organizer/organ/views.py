@@ -62,8 +62,8 @@ def about(request):
     return render(request, 'organ/about.html')
 
 
-def guest(request):
-    return render(request, 'organ/guest.html')
+def account(request):
+    return render(request, 'organ/account.html')
 
 
 def home(request):
@@ -79,7 +79,7 @@ def auth_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('guest')
+                return redirect('account')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'organ/auth_login.html', {'form': form})

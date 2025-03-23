@@ -1,0 +1,17 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Личный кадинет{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<main class="home">
+    <div class="home__container">
+        <h1 class="home__title">Здравствуйте, {{ request.user.username }}</h1>
+        <form action="{% url 'logout' %}" method="post" class="home__form">
+            {% csrf_token %}
+            <button type="submit" class="home__button">Выйти</button>
+        </form>
+    </div>
+</main>
+{% endblock %}
