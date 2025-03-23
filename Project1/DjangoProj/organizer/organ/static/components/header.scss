@@ -109,10 +109,11 @@
     inline-size: 40px;
     block-size: 40px;
     cursor: pointer;
-    transition: transform $transition;
+    transition: transform $transition, opacity $transition;
 
     &:hover {
       transform: scale(1.1);
+      opacity: 0.5;
     }
   }
 
