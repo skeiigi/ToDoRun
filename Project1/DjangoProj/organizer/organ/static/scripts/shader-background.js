@@ -47,7 +47,6 @@ async function init() {
         onWindowResize();
         window.addEventListener("resize", onWindowResize);
 
-        // Запускаем анимацию только после инициализации
         animate();
     } catch (error) {
         console.error("Error loading shaders:", error);
