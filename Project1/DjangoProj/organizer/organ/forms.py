@@ -44,14 +44,12 @@ class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Убираем help_text для всех полей
         for field_name in self.fields:
             self.fields[field_name].help_text = None
 
-        # Добавляем кастомные атрибуты для полей
         self.fields['username'].widget.attrs.update({
             'id': 'id_username',
-            'placeholder': ' '  # Пустой placeholder для анимации
+            'placeholder': ' '
         })
         self.fields['email'].widget.attrs.update({
             'id': 'id_email',
