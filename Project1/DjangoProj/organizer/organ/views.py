@@ -63,8 +63,8 @@ def about(request):
     return render(request, 'organ/about.html')
 
 
-def account(request):
-    return render(request, 'organ/account.html')
+# def account(request):
+#     return render(request, 'organ/account.html')
 
 
 def home(request):
@@ -96,6 +96,7 @@ def auth_register(request):
     else:
         form = RegisterForm()
     return render(request, 'organ/auth_register.html', {'form': form})
+
 
 @login_required
 def delete_account(request):
