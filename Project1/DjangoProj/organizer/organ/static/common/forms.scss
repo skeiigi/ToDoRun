@@ -1,12 +1,12 @@
 @import '../vendor/variables.scss';
 
 .form {
-  outline: 1px solid rgba(0, 0, 0, 0.1);
+  // outline: 1px solid rgba(0, 0, 0, 1);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 450px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2.5px);
   margin: 100px auto;
   padding: 30px;
@@ -14,7 +14,7 @@
   border-radius: $border-radius;
   // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  // border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
 
   // &::after {
@@ -32,7 +32,7 @@
 
 .form-title {
   font-size: 28px;
-  color: #333;
+  color: rgba(0, 0, 0, 0.75);;
   margin-bottom: 20px;
   font-weight: 600;
 }
@@ -45,8 +45,8 @@
 
 .form input {
   outline: 0;
-  background: rgba(255, 255, 255, 0.8);
-  color: #333;
+  background: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.75);;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 15px;
@@ -99,6 +99,7 @@
   width: 48%;
   height: 50px;
   font-size: 16px;
+  color:rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -150,6 +151,7 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .register-link:hover {
