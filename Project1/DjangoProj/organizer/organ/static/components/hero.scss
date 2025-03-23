@@ -1,5 +1,14 @@
 @import '../vendor/variables.scss';
 
+@keyframes blink {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0; 
+  }
+}
+
 .hero {
   display: flex;
   gap: 20px;
@@ -64,6 +73,14 @@
     font-size: $global-title-size;
     color: $text-alternative-color;
     margin-block-end: 20px;
+
+    &::after {
+      content: "│";
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      vertical-align: text-top;
+      transform: translateY(-2px);
+    }
   }
 
   &__text {
