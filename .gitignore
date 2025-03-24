@@ -13,8 +13,8 @@ __pycache__/
 .venv/
 venv/
 env/
-migrations
-src/migrations
+# migrations
+# src/migrations
 
 # Django
 *.sqlite3
