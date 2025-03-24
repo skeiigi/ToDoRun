@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster as builder
+FROM python:3.9
 
 WORKDIR /app
 
@@ -11,14 +11,13 @@ WORKDIR /app
 #     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 # RUN sed -i 's/\r$//' /app/project-app.sh
 
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # FROM gcr.io/distroless/nodejs20
 # WORKDIR /app
