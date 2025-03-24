@@ -2,7 +2,7 @@
 
 ## Установка и запуск
 
-Клонирование проекта из репозитория slokaln
+Клонирование проекта из репозитория
 
 ```bash
 git clone https://github.com/skeiigi/ToDoRun.git
