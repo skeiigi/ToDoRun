@@ -21,7 +21,7 @@ chmod +x deployment-environment.sh
 ./deployment-environment.sh
 ```
 
-## Запуск (вручную)
+## Запуск и миграция (вручную)
 
 Создание вирусной среды
 
@@ -33,15 +33,24 @@ python3 -m venv myenv  # Mac/Linux
 Активация вирусной среды
 
 ```bash
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser  # если ошибка
-.\venv\Scripts\Activate.ps1  # windows poweshell
-source myenv/bin/activate  # mac/linux
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser  # если есть ошибка
+.\venv\Scripts\Activate.ps1  # Windows PowerShell
+source myenv/bin/activate  # Mac/Linux
 ```
 
 Загрузка зависимостей проекта
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Начать миграцию (вручную)
+
+```bash
+cd src
+python manage.py makemigrations
+python manage.py migrate
+cd ..
 ```
 
 ## Запуск проекта

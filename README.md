@@ -23,7 +23,7 @@ chmod +x deployment-environment.sh
 ./deployment-environment.sh
 ```
 
-## Launch (manual)
+## Launch and migration (manual)
 
 Creating the viral environment
 
@@ -44,6 +44,15 @@ Downloading project dependencies
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Start migration (manual)
+
+```bash
+cd src
+python manage.py makemigrations
+python manage.py migrate
+cd ..
 ```
 
 ## Start project
