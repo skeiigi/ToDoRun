@@ -14,6 +14,7 @@ __pycache__/
 venv/
 env/
 migrations
+src/migrations
 
 # Django
 *.sqlite3
