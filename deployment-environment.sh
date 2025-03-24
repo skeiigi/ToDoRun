@@ -60,3 +60,5 @@ if [[ "$PLATFORM" == "Linux" ]] || [[ "$PLATFORM" == "Darwin" ]]; then
 else
     echo "  source $VENV_DIR/Scripts/activate"
 fi
+
+exit
