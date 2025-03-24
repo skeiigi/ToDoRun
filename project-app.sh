@@ -12,6 +12,7 @@ if [ -z "$VIRTUAL_ENV" ]; then
     echo "[ERROR]: Виртуальное окружение не активировано"
     echo "         Активируй его командой: source venv/bin/activate (Linux/Mac)"
     echo "         или source venv/Scripts/activate (Windows Git Bash)"
+    echp "         или запусти файл deployment-environment.sh"
     exit 1
 fi
 

@@ -42,11 +42,31 @@ echo "[LOG]: Настройка окружения завершена"
 
 cd src
 
+echo "[MIGRATION]: Настройка миграцй"
+
+if [ -f "db.sqlite3"]; then
+    echo "[MIGRATION]: Удаление старых миграций"
+    rm db.sqlite3
+    find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+else
+    echo "[MIGRATION]: db.sqlite3 такого файла нет"
+fi
+
+if [ -f "organ/migrations"]; then
+    echo "[MIGRATION]: Удаление старых миграций"
+    find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+else
+    echo "[MIGRATION]: organ/migrations такой папки нет"
+fi
+
 echo "[MIGRATION]: Создание новых миграций"
 python manage.py makemigrations
 
 echo "[MIGRATION]: Применение миграций"
 python manage.py migrate
+
+echo "[MIGRATION]: Проверка миграций"
+python manage.py showmigrations
 
 echo "[MIGRATION]: Миграции успешно выполнены"
 
