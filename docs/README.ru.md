@@ -14,6 +14,14 @@ git clone https://github.com/skeiigi/ToDoRun.git
 cd ToDoRun
 ```
 
+## Перед запуском скриптов
+
+Нужно открыть **Git Bash**, найти репозиторий ToDoRun с помощью **cd**.
+<br><br>**ВАЖНО** ("/")<br>
+```bash
+D:/one/two/three/ToDoRun
+```
+
 ## Запуск (автоматизация)
 
 ```bash
