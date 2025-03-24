@@ -26,7 +26,6 @@ async function init() {
     };
 
     try {
-        // Загружаем шейдеры
         const vertexShader = await loadShader(shaderPaths.vertex);
         const fragmentShader = await loadShader(shaderPaths.fragment);
 

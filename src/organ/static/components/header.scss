@@ -134,6 +134,10 @@
 
   @media (max-width: 768px) {
 
+    & {
+      padding: 0 10px;
+    }
+
     &__container {
       padding: 15px 20px;
     }

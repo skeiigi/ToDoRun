@@ -16,6 +16,7 @@
 <body class="page">
     {% if request.path == '/' %}
         <canvas class="webgl"></canvas>
+        <script type="module" src="{% static 'scripts/shader-config.js' %}"></script>
         <script type="module" src="{% static 'scripts/shader-squer.js' %}"></script>
         <script type="module" src="{% static 'scripts/shader-squer-animation.js' %}"></script>
     {% endif %}

@@ -1,11 +1,20 @@
-import { scene, camera, renderer, sectionMeshes, cameraGroup, objectsDistance } from './shader-squer.js';
+import { 
+  scene, 
+  camera, 
+  renderer, 
+  cameraGroup, 
+  objectsDistance 
+} from './shader-config.js';
+import { sectionMeshes, checkScreenSize } from './shader-squer.js';
 
 let scrollY = window.scrollY;
 let currentSection = 0;
+
 window.addEventListener("scroll", () => {
   scrollY = window.scrollY;
   const newSection = Math.round(scrollY / window.innerHeight);
-  if (newSection != currentSection) {
+  
+  if (newSection != currentSection && sectionMeshes[newSection]?.visible) {
     currentSection = newSection;
     gsap.to(sectionMeshes[currentSection].rotation, {
       duration: 1.5,
@@ -37,8 +46,10 @@ const tick = () => {
   cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
   for (const mesh of sectionMeshes) {
-    mesh.rotation.x += deltaTime * 0.1;
-    mesh.rotation.y += deltaTime * 0.12;
+    if (mesh.visible) {
+      mesh.rotation.x += deltaTime * 0.1;
+      mesh.rotation.y += deltaTime * 0.12;
+    }
   }
 
   renderer.render(scene, camera);
@@ -46,3 +57,13 @@ const tick = () => {
 };
 
 tick();
+
+window.addEventListener("resize", () => {
+  const sizes = { width: window.innerWidth, height: window.innerHeight };
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  
+  checkScreenSize();
+});
