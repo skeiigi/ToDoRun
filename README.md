@@ -17,7 +17,7 @@ cd ToDoRun
 ## Launch (automation)
 
 ```bash
-mod +x deployment-environment.sh
+chmod +x deployment-environment.sh
 ./deployment-environment.sh
 ```
 
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 Script start
 
 ```bash
-cmod +x project-app.sh
+chmod +x project-app.sh
 ./project-app.sh
 ```
 
