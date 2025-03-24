@@ -16,6 +16,15 @@ Going to the project directory
 cd ToDoRun
 ```
 
+## Before running the scripts
+
+You need to open  **Git Bash**, find the repository ToDoRun using **cd**.
+<br><br>**IMPORTANT** ("/")<br>
+```bash
+D:/one/two/three/ToDoRun
+```
+
+
 ## Launch (automation)
 
 ```bash
