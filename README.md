@@ -1,4 +1,4 @@
-Это проект по дисциплине "Информационная безопасность". В команде вместе с одногруппниками мы делаем веб-приложение на Django.
+This is an Information Security project. As a team, together with our classmates, we are making a web application in Django.
 
 ## Installation and launch
 
