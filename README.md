@@ -4,7 +4,7 @@ This is an Information Security project. As a team, together with our classmates
 
 ## Installation and launch
 
-Cloning the slokaln repository project
+Cloning repository project
 
 ```bash
 git clone https://github.com/skeiigi/ToDoRun.git
