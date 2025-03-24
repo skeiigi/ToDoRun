@@ -1,0 +1,14 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<main class="home">
+    <div class="home__container">
+        {% include 'organ/hero.html' %}
+    </div>
+</main>
+
+{% endblock %}

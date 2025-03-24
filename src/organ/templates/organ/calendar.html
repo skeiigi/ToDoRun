@@ -1,0 +1,50 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Календарь задач{% endblock %}
+
+{% block body %}
+{% load static %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Календарь задач</h1>
+<h2>Скоро здесь появится удобный календарь</h2>
+<br><br><br>
+
+{% if tasks %}
+    <table>
+        <thead>
+            <tr>
+                <th>Номер задачи</th>
+                <th>Имя пользователя</th>
+                <th>Задача</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Дата создания</th>
+                <th>Дата завершения</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.user.username }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.descriptionn }}</td>
+                    <td>{{ task.statuss }}</td>
+                    <td>{{ task.time_create }}</td>
+                    <td>{{ task.time_finish }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Задачи не найдены</p>
+{% endif %}
+
+<br><br><br>
+<a href="{% url 'account' %}">Назад</a>
+{% endblock %}

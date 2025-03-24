@@ -1,0 +1,19 @@
+{% load static %}
+<div id="customPopup" class="popup" style="display: none">
+  <div class="popup__content">
+    <p>{{ popup_message|default:"Вы уверены, что хотите удалить аккаунт?" }}</p>
+    <form action="{% url 'delete_account' %}" method="post" class="popup__form">
+      {% csrf_token %}
+      <button type="submit" class="popup__button popup__button--confirm">
+        {{ popup_confirm_text|default:"Да" }}
+      </button>
+      <button
+        type="button"
+        class="popup__button popup__button--cancel"
+        id="cancelButton"
+      >
+        {{ popup_cancel_text|default:"Отмена" }}
+      </button>
+    </form>
+  </div>
+</div>

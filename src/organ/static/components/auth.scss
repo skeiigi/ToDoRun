@@ -1,0 +1,49 @@
+@import '../vendor/variables.scss';
+
+.login-page {
+  width: 560px;
+  padding: 2% 0 0;
+  margin: auto;
+}
+
+.form-register {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  position: relative;
+  width: 800px;
+  height: auto;
+  top: 30px;
+  left: 0px;
+  z-index: 1;
+  background: rgba(243, 201, 156, 0.07);
+  margin-bottom: 50px;
+  padding: 18px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.08), 0px 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-register-primary {
+  width: 300px;
+  height: 57px;
+  padding: 5px;
+  font-size: 30px;
+  background: #DDA15E;
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+.btn-form-outline {
+  width: 160px;
+  height: 52px;
+  padding: 5px;
+  font-size: 25px;
+  justify-content: center;
+  margin: 10px;
+  background-color: transparent;
+  color: rgba(107, 146, 104, 0.5);
+  border-top: 2px solid rgba(216, 205, 181, 0.15);
+  transition: 0.7s;
+}

@@ -1,0 +1,21 @@
+@import '../vendor/variables.scss';
+
+.home {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  &__container {
+    max-width: $mx-size-page;
+  }
+
+  @media (max-width: 768px) {
+    & {
+      min-height: 68vh;
+    }
+  }
+}

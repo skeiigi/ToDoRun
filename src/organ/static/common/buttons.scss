@@ -1,0 +1,66 @@
+@import '../vendor/variables.scss';
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  max-width: 100%;
+  width: auto;
+  margin: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  // box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 1px 5px 5px 0 rgba(0, 0, 0, 0.12);
+  transition: background-color 0.5s, color 0.5s;
+
+  &-outline-primary {
+    width: 120px;
+    height: 50px;
+    padding: 3px;
+    font-size: 25px;
+    margin: 10px;
+    background-color: transparent;
+    color: rgba(216, 205, 181, 0.3);
+    border: 3px solid rgba(216, 205, 181, 0.25);
+    transition: background-color 0.7s, color 0.7s;
+
+    &:hover {
+      background-color: #FEFAE0;
+      color: $secondary-color;
+    }
+  }
+
+  &-home-primary {
+    width: 120px;
+    height: 50px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 27px;
+    background-color: $secondary-color;
+    color: $text-color;
+
+    &:hover {
+      background-color: $secondary-hover-color;
+    }
+  }
+
+  &-primary {
+    width: 100px;
+    height: 40px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    background-color: $secondary-color;
+    color: $text-color;
+
+    &:hover {
+      background-color: $secondary-hover-color;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block body %}
+{% load static %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Ваши задачи, {{ user.username }}</h1>
+{% if tasks %}
+    <table>
+        <tr>
+            <th>Статус</th>
+            <th>Задача</th>
+            <th>Описание</th>
+            <th>Начало</th>
+            <th>Завершение</th>
+            <th>Удалить</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="task_id" value="{{ task.id }}">
+                    <input type="checkbox"
+                        name="statuss"
+                        {% if task.statuss %}checked{% endif %}
+                        onchange="this.form.submit()">
+                </form>
+            </td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.descriptionn|truncatechars:100 }}</td>
+            <td>{{ task.time_create|date:"d.m.Y H:i" }}</td>
+            <td>{{ task.time_finish|date:"d.m.Y H:i" }}</td>
+            <td>
+                <form method="post" action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>У вас еще нет задач</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить задачу</button>
+</form>
+{% endblock %}

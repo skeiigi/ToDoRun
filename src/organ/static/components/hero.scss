@@ -1,0 +1,307 @@
+@import '../vendor/variables.scss';
+
+@keyframes blink {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0; 
+  }
+}
+
+.hero {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+
+  &__content {
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.5px);
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  &__tags-container {
+    display: flex;
+    flex-direction: row;
+    margin-block-end: 20px;
+    gap: 20px;
+    color: $text-alternative-color;
+  }
+
+  &__tag {
+    padding: 10px 20px;
+    border: 1px solid $text-alternative-color;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: $border-radius;
+    transition: border-color $transition, 
+                background-color $transition,
+                color $transition,
+                transform $transition;
+    
+    &:hover {
+      border-color: #000000;
+      cursor: pointer;
+      background-color: transparent;
+      color: black;
+      transform: rotateX(360deg);
+    }
+  }
+
+  &__title {
+    font-size: $global-title-size;
+    color: $text-alternative-color;
+    margin-block-end: 20px;
+
+    &::after {
+      content: "│";
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      vertical-align: text-top;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    margin-bottom: 100px;
+    color: $text-alternative-color;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color $transition, transform $transition;
+  }
+
+  &__button--primary {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: $text-color;
+    border: 1px solid #000;
+
+    &:hover {
+      background-color: transparent;
+      color: $text-alternative-color;
+      transform: scale(1.1);
+    }
+  }
+
+  &__button--outline {
+    background-color: transparent;
+    border: 1px solid $text-alternative-color;
+    color: $text-alternative-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $text-color;
+    }
+  }
+
+  &__container-img {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+
+    & a article {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      border-radius: $border-radius;
+      transition: transform 0.3s ease;
+
+      & .hero__container-link {
+        filter: blur(50px);
+      }
+
+      &:hover {
+        z-index: 2;
+
+        & .hero__container-link {
+          filter: blur(0px);
+        }
+
+        &::after {
+          right: -100%;
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease, top 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(0, 0, 0, 0.75);
+        font-size: 3rem;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        text-transform: uppercase;
+      }
+    }
+
+    & a:first-child {
+      & article::after {
+        content: "Задачи";
+      }
+    }
+
+    & a:nth-child(2) {
+      & article::after {
+        content: "Календарь";
+      }
+    }
+
+    & a:last-child {
+      article::after {
+        content: "О нас";
+      }
+    }
+  }
+
+  &__container-link {
+    height: 728px;
+    width: 240px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform $transition, filter $transition;
+  }
+
+  @media screen and (max-width: 1377px) {
+    & {
+      flex-direction: column;
+    }
+  
+    &__container-img {
+      flex-direction: column;
+      gap: 20px;
+
+      & a article {
+        width: 100%;
+
+        &::after {
+          writing-mode: horizontal-tb;
+          text-orientation: mixed;
+          right: 0%;
+          top: 0%;
+          transition: top 0.3s ease, right 0.3s ease;
+        }
+        
+        &:hover::after {
+          top: -100%;
+        }
+      }
+    }
+  
+    &__container-link {
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      min-height: 68vh;
+    }
+  
+    &__content {
+      block-size: 40vh;
+    }
+  
+    &__text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+  
+    &__button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+  
+    &__container-img a article {
+      &:hover {
+        transform: scaleX(1.2);
+      }
+
+      &:not(:hover) {
+        transform: scaleX(0.9);
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    &__content {
+      block-size: 40vh;
+      padding: 0 20px;
+      min-width: min-content;
+    }
+
+    &__tags-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    &__tag {
+      padding: 8px 16px;
+      text-align: center;
+    }
+  
+    &__text {
+        font-size: 1rem;
+    }
+  
+    &__buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+  
+    &__button {
+        width: 100%;
+    }
+  }
+
+  @media (max-height: 1000px) and (max-width: 1000px) {
+    &__tags-container {
+      display: none;
+    }
+  }
+}
+
+.task-list {
+  background-color: #42aaff;
+  background-image: url(../images/list-task.jpg);
+}
+
+.task-calendar {
+  background-color: #ffc0cb;
+  background-image: url(../images/calendar.jpg);
+}
+
+.about-us {
+  background-color: #008000;
+  background-image: url(../images/scale_1200.jpg);
+}
