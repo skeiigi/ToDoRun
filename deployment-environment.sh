@@ -40,6 +40,18 @@ fi
 
 echo "[LOG]: Настройка окружения завершена"
 
+cd src
+
+echo "[MIGRATION]: Создание новых миграций"
+python manage.py makemigrations
+
+echo "[MIGRATION]: Применение миграций"
+python manage.py migrate
+
+echo "[MIGRATION]: Миграции успешно выполнены"
+
+cd ..
+
 echo ""
 echo "[LOG]: Вируталка развёрнута"
 echo "[LOG]: Для повторной активации виртуального окружения нужно прописать:"
