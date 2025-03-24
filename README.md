@@ -1,5 +1,7 @@
 This is an Information Security project. As a team, together with our classmates, we are making a web application in Django.
 
+[Дока на русском](./docs/README.ru.md)
+
 ## Installation and launch
 
 Cloning the slokaln repository project
