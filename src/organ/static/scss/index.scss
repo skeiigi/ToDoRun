@@ -1,16 +1,15 @@
 @import '../vendor/index';
-@import '../components/page';
+@import '../components.block.scss/page';
 
-@import '../common/buttons';
-@import '../common/images';
-@import '../common/forms';
-@import '../common/popup-confirm.scss';
+@import '../common.element.scss/buttons';
+@import '../common.element.scss/images';
+@import '../common.element.scss/forms';
+@import '../common.element.scss/popup-confirm.scss';
 
-@import '../components/header';
-@import '../components/hero';
-@import '../components/home';
-@import '../components/auth';
-@import '../components/about';
-@import '../components/shader.scss';
-@import '../components/webgl.scss';
-
+@import '../components.block.scss/header';
+@import '../components.block.scss/hero';
+@import '../components.block.scss/home';
+@import '../components.block.scss/auth';
+@import '../components.block.scss/about';
+@import '../components.block.scss/shader.scss';
+@import '../components.block.scss/webgl.scss';
