@@ -1,0 +1,7 @@
+.mypy_cache
+.flake8
+.gitattributes
+.gitignore
+.pre-commit-config.yaml
+CHANGELOG.md
+README.md
