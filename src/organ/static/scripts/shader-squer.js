@@ -24,7 +24,7 @@ scene.add(directionalLight);
 
 export const checkScreenSize = () => {
   const shouldRender = window.innerWidth > 768;
-  
+
   if (shouldRender) {
     initRenderer();
     createMeshes();

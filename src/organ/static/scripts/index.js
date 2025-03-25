@@ -8,7 +8,7 @@ const cancelButton = document.getElementById('cancelButton');
 articles.forEach((article) => {
   article.addEventListener("mouseenter", () => {
     articles.forEach((otherArticle) => {
-      if (otherArticle !== article) 
+      if (otherArticle !== article)
         otherArticle.style.transform = "scaleX(0.9)"
     });
   });
@@ -34,18 +34,18 @@ if (typedTextElement) {
 }
 
 if (deleteAccountButton) {
-  deleteAccountButton.addEventListener('click', () => 
+  deleteAccountButton.addEventListener('click', () =>
     customPopup.style.display = 'flex');
 }
 
 if (cancelButton) {
-  cancelButton.addEventListener('click', () => 
+  cancelButton.addEventListener('click', () =>
     customPopup.style.display = 'none');
 }
 
 if (customPopup) {
   window.addEventListener('click', (event) => {
-    if (event.target === customPopup) 
+    if (event.target === customPopup)
       customPopup.style.display = 'none';
   });
 }

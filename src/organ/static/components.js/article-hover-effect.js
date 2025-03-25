@@ -4,7 +4,7 @@ export function initArticleHoverEffect() {
   articles.forEach((article) => {
     article.addEventListener("mouseenter", () => {
       articles.forEach((otherArticle) => {
-        if (otherArticle !== article) 
+        if (otherArticle !== article)
           otherArticle.style.transform = "scaleX(0.9)"
       });
     });

@@ -16,10 +16,10 @@ export const initRenderer = () => {
   if (canvasElement && !canvasElement.parentNode) {
     document.body.appendChild(canvasElement);
   }
-  
-  renderer = new THREE.WebGLRenderer({ 
-    canvas: canvasElement, 
-    alpha: true 
+
+  renderer = new THREE.WebGLRenderer({
+    canvas: canvasElement,
+    alpha: true
   });
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e 
+set -e
 
 REPO_URL="https://github.com/skeiigi/ToDoRun.git"
 PROJECT_DIR="ToDoRun"

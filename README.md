@@ -38,7 +38,7 @@ Creating the viral environment
 
 ```bash
 python -m venv venv  # windows
-python3 -m venv myenv  # mac/linux 
+python3 -m venv myenv  # mac/linux
 ```
 
 Activation the viral environment
