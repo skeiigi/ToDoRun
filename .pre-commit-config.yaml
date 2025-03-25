@@ -35,7 +35,6 @@ repos:
       - id: commitizen
         stages: [commit-msg]
 
-  # Локальный хук для обновления CHANGELOG
   - repo: local
     hooks:
       - id: update-changelog

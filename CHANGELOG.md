@@ -30,6 +30,7 @@
 
 ### Fix
 
+- **asd**: asd
 - **hero.scss**: fix break-point 728px for hero card element
 - **calendar**: routes acc -> calendar fix: ok
 - **account**: update register routes in acc
