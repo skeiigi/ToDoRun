@@ -21,3 +21,7 @@ test:
 clean:
 	docker-compose down -v
 	docker system prune -a -f
+
+update-changelog:
+    cz changelog --incremental
+    git add CHANGELOG.md
