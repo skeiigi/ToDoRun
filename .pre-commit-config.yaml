@@ -39,8 +39,8 @@ repos:
     hooks:
       - id: update-changelog
         name: Update CHANGELOG
-        entry: bash -c "cz changelog --incremental && git add CHANGELOG.md"
+        entry: bash -c "cz changelog --incremental --dry-run > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md && git add CHANGELOG.md"
         language: system
-        stages: [post-commit]
-        always_run: true
+        stages: [pre-commit]
+        always_run: false
         pass_filenames: false
