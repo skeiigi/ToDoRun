@@ -1,6 +1,12 @@
+# To Do Run
+
 This is an Information Security project. As a team, together with our classmates, we are making a web application in Django.
 
-[Дока на русском](./docs/README.ru.md)
+## Documentation
+
+- [Дока на русском](./docs/README.ru.md)
+- [Guides](./docs/)
+  - A guide on how to use prt-commit [EN](./docs/pre-commit/PRE-COMMIT.en.md)/[RU](./docs/pre-commit/PRE-COMMIT.ru.md)
 
 ## Installation and launch
 
