@@ -1,6 +1,9 @@
 @import '../vendor/index';
 @import '../components.block.scss/page';
 
+@import '../components.block.scss/shader.scss';
+@import '../components.block.scss/webgl.scss';
+
 @import '../common.element.scss/buttons';
 @import '../common.element.scss/images';
 @import '../common.element.scss/forms';
@@ -11,5 +14,4 @@
 @import '../components.block.scss/home';
 @import '../components.block.scss/auth';
 @import '../components.block.scss/about';
-@import '../components.block.scss/shader.scss';
-@import '../components.block.scss/webgl.scss';
+@import '../components.block.scss/tasks.scss';

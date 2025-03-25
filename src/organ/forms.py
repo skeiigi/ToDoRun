@@ -28,7 +28,7 @@ class TaskForm(forms.ModelForm):
             "title": forms.TextInput(
                 attrs={
                     "size": 50,  # Ширина поля в символах
-                    "style": "width: 300px;",  # Или задайте размер через CSS
+                    # "style": "width: 300px;",  # Или задайте размер через CSS
                     "placeholder": "Назовите задачу",
                 }
             ),

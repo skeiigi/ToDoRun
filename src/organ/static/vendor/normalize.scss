@@ -347,3 +347,7 @@ template {
 [hidden] {
   display: none;
 }
+
+a:-webkit-any-link {
+  color: currentColor;
+}

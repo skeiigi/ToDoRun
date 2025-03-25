@@ -4,55 +4,165 @@
 
 {% block body %}
 {% load static %}
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
 
-<h1>Ваши задачи, {{ user.username }}</h1>
-{% if tasks %}
-    <table>
-        <tr>
-            <th>Статус</th>
-            <th>Задача</th>
-            <th>Описание</th>
-            <th>Начало</th>
-            <th>Завершение</th>
-            <th>Удалить</th>
-        </tr>
-        {% for task in tasks %}
-        <tr>
-            <td>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="task_id" value="{{ task.id }}">
-                    <input type="checkbox"
-                        name="statuss"
-                        {% if task.statuss %}checked{% endif %}
-                        onchange="this.form.submit()">
-                </form>
-            </td>
-            <td>{{ task.title }}</td>
-            <td>{{ task.descriptionn|truncatechars:100 }}</td>
-            <td>{{ task.time_create|date:"d.m.Y H:i" }}</td>
-            <td>{{ task.time_finish|date:"d.m.Y H:i" }}</td>
-            <td>
-                <form method="post" action="{% url 'delete_task' task.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Удалить</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-{% else %}
-    <p>У вас еще нет задач</p>
-{% endif %}
+<main class="home">
+    <div class="home__container task">
+        <section class="task__wrapper">
+            <div class="task__sidebar">
+              <ul class="task__nav-list">
+                <li class="task__nav-item">
+                  <a href="{% url 'home' %}" class="task__nav-link" role="button">
+                    <span class="task__nav-link-text">Домой</span>
+                  </a>
+                </li>
+                <li class="task__nav-item">
+                  <a href="{% url 'calendar' %}" class="task__nav-link" role="button">
+                    <span class="task__nav-link-text">Календарь</span>
+                  </a>
+                </li>
+                <li class="task__nav-item">
+                  <a href="#" class="task__nav-link" id="open-task-popup" role="button">
+                    <span class="task__nav-link-text">Создать заметку</span>
+                  </a>
+                </li>
+                <li class="task__nav-item">
+                  <a href="#" class="task__nav-link" id="open-task-popup" role="button">
+                    <span class="task__nav-link-text">Удалить все заметки</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="task__main">
+              {% if tasks %}
+                <div class="task__cards-container">
+                  <div class="task__cards">
+                    {% for task in tasks %}
+                    <div class="task__card {% if task.statuss %}task__completed{% endif %}" onclick="openTaskDetailsPopup({{ forloop.counter }}, '{{ task.title }}', '{{ task.descriptionn }}', '{{ task.time_create|date:"d.m.Y H:i" }}', '{{ task.time_finish|date:"d.m.Y H:i" }}', {{ task.id }})">
+                      <div class="task__card-number">#{{ forloop.counter }}</div>
+                      <div class="task__card-header">
+                        <h3 class="task__card-title">{{ task.title }}</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <input type="checkbox" class="task__status-checkbox"
+                                name="statuss"
+                                {% if task.statuss %}checked{% endif %}
+                                onchange="this.form.submit()"
+                            >
+                          </form>
+                      </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Добавить задачу</button>
-</form>
+                      {% comment %} <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <input type="checkbox" class="task__status-checkbox"
+                            name="statuss"
+                            {% if task.statuss %}checked{% endif %}
+                            onchange="this.form.submit()"
+                        >
+                      </form> {% endcomment %}
+                      
+                       <p class="task__card-description">{{ task.descriptionn|truncatechars:100 }}</p>
+                      
+                      <div class="task__card-dates">
+                        <div>Начало: {{ task.time_create|date:"d.m.Y H:i" }}</div>
+                        <div>Завершение: {{ task.time_finish|date:"d.m.Y H:i" }}</div>
+                      </div>
+                      
+                      {% comment %} <div class="task__card-footer">
+                        <form method="post" action="{% url 'delete_task' task.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="task__delete-btn">Удалить</button>
+                        </form>
+                      </div> {% endcomment %}
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="task__no-tasks">
+                  <p>У вас еще нет задач. <a href="#" id="open-task-popup-2">Добавьте первую задачу!</a></p>
+                </div>
+              {% endif %}
+            </div>
+          </section>
+    </div>
+
+    <div class="task__popup-overlay" id="task-popup">
+        <div class="task__popup-content">
+            <button class="task__popup-close" id="close-task-popup">&times;</button>
+            <h2 class="task__popup-title">Добавить новую задачу</h2>
+            <form method="post" class="task__form">
+                {% csrf_token %}
+                <div class="task__form-field">
+                    <label for="id_title" style="color: white;">Название:</label>
+                    {{ form.title }}
+                </div>
+                <div class="task__form-field">
+                    <label for="id_descriptionn" style="color: white;">Описание:</label>
+                    {{ form.descriptionn }}
+                </div>
+                <button type="submit" class="task__submit-btn">Добавить задачу</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="task__popup-overlay" id="task-details-popup">
+        <div class="task__popup-content">
+            <button class="task__popup-close" id="close-task-details-popup">&times;</button>
+            <div class="task__popup-header">
+                <h2 class="task__popup-title" id="task-details-title"></h2>
+                <div class="task__popup-number" id="task-details-number"></div>
+            </div>
+            <div class="task__popup-body">
+                <div class="task__popup-description">
+                    <h3>Описание:</h3>
+                    <p id="task-details-description"></p>
+                </div>
+                <div class="task__popup-dates">
+                    <h3>Даты:</h3>
+                    <p>Начало: <span id="task-details-start"></span></p>
+                    <p>Завершение: <span id="task-details-end"></span></p>
+                </div>
+            </div>
+            <div class="task__popup-footer">
+                <form method="post" action="" id="task-details-delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="task__delete-btn">Удалить задачу</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function openTaskDetailsPopup(number, title, description, start, end, taskId) {
+        if (event && event.target.classList.contains('task__status-checkbox')) {
+            return;
+        }
+
+        document.getElementById('task-details-number').textContent = '#' + number;
+        document.getElementById('task-details-title').textContent = title;
+        document.getElementById('task-details-description').textContent = description;
+        document.getElementById('task-details-start').textContent = start;
+        document.getElementById('task-details-end').textContent = end;
+        
+        document.getElementById('task-details-delete-form').action = `/tasks/delete/${taskId}/`;
+        
+        document.getElementById('task-details-popup').style.display = 'flex';
+    }
+
+    document.getElementById('close-task-details-popup').addEventListener('click', function() {
+        document.getElementById('task-details-popup').style.display = 'none';
+    });
+
+    document.getElementById('task-details-popup').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+</script>
+
+<script src="{% static 'components.js/tasks-popup-open.js' %}"></script>
 {% endblock %}

@@ -156,14 +156,14 @@ table {
 }
 
 a {
-    color: $text-color;
+    // color: $text-color;
     text-decoration: none;
     transition: 0.5s;
 }
 
-a:hover {
-    color: #606C38;
-}
+// a:hover {
+//     color: #606C38;
+// }
 
 img {
     width: 100%;
