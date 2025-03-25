@@ -38,6 +38,13 @@ chmod +x deployment-environment.sh
 ./deployment-environment.sh
 ```
 
+In PowerShell __(recommended for Windows)__
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\deployment-environment.ps1
+```
+
 ## Launch and migration (manual)
 
 Creating the viral environment
@@ -77,6 +84,13 @@ Script start
 ```bash
 chmod +x project-app.sh
 ./project-app.sh
+```
+
+In PowerShell __(recommended for Windows)__
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\project-app.ps1
 ```
 
 Manual start

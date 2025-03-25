@@ -33,6 +33,13 @@ chmod +x deployment-environment.sh
 ./deployment-environment.sh
 ```
 
+В PowerShell __(рекомендованно для Windows)__
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\deployment-environment.ps1
+```
+
 ## Запуск и миграция (вручную)
 
 Создание вирусной среды
@@ -72,6 +79,13 @@ cd ..
 ```bash
 chmod +x project-app.sh
 ./project-app.sh
+```
+
+В PowerShell __(рекомендованно для Windows)__
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\project-app.ps1
 ```
 
 Ручной запуск
