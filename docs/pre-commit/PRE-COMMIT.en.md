@@ -1,6 +1,15 @@
-# Pre-Commit
+# Pre-Commit + Cz
 
-[Back](../../README.md)
+[Back](../../README.md )
+
+## Using Pre-Commit + Cz
+
+```bash
+git add .
+cz commit
+```
+
+## Using a Dry Pre-Commit
 
 #### Updating dependencies
 
@@ -20,7 +29,7 @@ pre-commit install
 pre-commit run --all-files
 ```
 
-#### Automatically start and commit
+#### Automatic start and commit
 
 ```bash
 git commit -m "message"

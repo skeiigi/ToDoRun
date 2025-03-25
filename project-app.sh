@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# нужен для старта проекта
+
 set -e
 
 PROJECT_ROOT=$(dirname "$(readlink -f "$0" || realpath "$0")")

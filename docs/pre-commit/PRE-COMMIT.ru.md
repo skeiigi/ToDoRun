@@ -1,6 +1,15 @@
-# Pre-Commit
+# Pre-Commit + Cz
 
 [Назад](../../README.md)
+
+## Использование Pre-Commit + Cz
+
+```bash
+git add .
+cz commit
+```
+
+## Использование сухого Pre-Commit
 
 #### Обновление зависимостей
 

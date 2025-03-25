@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# нужен для легкой сборки проекта под кажду систему
+
 set -e
 
 REPO_URL="https://github.com/skeiigi/ToDoRun.git"
