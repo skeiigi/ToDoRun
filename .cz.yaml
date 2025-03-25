@@ -4,7 +4,7 @@ commitizen:
   tag_format: v$version
   update_changelog_on_bump: true
   changelog_file: "CHANGELOG.md"
-  changelog_incremental: false  # Отключаем инкрементальное обновление
+  changelog_incremental: false
   version_files: ["CHANGELOG.md"]
   changelog_message_template: |
     ## [Unreleased]
