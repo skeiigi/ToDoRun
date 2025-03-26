@@ -7,6 +7,7 @@ This is an Information Security project. As a team, together with our classmates
 - [Дока на русском](./docs/README.ru.md)
 - [Guides](./docs/)
   - A guide on how to use prt-commit [EN](./docs/pre-commit/PRE-COMMIT.en.md)/[RU](./docs/pre-commit/PRE-COMMIT.ru.md)
+  - How to run in docker [EN](./docs/docker/DOCKER.en.md)/[RU](./docs/docker/DOCKER.ru.md)
 
 ## Installation and launch
 
