@@ -25,7 +25,7 @@ cd ToDoRun
 ## Before running the scripts
 
 You need to open  **Git Bash**, find the repository ToDoRun using **cd**.
-<br><br>**IMPORTANT** ("/")<br>
+<br><br>**IMPORTANT** (use "/")<br>
 ```bash
 D:/one/two/three/ToDoRun
 ```
