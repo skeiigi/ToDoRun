@@ -175,7 +175,7 @@ img {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .page__base-bg {
@@ -202,4 +202,9 @@ img {
     background-size: 10px 10px;
     opacity: 0.5;
   }
+}
+
+
+.page-active-animation {
+  overflow: hidden;
 }

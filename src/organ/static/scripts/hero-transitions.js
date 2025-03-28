@@ -1,4 +1,5 @@
 const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.5 } });
+const page = document.querySelector('.page');
 
 tl.fromTo('.hero__content', 
   { opacity: 0, y: 30 },
@@ -41,6 +42,8 @@ links.forEach(link => {
         e.preventDefault();
         const href = this.getAttribute('href');
         
+        (page || document.documentElement).classList.add('page-active-animation');
+        
         gsap.to(this, {
           scale: 0.95,
           duration: 0.1,
@@ -61,7 +64,12 @@ links.forEach(link => {
         overlay.style.opacity = '0';
         document.body.appendChild(overlay);
         
-        const exitTl = gsap.timeline();
+        const exitTl = gsap.timeline({
+          onComplete: () => {
+              (page || document.documentElement).classList.remove('page-active-animation');
+              window.location.href = href;
+          }
+      });
         
         exitTl.to(overlay, {
             opacity: 0.9,

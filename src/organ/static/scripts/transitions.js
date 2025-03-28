@@ -1,10 +1,17 @@
 const links = document.querySelectorAll('a[data-transition="slide"]');
+const page = document.querySelector('.page');
 
 links.forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
         
+        if (page) {
+            page.classList.add('page-active-animation');
+        } else {
+            document.documentElement.classList.add('page-active-animation');
+        }
+
         const overlay = document.createElement('div');
         overlay.style.position = 'fixed';
         overlay.style.top = '0';
