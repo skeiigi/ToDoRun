@@ -8,7 +8,7 @@
           src="{% static 'images/label.svg' %}"
           alt="Логотип ToDoRun"
         />
-        <a href="{% url 'home' %}" class="header__logo-text">ToDoRun</a>
+        <a href="{% url 'home' %}" class="header__logo-text" data-transition="slide">ToDoRun</a>
       </div>
 
       <nav class="header__nav">
@@ -72,7 +72,7 @@
           </div>
         </form>
         <div class="header__container-icon-acc">
-          <a href="{% url 'account' %}">
+          <a href="{% url 'account' %}" data-transition="slide">
             <svg class="header__icon-acc">
               <use href="{% static 'images/account.svg' %}#account"></use>
             </svg>

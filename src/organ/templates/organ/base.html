@@ -1,6 +1,5 @@
-{% load sass_tags %}
 <!DOCTYPE html>
-{% load static %}
+{% load static sass_tags %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -20,9 +19,15 @@
         <script type="module" src="{% static 'scripts/shader-squer.js' %}"></script>
         <script type="module" src="{% static 'scripts/shader-squer-animation.js' %}"></script>
     {% endif %}
+    
     {% include 'organ/shader_background.html' %}
     {% include 'organ/header.html' %}
-    {% block body %}{% endblock %}
+    
+    <main class="content">
+        {% block body %}{% endblock %}
+    </main>
+    
+    <script src="{% static 'scripts/transitions.js' %}"></script>
     <script src="{% static 'scripts/index.js' %}"></script>
 </body>
 </html>

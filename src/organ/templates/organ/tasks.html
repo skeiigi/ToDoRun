@@ -11,12 +11,12 @@
             <div class="task__sidebar">
               <ul class="task__nav-list">
                 <li class="task__nav-item">
-                  <a href="{% url 'home' %}" class="task__nav-link" role="button">
+                  <a href="{% url 'home' %}" class="task__nav-link" data-transition="slide" role="button">
                     <span class="task__nav-link-text">Домой</span>
                   </a>
                 </li>
                 <li class="task__nav-item">
-                  <a href="{% url 'calendar' %}" class="task__nav-link" role="button">
+                  <a href="{% url 'calendar' %}" class="task__nav-link" data-transition="slide" role="button">
                     <span class="task__nav-link-text">Календарь</span>
                   </a>
                 </li>
@@ -137,6 +137,7 @@
 </main>
 
 <script>
+  {% comment %} TODO: вставить в файл {% endcomment %}
     function openTaskDetailsPopup(number, title, description, start, end, taskId) {
         if (event && event.target.classList.contains('task__status-checkbox')) {
             return;
@@ -164,5 +165,6 @@
     });
 </script>
 
+{% comment %} функция открытия попапа {% endcomment %}
 <script src="{% static 'components.js/tasks-popup-open.js' %}"></script>
 {% endblock %}

@@ -34,17 +34,17 @@
     {% endif %}
   </div>
   <div class="hero__container-img">
-    <a href="{% url 'tasks' %}">
+    <a href="{% url 'tasks' %}" data-transition="slide">
       <article>
         <div class="hero__container-link task-list"></div>
       </article>
     </a>
-    <a href="{% url 'calendar' %}">
+    <a href="{% url 'calendar' %}" data-transition="slide">
       <article>
         <div class="hero__container-link task-calendar"></div>
       </article>
     </a>
-    <a href="{% url 'about' %}">
+    <a href="{% url 'about' %}" data-transition="slide">
       <article>
         <div class="hero__container-link about-us"></div>
       </article>
@@ -52,7 +52,41 @@
   </div>
 </section>
 
-{% comment %} <script src="{% static 'scripts/hero-cards-dynamic-size-hover.js' %}"></script>
-<script src="{% static 'scripts/hero-title-animation.js' %}"></script> {% endcomment %}
+<style>
+  .hero__content {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .hero__tags-container {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .hero__title {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .hero__text {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .hero__buttons {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .hero__container-img {
+    opacity: 0;
+  }
+  
+  .hero__container-img article {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+</style>
 
-{% comment %} <script src="{% static 'scripts/index.js' %}"></script> {% endcomment %}
+{% comment %} анимация для hero {% endcomment %}
+<script src="{% static 'scripts/hero-transitions.js' %}"></script>
