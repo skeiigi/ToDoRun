@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import (  # noqa: E501
     CustomAuthenticationForm,
@@ -11,6 +12,8 @@ from .forms import (  # noqa: E501
     TaskStatusForm,
 )
 from .models import Tasks
+
+from django.http import JsonResponse
 
 
 @login_required
@@ -105,3 +108,10 @@ def delete_account(request):
         user.delete()
         return redirect("home")
     return redirect("account")
+
+@csrf_exempt
+def delete_all_tasks(request):
+    if request.method == 'POST':
+        Tasks.objects.all().delete()  # Удалить все задачи
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error'}, status=400)
