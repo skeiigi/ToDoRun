@@ -27,4 +27,4 @@ class Subtasks(models.Model):
         on_delete=models.CASCADE
     )
     text = models.CharField(max_length=30)
-    is_finished = models.BooleanField()
+    is_finished = models.BooleanField(default=False)

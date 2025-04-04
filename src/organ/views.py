@@ -11,7 +11,7 @@ from .forms import (  # noqa: E501
     TaskForm,
     TaskStatusForm,
 )
-from .models import Tasks
+from .models import Tasks, Subtasks
 
 from django.http import JsonResponse
 
@@ -45,8 +45,9 @@ def tasks(request):
 
 
 @login_required
-def subtasks(request): # task_id
-    return render(request, "organ/subtasks.html")
+def subtasks(request):
+    sbtasks = Subtasks.objects.all
+    return render(request, "organ/subtasks.html", {"subtasks": sbtasks})
 
 
 @login_required
