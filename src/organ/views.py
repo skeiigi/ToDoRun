@@ -45,6 +45,11 @@ def tasks(request):
 
 
 @login_required
+def subtasks(request): # task_id
+    return render(request, "organ/subtasks.html")
+
+
+@login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Tasks, id=task_id, user=request.user)
     task.delete()

@@ -129,6 +129,9 @@
                 </div>
             </div>
             <div class="task__popup-footer">
+                <form action="{% url 'subtasks' %}">
+                    <button type="submit" class="task__addsubtask-btn">Подробнее</button>
+                </form>
                 <form method="post" action="" id="task-details-delete-form">
                     {% csrf_token %}
                     <button type="submit" class="task__delete-btn">Удалить задачу</button>
