@@ -9,10 +9,18 @@
     <div class="home__container">
         <h1 class="home__title">Здравствуйте, {{ request.user.username }}</h1>
 
-        <button type="button" class="home__button home__button--danger" id="deleteAccountButton">
+
+        <br>
+        <form action="{% url 'tasks' %}">
+            <button type="submit">Перейти в ваши задачи</button>
+        </form>
+        <br>
+
+        <button type="button" class="home__button home__button--danger">
             Удалить аккаунт
         </button>
         {% include 'organ/popup_confirm.html' %}
+
     </div>
 </main>
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'tasks' %}">Назад</a>
+
+{% if subtasks %}
+<table>
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Задача</th>
+      <th>Текст</th>
+      <th>Выполнено</th>
+    </tr>
+  </thead>
+  {% for st in subtasks %}
+  <tbody>
+    <tr>
+      <th>{{ st.id }}</th>
+      <th>{{ st.task }}</th>
+      <th>{{ st.text }}</th>
+      <th>{{ st.is_finished }}</th>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+{% else %}
+<p>Подзадач нет....</p>
+{% endif %}
+
+</body>
+</html>
+
+
+

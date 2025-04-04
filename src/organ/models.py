@@ -19,3 +19,12 @@ class Tasks(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Subtasks(models.Model):
+    task = models.ForeignKey(
+        Tasks,
+        on_delete=models.CASCADE
+    )
+    text = models.CharField(max_length=30)
+    is_finished = models.BooleanField(default=False)
