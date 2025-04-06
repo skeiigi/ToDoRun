@@ -1,4 +1,6 @@
-async function deleteAllTasks() {
+async function deleteAllTasks(e) {
+  e.preventDefault();
+
   const deleteAllButton = document.getElementById('delete-all-tasks');
   if (!deleteAllButton) return;
 
@@ -28,9 +30,7 @@ async function deleteAllTasks() {
 }
 
 const deleteAllButton = document.getElementById('delete-all-tasks');
-if (deleteAllButton) {
-  deleteAllButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    deleteAllTasks();
-  });
+const noTasksText = document.querySelector('.task__no-tasks'); 
+if (!noTasksText) {
+  deleteAllButton.addEventListener('click', deleteAllTasks);
 }
