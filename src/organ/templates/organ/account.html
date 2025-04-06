@@ -16,7 +16,7 @@
         </form>
         <br>
 
-        <button type="button" class="home__button home__button--danger">
+        <button id="deleteAccountButton" type="button" class="home__button home__button--danger">
             Удалить аккаунт
         </button>
         {% include 'organ/popup_confirm.html' %}
@@ -24,5 +24,4 @@
     </div>
 </main>
 
-<script src="{% static 'scripts/delete-acc.js' %}"></script>
 {% endblock %}
