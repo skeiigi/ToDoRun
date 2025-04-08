@@ -1,6 +1,3 @@
-<#
-    нужен для легкой сборки проекта под кажду систему Powershell
-#>
 
 $ErrorActionPreference = "Stop"
 
