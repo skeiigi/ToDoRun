@@ -24,13 +24,11 @@
                 <td style="padding: 10px; border: 1px solid #ddd;">{{ forloop.counter }}</td>
                 <td style="padding: 10px; border: 1px solid #ddd;">{{ st.text }}</td>
                 <td style="padding: 10px; border: 1px solid #ddd;">
-                    <form method="post" style="display:inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="subtask_id" value="{{ st.id }}">
-                        <input type="hidden" name="update_status" value="1">
-                        <input type="checkbox" name="is_finished" {% if st.is_finished %}checked{% endif %}
-                               onchange="this.form.submit()">
-                    </form>
+                    {% if st.is_finished %}
+                        <span style="color: green;">Выполнено</span>
+                    {% else %}
+                        <span style="color: red;">В процессе</span>
+                    {% endif %}
                 </td>
                 <td style="padding: 10px; border: 1px solid #ddd;">
                     <form method="post" action="{% url 'delete_subtask' st.id %}">
