@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div class="task__popup-footer">
-                <form action="{% url 'subtasks' %}">
+                <form action="" method="get" id="subtasks-form">
                     <button type="submit" class="task__addsubtask-btn">Подробнее</button>
                 </form>
                 <form method="post" action="" id="task-details-delete-form">
@@ -155,6 +155,7 @@
         document.getElementById('task-details-end').textContent = end;
         
         document.getElementById('task-details-delete-form').action = `/tasks/delete/${taskId}/`;
+        document.getElementById('subtasks-form').action = `/tasks/${taskId}/subtasks/`;
         
         document.getElementById('task-details-popup').style.display = 'flex';
     }

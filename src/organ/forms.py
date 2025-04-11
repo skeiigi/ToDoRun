@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Tasks
+from .models import Tasks, Subtasks
 
 
 class TaskStatusForm(forms.ModelForm):
@@ -38,6 +38,18 @@ class TaskForm(forms.ModelForm):
                 }
             ),
         }
+
+
+class SubtasksForm(forms.ModelForm):
+    class Meta:
+        model = Subtasks
+        fields = ["text"]
+
+
+class SubtasksStatusForm(forms.ModelForm):
+    class Meta:
+        model = Subtasks
+        fields = ["is_finished"]
 
 
 class RegisterForm(UserCreationForm):

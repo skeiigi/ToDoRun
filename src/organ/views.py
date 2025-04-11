@@ -4,12 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import DetailView
 
 from .forms import (  # noqa: E501
     CustomAuthenticationForm,
     RegisterForm,
     TaskForm,
     TaskStatusForm,
+    SubtasksForm
 )
 from .models import Tasks, Subtasks
 
@@ -45,16 +47,38 @@ def tasks(request):
 
 
 @login_required
-def subtasks(request):
-    sbtasks = Subtasks.objects.all
-    return render(request, "organ/subtasks.html", {"subtasks": sbtasks})
-
-
-@login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Tasks, id=task_id, user=request.user)
     task.delete()
     return redirect("tasks")
+
+
+@login_required
+def subtasks(request, task_id):
+    task = get_object_or_404(Tasks, id=task_id)
+    sbtasks = Subtasks.objects.filter(task=task)
+    if request.method == "POST":
+        form = SubtasksForm(request.POST)
+        if form.is_valid():
+            sbtask = form.save(commit=False)
+            sbtask.task = task
+            sbtask.save()
+            return redirect('subtasks', task_id=task.id)
+    else:
+        form = SubtasksForm()
+    return render(request, "organ/subtasks.html", {
+        "subtasks": sbtasks,
+        "task": task,
+        "form": form
+    })
+
+
+@login_required
+def delete_subtask(request, subtask_id):
+    subtask = get_object_or_404(Subtasks, id=subtask_id)
+    task_id = subtask.task.id
+    subtask.delete()
+    return redirect("subtasks", task_id=task_id)
 
 
 @login_required
