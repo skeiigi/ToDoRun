@@ -13,6 +13,7 @@ class Tasks(models.Model):
     descriptionn = models.CharField(blank=True, max_length=255)
     statuss = models.BooleanField(default=False, verbose_name="Выполнено")
     time_create = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(null=True, verbose_name="дедлайн")
     time_finish = models.DateTimeField(
         blank=True, null=True, verbose_name="Время завершения"
     )

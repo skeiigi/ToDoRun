@@ -40,7 +40,7 @@
                 <div class="task__cards-container">
                   <div class="task__cards">
                     {% for task in tasks %}
-                    <div class="task__card {% if task.statuss %}task__completed{% endif %}" onclick="openTaskDetailsPopup({{ forloop.counter }}, '{{ task.title }}', '{{ task.descriptionn }}', '{{ task.time_create|date:'d.m.Y H:i' }}', '{{ task.time_finish|date:'d.m.Y H:i' }}', {{ task.id }})">
+                    <div class="task__card {% if task.statuss %}task__completed{% endif %}" onclick="openTaskDetailsPopup({{ forloop.counter }}, '{{ task.title }}', '{{ task.descriptionn }}', '{{ task.time_create|date:'d.m.Y H:i' }}', '{{ task.deadline|date:'d.m.Y' }}','{{ task.time_finish|date:'d.m.Y H:i' }}', {{ task.id }})">
                       <div class="task__card-number">#{{ forloop.counter }}</div>
                       <div class="task__card-header">
                         <h3 class="task__card-title">{{ task.title }}</h3>
@@ -69,6 +69,7 @@
                       
                       <div class="task__card-dates">
                         <div>Начало: {{ task.time_create|date:"d.m.Y H:i" }}</div>
+                        <div>Дедлайн: {{ task.deadline|date:"d.m.Y" }}</div>
                         <div>Завершение: {{ task.time_finish|date:"d.m.Y H:i" }}</div>
                       </div>
                       
@@ -105,6 +106,10 @@
                     <!--<label for="id_descriptionn" style="color: white;">Описание:</label>-->
                     {{form.descriptionn}}
                 </div>
+                <div class="task__form-field">
+                    <!--<label for="id_deadline" style="color: white;">Дедлайн:</label>-->
+                    {{form.deadline}}
+                </div>
                 <button type="submit" class="task__submit-btn">Добавить задачу</button>
             </form>
         </div>
@@ -125,6 +130,7 @@
                 <div class="task__popup-dates">
                     <h3>Даты:</h3>
                     <p>Начало: <span id="task-details-start"></span></p>
+                    <p>Дедлайн: <span id="task-details-deadline"></span></p>
                     <p>Завершение: <span id="task-details-end"></span></p>
                 </div>
             </div>
@@ -140,7 +146,7 @@
 
 <script>
   {% comment %} TODO: вставить в файл {% endcomment %}
-    function openTaskDetailsPopup(number, title, description, start, end, taskId) {
+    function openTaskDetailsPopup(number, title, description, start, deadline, end, taskId) {
         if (event && event.target.classList.contains('task__status-checkbox')) {
             return;
         }
@@ -149,6 +155,7 @@
         document.getElementById('task-details-title').textContent = title;
         document.getElementById('task-details-description').textContent = description;
         document.getElementById('task-details-start').textContent = start;
+        document.getElementById('task-details-deadline').textContent = deadline;
         document.getElementById('task-details-end').textContent = end;
         
         document.getElementById('task-details-delete-form').action = `/tasks/delete/${taskId}/`;
