@@ -33,31 +33,6 @@ export const initRenderer = () => {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate = true;
-
-  composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
-  
-  const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5,
-    0.4,
-    0.6 
-  );
-  
-  const filmPass = new FilmPass(
-    0.35,
-    0.025,
-    648,
-    false
-  );
-  
-  const colorCorrection = new ShaderPass(ColorCorrectionShader);
-  colorCorrection.uniforms.contrast.value = 1.1;
-  colorCorrection.uniforms.saturation.value = 1.15;
-  
-  composer.addPass(bloomPass);
-  composer.addPass(filmPass);
-  composer.addPass(colorCorrection);
 };
 
 export const removeRenderer = () => {

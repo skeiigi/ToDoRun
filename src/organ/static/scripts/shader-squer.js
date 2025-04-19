@@ -1,9 +1,9 @@
-import { scene, removeRenderer, initRenderer } from './shader-config.js';
+import { scene, initRenderer } from './shader-config.js';
 
 let model1 = null;
 let model2 = null;
 export let sectionMeshes = [];
-let modelsLoaded = false; // Флаг для отслеживания загрузки моделей
+let modelsLoaded = false;
 
 const loadingManager = new THREE.LoadingManager();
 const gltfLoader = new THREE.GLTFLoader(loadingManager);
@@ -31,7 +31,7 @@ const createMeshes = () => {
   gltfLoader.load(
     window.MODEL_PATHS.model2,
     (gltf) => {
-      if (!model2) { // Проверяем, не существует ли уже модель
+      if (!model2) {
         model2 = gltf.scene;
         model2.position.set(-3, -1, 0);
         model2.scale.set(7, 7, 7);
@@ -45,10 +45,9 @@ const createMeshes = () => {
     }
   );
   
-  modelsLoaded = true; // Устанавливаем флаг после загрузки
+  modelsLoaded = true;
 };
 
-// Освещение (оставляем без изменений)
 const envLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(envLight);
 
@@ -71,11 +70,9 @@ rimLight.position.set(0, 5, -10);
 rimLight.shadow.camera.far = 50;
 scene.add(rimLight);
 
-// Упрощенная функция checkScreenSize без проверки разрешения
 export const checkScreenSize = () => {
   initRenderer();
   createMeshes();
 };
 
-// Инициализация при загрузке
 checkScreenSize();
