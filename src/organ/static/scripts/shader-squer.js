@@ -1,26 +1,50 @@
 import { scene, removeRenderer, initRenderer } from './shader-config.js';
 
-let mesh1 = null;
-let mesh2 = null;
+let model1 = null;
+let model2 = null;
 export let sectionMeshes = [];
 
+const loadingManager = new THREE.LoadingManager();
+const gltfLoader = new THREE.GLTFLoader(loadingManager);
+
 const createMeshes = () => {
-  const material1 = new THREE.MeshToonMaterial({ color: "#F5F5DC", transparent: false });
-  mesh1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), material1);
+  gltfLoader.load(
+    window.MODEL_PATHS.model1,
+    (gltf) => {
+      model1 = gltf.scene;
+      model1.position.set(3, 0, 0);
+      model1.scale.set(0.5, 0.5, 0.5);
+      scene.add(model1);
+      sectionMeshes.push(model1);
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading model1:', error);
+    }
+  );
 
-  const material2 = new THREE.MeshToonMaterial({ color: "#F5F5DC", transparent: false });
-  mesh2 = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), material2);
-
-  mesh1.position.set(3, 2, 0);
-  mesh2.position.set(-3, -2, 0);
-
-  sectionMeshes = [mesh1, mesh2];
-  scene.add(mesh1, mesh2);
+  gltfLoader.load(
+    window.MODEL_PATHS.model2,
+    (gltf) => {
+      model2 = gltf.scene;
+      model2.position.set(-3, -1, 0);
+      model2.scale.set(7, 7, 7);
+      scene.add(model2);
+      sectionMeshes.push(model2);
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading model2:', error);
+    }
+  );
 };
 
-const directionalLight = new THREE.DirectionalLight("#ffffff", 0.85);
+const directionalLight = new THREE.DirectionalLight("#ffffff", 1);
 directionalLight.position.set(1, 1, 0);
 scene.add(directionalLight);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+scene.add(ambientLight);
 
 export const checkScreenSize = () => {
   const shouldRender = window.innerWidth > 768;
@@ -29,9 +53,10 @@ export const checkScreenSize = () => {
     initRenderer();
     createMeshes();
   } else {
-    scene.remove(mesh1, mesh2);
-    mesh1 = null;
-    mesh2 = null;
+    if (model1) scene.remove(model1);
+    if (model2) scene.remove(model2);
+    model1 = null;
+    model2 = null;
     sectionMeshes = [];
     removeRenderer();
   }
