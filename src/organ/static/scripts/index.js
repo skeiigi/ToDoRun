@@ -50,13 +50,11 @@ if (customPopup) {
   });
 }
 
-// Показываем контент сразу, если это не домашняя страница
 if (window.location.pathname !== '/') {
   document.querySelector('.content').style.display = 'block';
   document.querySelector('.content').style.opacity = '1';
 }
 
-// Запускаем прелоадер только на домашней странице
 if (window.location.pathname === '/') {
   document.addEventListener('DOMContentLoaded', function() {
       const preloader = document.getElementById('preloader');
@@ -94,7 +92,7 @@ if (window.location.pathname === '/') {
                   loadingText.textContent = "LOADING ASSETS";
               }
           }
-      }, 15);
+      }, 50);
   });
 }
 
