@@ -88,5 +88,4 @@ window.addEventListener("resize", () => {
       });
     }
   }
-
 });
