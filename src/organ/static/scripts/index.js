@@ -50,44 +50,53 @@ if (customPopup) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const preloader = document.getElementById('preloader');
-  const content = document.querySelector('.content');
-  const progress = document.getElementById('progress');
-  const loadingText = document.querySelector('.loading-text');
-  
-  let width = 0;
-  const interval = setInterval(() => {
-      if (width >= 100) {
-          clearInterval(interval);
-          loadingText.textContent = "READY";
-          
-          setTimeout(() => {
-              preloader.classList.add('preloader-done');
-              
-              content.style.display = 'block';
-              
-              void content.offsetWidth;
-              
-              content.style.opacity = '1';
+// Показываем контент сразу, если это не домашняя страница
+if (window.location.pathname !== '/') {
+  document.querySelector('.content').style.display = 'block';
+  document.querySelector('.content').style.opacity = '1';
+}
+
+// Запускаем прелоадер только на домашней странице
+if (window.location.pathname === '/') {
+  document.addEventListener('DOMContentLoaded', function() {
+      const preloader = document.getElementById('preloader');
+      const content = document.querySelector('.content');
+      const progress = document.getElementById('progress');
+      const loadingText = document.querySelector('.loading-text');
+      
+      let width = 0;
+      const interval = setInterval(() => {
+          if (width >= 100) {
+              clearInterval(interval);
+              loadingText.textContent = "READY";
               
               setTimeout(() => {
-                  preloader.style.display = 'none';
-              }, 800);
-          }, 600);
-      } else {
-          width += Math.floor(Math.random() * 5) + 1;
-          width = Math.min(width, 100);
-          progress.style.width = width + '%';
-          
-          if (width > 80) {
-              loadingText.textContent = "ALMOST THERE";
-          } else if (width > 50) {
-              loadingText.textContent = "LOADING ASSETS";
+                  preloader.classList.add('preloader-done');
+                  
+                  content.style.display = 'block';
+                  
+                  void content.offsetWidth;
+                  
+                  content.style.opacity = '1';
+                  
+                  setTimeout(() => {
+                      preloader.style.display = 'none';
+                  }, 800);
+              }, 600);
+          } else {
+              width += Math.floor(Math.random() * 5) + 1;
+              width = Math.min(width, 100);
+              progress.style.width = width + '%';
+              
+              if (width > 80) {
+                  loadingText.textContent = "ALMOST THERE";
+              } else if (width > 50) {
+                  loadingText.textContent = "LOADING ASSETS";
+              }
           }
-      }
-  }, 100);
-});
+      }, 15);
+  });
+}
 
 window.addEventListener('load', function() {
 });
