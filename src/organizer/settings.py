@@ -142,3 +142,12 @@ SASS_PROCESSOR_ROOT = STATIC_ROOT
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Защита от кликовой атаки (Clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# Защита от MIME-типирования
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Защита от XSS
+SECURE_BROWSER_XSS_FILTER = True
