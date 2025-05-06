@@ -1,18 +1,19 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import DetailView
 
-from .forms import (  # noqa: E501
+from calendar import monthrange
+from django.utils.timezone import make_aware
+
+from .forms import (
     CustomAuthenticationForm,
     RegisterForm,
     TaskForm,
     TaskStatusForm,
     SubtasksForm,
-    SubtasksStatusForm
 )
 from .models import Tasks, Subtasks
 
@@ -102,9 +103,67 @@ def account(request):
     return render(request, "organ/account.html")
 
 
+@login_required
 def calendar(request):
-    tasks = Tasks.objects.all()
-    return render(request, "organ/calendar.html", {"tasks": tasks})
+    year = int(request.GET.get('year', datetime.now().year))
+    month = int(request.GET.get('month', datetime.now().month))
+
+    current_month = date(year, month, 1)
+
+    prev_month = (current_month.replace(month=current_month.month-1)
+                  if current_month.month > 1 else current_month.replace(year=current_month.year-1, month=12))
+    next_month = (current_month.replace(month=current_month.month+1) 
+                  if current_month.month < 12 else current_month.replace(year=current_month.year+1, month=1))
+
+    first_day = make_aware(datetime(year, month, 1))
+    last_day = make_aware(datetime(year, month, monthrange(year, month)[1], 23, 59, 59))
+    tasks = Tasks.objects.filter(
+        user=request.user,
+        time_create__range=(first_day, last_day)
+    ).order_by('time_create')
+
+    month_days = []
+
+    first_weekday = current_month.weekday()
+
+    if first_weekday > 0:
+        prev_month_last_day = monthrange(prev_month.year, prev_month.month)[1]
+        for day in range(prev_month_last_day - first_weekday + 1, prev_month_last_day + 1):
+            month_days.append({
+                'date': date(prev_month.year, prev_month.month, day),
+                'day': day,
+                'month': prev_month.month
+            })
+
+    days_in_month = monthrange(year, month)[1]
+    for day in range(1, days_in_month + 1):
+        month_days.append({
+            'date': date(year, month, day),
+            'day': day,
+            'month': month
+        })
+
+    last_weekday = date(year, month, days_in_month).weekday()
+    if last_weekday < 6:
+        for day in range(1, 6 - last_weekday + 1):
+            month_days.append({
+                'date': date(next_month.year, next_month.month, day),
+                'day': day,
+                'month': next_month.month
+            })
+
+    today = datetime.now()
+
+    context = {
+        'current_month': current_month,
+        'prev_month': prev_month,
+        'next_month': next_month,
+        'tasks': tasks,
+        'month_days': month_days,
+        'today': today,
+    }
+
+    return render(request, "organ/calendar.html", context)
 
 
 def about(request):
@@ -154,6 +213,7 @@ def delete_account(request):
         user.delete()
         return redirect("home")
     return redirect("account")
+
 
 @csrf_exempt
 def delete_all_tasks(request):

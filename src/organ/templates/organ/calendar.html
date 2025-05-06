@@ -4,47 +4,57 @@
 
 {% block body %}
 {% load static %}
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
 
-<h1>Календарь задач</h1>
-<h2>Скоро здесь появится удобный календарь</h2>
-<br><br><br>
+<section class="calendar">
+  <div class="calendar__container">
+    <div class="calendar__meta">
+      <h1 class="calendar__title">Календарь задач</h1>
+      <div class="calendar__back">
+        <a href="{% url 'account' %}" class="calendar__link">В личный кабинет →</a>
+      </div>
+    </div>
+    
+    <div class="calendar__controls">
+      <a href="?year={{ prev_month.year }}&month={{ prev_month.month }}" class="calendar__nav-link">← Предыдущий месяц</a>
+      <h2 class="calendar__month-title">{{ current_month|date:"F Y" }}</h2>
+      <a href="?year={{ next_month.year }}&month={{ next_month.month }}" class="calendar__nav-link">Следующий месяц →</a>
+    </div>
 
-{% if tasks %}
-    <table>
-        <thead>
-            <tr>
-                <th>Номер задачи</th>
-                <th>Имя пользователя</th>
-                <th>Задача</th>
-                <th>Описание</th>
-                <th>Статус</th>
-                <th>Дата создания</th>
-                <th>Дата завершения</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-                <tr>
-                    <td>{{ task.id }}</td>
-                    <td>{{ task.user.username }}</td>
-                    <td>{{ task.title }}</td>
-                    <td>{{ task.descriptionn }}</td>
-                    <td>{{ task.statuss }}</td>
-                    <td>{{ task.time_create }}</td>
-                    <td>{{ task.time_finish }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>Задачи не найдены</p>
-{% endif %}
+    <div class="calendar__grid">
+      <div class="calendar__weekdays">
+        <div class="calendar__weekday">Пн</div>
+        <div class="calendar__weekday">Вт</div>
+        <div class="calendar__weekday">Ср</div>
+        <div class="calendar__weekday">Чт</div>
+        <div class="calendar__weekday">Пт</div>
+        <div class="calendar__weekday">Сб</div>
+        <div class="calendar__weekday">Вс</div>
+      </div>
 
-<br><br><br>
-<a href="{% url 'account' %}">Назад</a>
+      <div class="calendar__days">
+        {% for day in month_days %}
+          {% if day.month != current_month.month %}
+            <div class="calendar__day calendar__day--other-month">
+              {{ day.day }}
+            </div>
+          {% else %}
+            <div class="calendar__day {% if day.date == today.date %}calendar__day--today{% endif %}">
+              <div class="calendar__day-number">{{ day.day }}</div>
+              <div class="calendar__tasks">
+                {% for task in tasks %}
+                  {% if task.time_create.date == day.date %}
+                    <div class="calendar__task {% if task.statuss %}calendar__task--completed{% endif %}" 
+                         title="{{ task.title }} - {{ task.descriptionn }}">
+                      {{ task.title|truncatechars:15 }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
