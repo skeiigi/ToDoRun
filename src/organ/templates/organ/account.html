@@ -5,23 +5,35 @@
 {% block body %}
 {% load static %}
 
-<main class="home">
+<section class="home">
     <div class="home__container">
-        <h1 class="home__title">Здравствуйте, {{ request.user.username }}</h1>
-
-
-        <br>
-        <form action="{% url 'tasks' %}">
-            <button type="submit">Перейти в ваши задачи</button>
-        </form>
-        <br>
-
-        <button id="deleteAccountButton" type="button" class="home__button home__button--danger">
-            Удалить аккаунт
-        </button>
-        {% include 'organ/popup_confirm.html' %}
-
+        <div class="account__container">
+            <div class="account__user-info">
+                <div class="account__avatar"></div>
+                <div>
+                    <h1 class="account__title">Здравствуйте, {{ request.user.username }}</h1>
+                    <p class="account__meta">Добро пожаловать в ваш личный кабинет</p>
+                </div>
+            </div>
+    
+            <div class="account__actions">
+                <div class="account__redirect">
+                    <form action="{% url 'tasks' %}">
+                        <button type="submit" class="account__button">Перейти в ваши задачи</button>
+                    </form>
+                    <form action="{% url 'calendar' %}">
+                        <button type="submit" class="account__button">Перейти в календарь</button>
+                    </form>
+                </div>
+    
+                <button id="deleteAccountButton" type="button" class="account__button">
+                    Удалить аккаунт
+                </button>
+            </div>
+    
+            {% include 'organ/popup_confirm.html' %}
+        </div>
     </div>
-</main>
+</section>
 
 {% endblock %}

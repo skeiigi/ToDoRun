@@ -4,14 +4,9 @@
 
 {% block body %}
 {% load static %}
-<main class="home">
+<section class="home">
     <div class="home__container">
         <div class="about">
-
-            {% comment %} как по мне эта хуйня не смотрится (то что закомментено) {% endcomment %}
-            {% comment %} <h1 class="about__naming">Наггетсы и сырный соус</h1> {% endcomment %}
-            {% comment %} <a href="{% url 'dashboard' %}" class="back-button">Назад</a> {% endcomment %}
-
             <section class="about__team">
                 <article class="about__team-member">
                     <img src="{% static 'images/nigger1.jpg' %}" alt="Участник 1" class="about__team-photo">
@@ -50,5 +45,5 @@
             </section>
         </div>
     </div>
-</main>
+</section>
 {% endblock %}
