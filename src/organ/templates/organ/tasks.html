@@ -54,30 +54,11 @@
                             >
                           </form>
                       </div>
-
-                      {% comment %} <form method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="task_id" value="{{ task.id }}">
-                        <input type="checkbox" class="task__status-checkbox"
-                            name="statuss"
-                            {% if task.statuss %}checked{% endif %}
-                            onchange="this.form.submit()"
-                        >
-                      </form> {% endcomment %}
-                      
-                       <p class="task__card-description">{{ task.descriptionn|truncatechars:100 }}</p>
-                      
+                      <p class="task__card-description">{{ task.descriptionn|truncatechars:100 }}</p>
                       <div class="task__card-dates">
                         <div>Начало: {{ task.time_create|date:"d.m.Y H:i" }}</div>
                         <div>Завершение: {{ task.time_finish|date:"d.m.Y H:i" }}</div>
                       </div>
-                      
-                      {% comment %} <div class="task__card-footer">
-                        <form method="post" action="{% url 'delete_task' task.id %}">
-                          {% csrf_token %}
-                          <button type="submit" class="task__delete-btn">Удалить</button>
-                        </form>
-                      </div> {% endcomment %}
                     </div>
                     {% endfor %}
                   </div>
@@ -98,11 +79,9 @@
             <form method="post" class="task__form">
                 {% csrf_token %}
                 <div class="task__form-field">
-                    <!--<label for="id_title" style="color: white;">Название:</label>-->
                     {{form.title}}
                 </div>
                 <div class="task__form-field">
-                    <!--<label for="id_descriptionn" style="color: white;">Описание:</label>-->
                     {{form.descriptionn}}
                 </div>
                 <button type="submit" class="task__submit-btn">Добавить задачу</button>
