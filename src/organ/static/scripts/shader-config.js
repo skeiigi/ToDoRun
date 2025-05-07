@@ -10,6 +10,7 @@ camera.position.z = 6;
 cameraGroup.add(camera);
 
 export let renderer = null;
+export let composer = null;
 const canvasElement = document.querySelector("canvas.webgl");
 
 export const initRenderer = () => {
@@ -19,10 +20,19 @@ export const initRenderer = () => {
 
   renderer = new THREE.WebGLRenderer({
     canvas: canvasElement,
-    alpha: true
+    alpha: true,
+    antialias: true
   });
+  
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+  renderer.physicallyCorrectLights = true;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.autoUpdate = true;
 };
 
 export const removeRenderer = () => {
@@ -32,6 +42,10 @@ export const removeRenderer = () => {
   if (renderer) {
     renderer.dispose();
     renderer = null;
+  }
+  if (composer) {
+    composer.dispose();
+    composer = null;
   }
   camera = null;
 };

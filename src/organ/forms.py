@@ -47,22 +47,32 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        
+        # Удаляем стандартные подсказки
         for field_name in self.fields:
             self.fields[field_name].help_text = None
 
+        # Настраиваем атрибуты полей
         self.fields["username"].widget.attrs.update(
             {"id": "id_username", "placeholder": " "}
         )
         self.fields["email"].widget.attrs.update(
             {"id": "id_email", "placeholder": " "}
-        )  # noqa: E501
+        )
         self.fields["password1"].widget.attrs.update(
-            {"id": "id_password1", "placeholder": " "}
+            {"id": "id_password1", "placeholder": " ", "class": "password-field"}
         )
         self.fields["password2"].widget.attrs.update(
-            {"id": "id_password2", "placeholder": " "}
+            {"id": "id_password2", "placeholder": " ", "class": "password-field"}
         )
+
+        # Добавляем кастомные сообщения об ошибках
+        self.fields['password1'].error_messages = {
+            'password_too_short': 'Пароль должен содержать минимум 6 символов',
+            'password_too_common': 'Этот пароль слишком простой',
+            'password_entirely_numeric': 'Пароль не может состоять только из цифр',
+            'password_similar_to_username': 'Пароль слишком похож на имя пользователя',
+        }
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -75,6 +85,6 @@ class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(
         label="",
         widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": ""}
+            attrs={"class": "form-control password-field", "placeholder": ""}
         ),  # noqa: E501
     )

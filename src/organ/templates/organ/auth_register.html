@@ -25,12 +25,34 @@
                     <div class="input-container">
                         {{ form.password1 }}
                         <label for="id_password1" class="placeholder">Пароль</label>
+                        <span class="password-toggle" onclick="togglePassword('id_password1')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        {% if form.password1.errors %}
+                        <div class="error-message">
+                            {% for error in form.password1.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="input-container">
                         {{ form.password2 }}
                         <label for="id_password2" class="placeholder">Подтверждение пароля</label>
+                        <span class="password-toggle" onclick="togglePassword('id_password2')">
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
+                    {% if form.password2.errors %}
+                    <div class="error-message">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    
 
                     <div class="button-container">
                         <button type="submit" class="btn btn-form-primary">Зарегистрироваться</button>

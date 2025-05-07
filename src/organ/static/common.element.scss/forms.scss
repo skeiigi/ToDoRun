@@ -157,3 +157,38 @@
 .register-link:hover {
   color: rgba(0, 0, 0, 0.5);
 }
+
+.error-message {
+    color: #ff4d4d;
+    width: 336px;
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 77, 77, 0.1);
+    border-radius: 20px;
+    
+    p {
+        margin: 2px;
+        padding: 2px 0;
+    }
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+    
+    &:hover {
+        color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+// Увеличиваем правый отступ для поля пароля, чтобы текст не накладывался на иконку
+.password-field {
+    padding-right: 40px !important;
+}

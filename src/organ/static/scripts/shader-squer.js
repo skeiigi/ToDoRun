@@ -1,40 +1,78 @@
-import { scene, removeRenderer, initRenderer } from './shader-config.js';
+import { scene, initRenderer } from './shader-config.js';
 
-let mesh1 = null;
-let mesh2 = null;
+let model1 = null;
+let model2 = null;
 export let sectionMeshes = [];
+let modelsLoaded = false;
+
+const loadingManager = new THREE.LoadingManager();
+const gltfLoader = new THREE.GLTFLoader(loadingManager);
 
 const createMeshes = () => {
-  const material1 = new THREE.MeshToonMaterial({ color: "#F5F5DC", transparent: false });
-  mesh1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), material1);
+  if (modelsLoaded) return;
+  
+  gltfLoader.load(
+    window.MODEL_PATHS.model1,
+    (gltf) => {
+      if (!model1) {
+        model1 = gltf.scene;
+        model1.position.set(3, 0, 0);
+        model1.scale.set(0.5, 0.5, 0.5);
+        scene.add(model1);
+        sectionMeshes.push(model1);
+      }
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading model1:', error);
+    }
+  );
 
-  const material2 = new THREE.MeshToonMaterial({ color: "#F5F5DC", transparent: false });
-  mesh2 = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), material2);
-
-  mesh1.position.set(3, 2, 0);
-  mesh2.position.set(-3, -2, 0);
-
-  sectionMeshes = [mesh1, mesh2];
-  scene.add(mesh1, mesh2);
+  gltfLoader.load(
+    window.MODEL_PATHS.model2,
+    (gltf) => {
+      if (!model2) {
+        model2 = gltf.scene;
+        model2.position.set(-3, -1, 0);
+        model2.scale.set(7, 7, 7);
+        scene.add(model2);
+        sectionMeshes.push(model2);
+      }
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading model2:', error);
+    }
+  );
+  
+  modelsLoaded = true;
 };
 
-const directionalLight = new THREE.DirectionalLight("#ffffff", 0.85);
-directionalLight.position.set(1, 1, 0);
-scene.add(directionalLight);
+const envLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(envLight);
+
+const dirLight = new THREE.DirectionalLight(0xfff4e6, 2.5);
+dirLight.position.set(5, 10, 7);
+dirLight.castShadow = true;
+dirLight.shadow.mapSize.width = 4096;
+dirLight.shadow.mapSize.height = 4096;
+dirLight.shadow.camera.near = 0.1;
+dirLight.shadow.camera.far = 100;
+dirLight.shadow.normalBias = 0.05;
+scene.add(dirLight);
+
+const fillLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.7);
+fillLight.position.set(-5, 3, -5);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0xffffff, 1.2);
+rimLight.position.set(0, 5, -10);
+rimLight.shadow.camera.far = 50;
+scene.add(rimLight);
 
 export const checkScreenSize = () => {
-  const shouldRender = window.innerWidth > 768;
-
-  if (shouldRender) {
-    initRenderer();
-    createMeshes();
-  } else {
-    scene.remove(mesh1, mesh2);
-    mesh1 = null;
-    mesh2 = null;
-    sectionMeshes = [];
-    removeRenderer();
-  }
+  initRenderer();
+  createMeshes();
 };
 
 checkScreenSize();

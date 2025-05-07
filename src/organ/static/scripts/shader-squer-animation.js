@@ -80,11 +80,13 @@ window.addEventListener("resize", () => {
     camera.updateProjectionMatrix();
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    if (composer) {
+      composer.setSize(sizes.width, sizes.height);
+      composer.passes.forEach(pass => {
+        if (pass.setSize) pass.setSize(sizes.width, sizes.height);
+      });
+    }
   }
 
-  checkScreenSize();
-
-  if (renderer && !animationId) {
-    tick();
-  }
 });
