@@ -32,6 +32,11 @@
                         <label for="id_password2" class="placeholder">Подтверждение пароля</label>
                     </div>
 
+                    <div class="input-container captcha-container">
+                        {{ form.captcha }}
+                        {{ form.captcha.errors }}
+                    </div>
+
                     <div class="button-container">
                         <button type="submit" class="btn btn-form-primary">Зарегистрироваться</button>
                     </div>
@@ -68,5 +73,7 @@
         </form>
     </div>
 </section>
+
+<script src="{% static "components.js/replace-placeholder.js" %}"></script>
 
 {% endblock %}

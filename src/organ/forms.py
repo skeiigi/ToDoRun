@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
+from captcha.fields import CaptchaField
 from .models import Tasks, Subtasks
-
 
 class TaskStatusForm(forms.ModelForm):
     class Meta:
@@ -53,6 +53,8 @@ class SubtasksStatusForm(forms.ModelForm):
 
 
 class RegisterForm(UserCreationForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
@@ -78,6 +80,8 @@ class RegisterForm(UserCreationForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
+    captcha = CaptchaField()
+
     username = forms.CharField(
         label="",
         widget=forms.TextInput(

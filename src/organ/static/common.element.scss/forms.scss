@@ -8,7 +8,6 @@
   width: 450px;
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2.5px);
-  margin: 100px auto;
   padding: 30px;
   text-align: center;
   border-radius: $border-radius;
@@ -162,7 +161,6 @@
 // описание надёжного пароля
 
 .description-reliable-password {
-  margin: 100px auto;
   border-radius: 42px;
   background-color: rgba(0, 0, 0, 0.1);
 
@@ -185,4 +183,14 @@
     font-weight: 600;
     font-size: 28px;
   }  
+}
+
+.captcha {
+  inline-size: 175px;
+  block-size: 75px;
+  margin-block-end: 6px;
+}
+
+.errorlist {
+  margin-top: 10px;
 }

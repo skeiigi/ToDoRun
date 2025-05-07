@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path("", views.home, name="home"),
     path("admin/", admin.site.urls, name="admin"),
     path("login/", views.auth_login, name="auth_login"),
@@ -19,5 +20,6 @@ urlpatterns = [
     path('delete-all-tasks/', views.delete_all_tasks, name='delete_all_tasks'),
     path("tasks/<int:task_id>/subtasks/", views.subtasks, name='subtasks'),
     path("subtasks/delete/<int:subtask_id>/", views.delete_subtask, name="delete_subtask"),
-    # path("subtasks/", views.subtasks, name='subtasks')
+    # path("subtasks/", views.subtasks, name='subtasks'),
+    path('captcha/', include('captcha.urls')),
 ]

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "organ",
     "sass_processor",
+    'captcha',
 ]
 
 STATICFILES_FINDERS = [
