@@ -6,7 +6,7 @@
 {% load static %}
 <section class="home">
     <div class="home__container">
-        <form method="post">
+        <form method="post" style="position: relative; display: flex; gap: 10px;">
             {% csrf_token %}
             <div class="form">
                 <div class="form-input">
@@ -42,7 +42,31 @@
                     </div>
                 </div>
             </div>
+
+            {% comment %} form description reliable password {% endcomment %}
+            <div class="description-reliable-password">
+                <div class="description-reliable-password__ruls">
+                    <h4 class="description-reliable-password__title">
+                        Правила пароля 
+                    </h4>
+                    <ul class="description-reliable-password__list-ruls">
+                        <li>
+                            • Минимальная длина пароля — 8 символов.
+                        </li>
+                        <li>
+                            • Пароль не должен быть слишком похож на личную информацию пользователя
+                        </li>
+                        <li>
+                            • Пароль не должен быть слишком распространённым
+                        </li>
+                        <li>
+                            • Пароль не должен состоять только из цифр.
+                        </li>
+                    </ul>
+                </div>
+            </div>    
         </form>
     </div>
 </section>
+
 {% endblock %}

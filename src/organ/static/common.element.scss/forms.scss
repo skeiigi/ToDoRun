@@ -1,6 +1,7 @@
 @import '../vendor/variables.scss';
 
 .form {
+  z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,4 +157,32 @@
     color: #666;
     user-select: none;
   }
+}
+
+// описание надёжного пароля
+
+.description-reliable-password {
+  margin: 100px auto;
+  border-radius: 42px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  &__ruls {
+    box-sizing: border-box;
+    padding: 30px;
+    inline-size: 310px;
+    line-height: 22px;
+    block-size: 100%;
+  }
+
+  &__list-ruls {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 28px;
+  }  
 }
