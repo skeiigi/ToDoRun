@@ -17,9 +17,12 @@
                         <label for="id_username" class="placeholder">Логин</label>
                     </div>
 
-                    <div class="input-container">
+                    <div class="input-container password-container">
                         {{ form.password }}
                         <label for="id_password" class="placeholder">Пароль</label>
+                        <span class="toggle-password" onclick="togglePassword()">
+                            👁
+                        </span>
                     </div>
 
                     <div class="button-container">
@@ -35,4 +38,7 @@
         </form>
     </div>
 </section>
+
+<script src="{% static 'components.js/auth_eye.js' %}"></script>
+
 {% endblock %}
