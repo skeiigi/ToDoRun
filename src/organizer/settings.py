@@ -152,3 +152,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Защита от XSS
 SECURE_BROWSER_XSS_FILTER = True
+
+# Увеличение буфера для файлов
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
+
+# Увеличение размера запроса в целом
+DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600
