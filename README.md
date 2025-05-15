@@ -1,5 +1,7 @@
 # To Do Run
 
+![pre-screen](./docs/img/prescreen.png)
+
 This is an Information Security project. As a team, together with our classmates, we are making a web application in Django.
 
 ## Documentation
@@ -8,6 +10,15 @@ This is an Information Security project. As a team, together with our classmates
 - [Guides](./docs/)
   - A guide on how to use prt-commit [EN](./docs/pre-commit/PRE-COMMIT.en.md)/[RU](./docs/pre-commit/PRE-COMMIT.ru.md)
   - How to run in docker [EN](./docs/docker/DOCKER.en.md)/[RU](./docs/docker/DOCKER.ru.md)
+
+## Stack
+- Python
+  - Django
+- SCSS
+- GLSL
+- JavaScript
+  - Three.js
+  - GSAP
 
 ## Installation and launch
 
@@ -100,3 +111,13 @@ Manual start
 cd src
 python manage.py runserver
 ```
+
+## Authors
+- [dkmfzf](https://github.com/DKMFzF)
+- [skeiigi](https://github.com/skeiigi)
+
+<a href="./LICENSE.md">
+  <span style="font-size: 20px;">
+    License
+  </span>
+</a>
