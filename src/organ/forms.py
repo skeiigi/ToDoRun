@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
 from .models import Tasks, Subtasks
 
+
 class TaskStatusForm(forms.ModelForm):
     class Meta:
         model = Tasks
@@ -27,8 +28,7 @@ class TaskForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(
                 attrs={
-                    "size": 50,  # Ширина поля в символах
-                    # "style": "width: 300px;",  # Или задайте размер через CSS
+                    "size": 50,
                     "placeholder": "Назовите задачу",
                 }
             ),

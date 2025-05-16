@@ -1,11 +1,11 @@
 from datetime import datetime, date
 
+from django.views.decorators.cache import cache_page
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-# from captcha.models import CaptchaStore
 
 from calendar import monthrange
 from django.utils.timezone import make_aware
@@ -64,10 +64,8 @@ def subtasks(request, task_id):
     task = get_object_or_404(Tasks, id=task_id)
     sbtasks = Subtasks.objects.filter(task=task)
 
-    # Форма для добавления новой подзадачи
     if request.method == "POST":
-        # Проверяем, какая форма была отправлена
-        if 'add_subtask' in request.POST:  # Форма для добавления новой подзадачи
+        if 'add_subtask' in request.POST:
             form = SubtasksForm(request.POST)
             if form.is_valid():
                 sbtask = form.save(commit=False)
@@ -75,11 +73,10 @@ def subtasks(request, task_id):
                 sbtask.save()
                 return redirect('subtasks', task_id=task.id)
 
-        elif 'update_status' in request.POST:  # Форма для обновления статуса
-            subtask_id = request.POST.get('subtask_id')  # Получаем ID подзадачи
+        elif 'update_status' in request.POST:
+            subtask_id = request.POST.get('subtask_id')
             if subtask_id:
                 subtask = get_object_or_404(Subtasks, id=subtask_id)
-                # Обновляем статус выполнения
                 subtask.is_finished = 'is_finished' in request.POST
                 subtask.save()
                 return redirect('subtasks', task_id=task.id)
@@ -170,12 +167,9 @@ def calendar(request):
     return render(request, "organ/calendar.html", context)
 
 
+@cache_page(60 * 15)
 def about(request):
     return render(request, "organ/about.html")
-
-
-# def account(request):
-#     return render(request, 'organ/account.html')
 
 
 def home(request):
@@ -222,7 +216,7 @@ def delete_account(request):
 @csrf_exempt
 def delete_all_tasks(request):
     if request.method == 'POST':
-        Tasks.objects.all().delete()  # Удалить все задачи
+        Tasks.objects.all().delete()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'}, status=400)
 
@@ -300,19 +294,3 @@ def ajax_task_operation(request):
             'message': str(e),
             'type': type(e).__name__
         }, status=500)
-
-
-# def ajax_check_captcha(request):
-#     if request.method == "POST":
-#         import json
-#         data = json.loads(request.body)
-#         captcha_value = data.get("captcha", "")
-#         captcha_key = data.get("captcha_key", "")
-
-#         try:
-#             store = CaptchaStore.objects.get(hashkey=captcha_key)
-#             is_valid = store.response == captcha_value
-#         except CaptchaStore.DoesNotExist:
-#             is_valid = False
-
-#         return JsonResponse({"valid": is_valid})
