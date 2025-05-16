@@ -4,9 +4,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+# from captcha.models import CaptchaStore
 
 from calendar import monthrange
 from django.utils.timezone import make_aware
+
+import json
 
 from .forms import (
     CustomAuthenticationForm,
@@ -112,7 +116,7 @@ def calendar(request):
 
     prev_month = (current_month.replace(month=current_month.month-1)
                   if current_month.month > 1 else current_month.replace(year=current_month.year-1, month=12))
-    next_month = (current_month.replace(month=current_month.month+1) 
+    next_month = (current_month.replace(month=current_month.month+1)
                   if current_month.month < 12 else current_month.replace(year=current_month.year+1, month=1))
 
     first_day = make_aware(datetime(year, month, 1))
@@ -221,3 +225,94 @@ def delete_all_tasks(request):
         Tasks.objects.all().delete()  # Удалить все задачи
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'}, status=400)
+
+
+@require_POST
+@csrf_exempt
+def ajax_check_password(request):
+    try:
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        user = authenticate(username=username, password=password)
+        return JsonResponse({'valid': user is not None})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
+
+@require_POST
+@csrf_exempt
+@login_required
+def ajax_task_operation(request):
+    try:
+        data = json.loads(request.body)
+        operation = data.get('operation')
+
+        if operation == 'create':
+            form = TaskForm(data)
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.user = request.user
+                task.save()
+                return JsonResponse({
+                    'status': 'success',
+                    'task': {
+                        'id': task.id,
+                        'title': task.title,
+                        'descriptionn': task.descriptionn,
+                        'statuss': task.statuss,
+                        'time_create': task.time_create.strftime('%Y-%m-%d %H:%M')
+                    }
+                })
+            else:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Ошибка валидации',
+                    'errors': form.errors.get_json_data()
+                }, status=400)
+
+        elif operation == 'delete':
+            task_id = data.get('task_id')
+            task = get_object_or_404(Tasks, id=task_id, user=request.user)
+            task.delete()
+            return JsonResponse({'status': 'success'})
+
+        elif operation == 'toggle_status':
+            task_id = data.get('task_id')
+            task = get_object_or_404(Tasks, id=task_id, user=request.user)
+            task.statuss = not task.statuss
+            if task.statuss:
+                task.time_finish = datetime.now()
+            else:
+                task.time_finish = None
+            task.save()
+            return JsonResponse({
+                'status': 'success',
+                'new_status': task.statuss,
+                'time_finish': task.time_finish.strftime('%Y-%m-%d %H:%M') if task.time_finish else None
+            })
+
+        return JsonResponse({'status': 'error', 'message': 'Invalid operation'}, status=400)
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e),
+            'type': type(e).__name__
+        }, status=500)
+
+
+# def ajax_check_captcha(request):
+#     if request.method == "POST":
+#         import json
+#         data = json.loads(request.body)
+#         captcha_value = data.get("captcha", "")
+#         captcha_key = data.get("captcha_key", "")
+
+#         try:
+#             store = CaptchaStore.objects.get(hashkey=captcha_key)
+#             is_valid = store.response == captcha_value
+#         except CaptchaStore.DoesNotExist:
+#             is_valid = False
+
+#         return JsonResponse({"valid": is_valid})

@@ -6,7 +6,7 @@
 {% load static %}
 <section class="home">
     <div class="home__container">
-        <form method="post">
+        <form method="post" id="login-form" onsubmit="return handleLoginSubmit(event)">
             {% csrf_token %}
             <div class="form">
                 <div class="form-input">
@@ -32,6 +32,7 @@
 
                     <div class="button-container">
                         <button type="submit" class="btn btn-form-primary">Войти</button>
+                        <p id="password-check-result"></p>
                     </div>
 
                     <div class="link-container">
@@ -43,6 +44,8 @@
         </form>
     </div>
 </section>
+
+<script src="{% static "components.js/loginAjax.js" %}"></script>
 
 <script src="{% static "components.js/replace-placeholder.js" %}"></script>
 <script src="{% static 'components.js/auth_eye.js' %}"></script>

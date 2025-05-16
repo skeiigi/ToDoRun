@@ -20,6 +20,7 @@ urlpatterns = [
     path('delete-all-tasks/', views.delete_all_tasks, name='delete_all_tasks'),
     path("tasks/<int:task_id>/subtasks/", views.subtasks, name='subtasks'),
     path("subtasks/delete/<int:subtask_id>/", views.delete_subtask, name="delete_subtask"),
-    # path("subtasks/", views.subtasks, name='subtasks'),
     path('captcha/', include('captcha.urls')),
+    path("ajax/check-password/", views.ajax_check_password, name="ajax_check_password"),
+    path("ajax/task-operation/", views.ajax_task_operation, name="ajax_task_operation"),
 ]
