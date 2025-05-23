@@ -81,7 +81,15 @@
                 <div class="task__cards-container">
                   <div class="task__cards">
                     {% for task in tasks %}
-                    <div class="task__card {% if task.statuss %}task__completed{% endif %}" onclick="openTaskDetailsPopup({{ forloop.counter }}, '{{ task.title }}', '{{ task.descriptionn }}', '{{ task.time_create|date:'d.m.Y H:i' }}', '{{ task.time_finish|date:'d.m.Y H:i' }}', {{ task.id }})">
+                    <div class="task__card {% if task.statuss %}task__completed{% endif %}" 
+                         data-task-number="{{ forloop.counter }}"
+                         data-task-title="{{ task.title|escapejs }}"
+                         data-task-description="{{ task.descriptionn|escapejs }}"
+                         data-task-start="{{ task.time_create|date:'d.m.Y H:i' }}"
+                         data-task-end="{{ task.time_finish|date:'d.m.Y H:i' }}"
+                         data-task-deadline="{{ task.deadline|date:'d.m.Y' }}"
+                         data-task-id="{{ task.id }}"
+                         onclick="openTaskDetailsPopup(this)">
                       <div class="task__card-number">#{{ forloop.counter }}</div>
                       <div class="task__card-header">
                         <h3 class="task__card-title">{{ task.title }}</h3>
@@ -97,8 +105,18 @@
                       </div>
                       <p class="task__card-description">{{ task.descriptionn|truncatechars:100 }}</p>
                       <div class="task__card-dates">
-                        <div>Начало: {{ task.time_create|date:"d.m.Y H:i" }}</div>
-                        <div>Завершение: {{ task.time_finish|date:"d.m.Y H:i" }}</div>
+                        <div>
+                          <i class="fas fa-play"></i>
+                          <span>Начало: {{ task.time_create|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div>
+                          <i class="fas fa-check"></i>
+                          <span>Завершение: {{ task.time_finish|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div>
+                          <i class="fas fa-clock"></i>
+                          <span>Дедлайн: {{ task.deadline|date:"d.m.Y" }}</span>
+                        </div>
                       </div>
                     </div>
                     {% endfor %}
@@ -125,6 +143,9 @@
               <div class="task__form-field">
                   {{form.descriptionn}}
               </div>
+              <div class="task__form-field">
+                  {{form.deadline}}
+              </div>
               <button type="submit" class="task__submit-btn">Добавить задачу</button>
           </form>
         </div>
@@ -146,6 +167,7 @@
                     <h3>Даты:</h3>
                     <p>Начало: <span id="task-details-start"></span></p>
                     <p>Завершение: <span id="task-details-end"></span></p>
+                    <p>Дедлайн: <span id="task-details-deadline"></span></p>
                 </div>
             </div>
             <div class="task__popup-footer">
@@ -162,20 +184,20 @@
 </main>
 
 <script>
-  {% comment %} TODO: вставить в файл {% endcomment %}
-    function openTaskDetailsPopup(number, title, description, start, end, taskId) {
+    function openTaskDetailsPopup(element) {
         if (event && event.target.classList.contains('task__status-checkbox')) {
             return;
         }
 
-        document.getElementById('task-details-number').textContent = '#' + number;
-        document.getElementById('task-details-title').textContent = title;
-        document.getElementById('task-details-description').textContent = description;
-        document.getElementById('task-details-start').textContent = start;
-        document.getElementById('task-details-end').textContent = end;
+        document.getElementById('task-details-number').textContent = '#' + element.dataset.taskNumber;
+        document.getElementById('task-details-title').textContent = element.dataset.taskTitle;
+        document.getElementById('task-details-description').textContent = element.dataset.taskDescription;
+        document.getElementById('task-details-start').textContent = element.dataset.taskStart;
+        document.getElementById('task-details-end').textContent = element.dataset.taskEnd;
+        document.getElementById('task-details-deadline').textContent = element.dataset.taskDeadline;
         
-        document.getElementById('task-details-delete-form').action = `/tasks/delete/${taskId}/`;
-        document.getElementById('subtasks-form').action = `/tasks/${taskId}/subtasks/`;
+        document.getElementById('task-details-delete-form').action = `/tasks/delete/${element.dataset.taskId}/`;
+        document.getElementById('subtasks-form').action = `/tasks/${element.dataset.taskId}/subtasks/`;
         
         document.getElementById('task-details-popup').style.display = 'flex';
     }

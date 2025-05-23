@@ -91,9 +91,11 @@ document.getElementById('task-create-form').addEventListener('submit', function(
     e.stopPropagation();
     
     const form = this;
+    const deadlineInput = form.querySelector('[name="deadline"]');
     const formData = {
         title: form.querySelector('[name="title"]').value,
         descriptionn: form.querySelector('[name="descriptionn"]').value,
+        deadline: deadlineInput.value || null,
         operation: 'create'
     };
     
@@ -103,9 +105,7 @@ document.getElementById('task-create-form').addEventListener('submit', function(
         .then(function(response) {
             console.log('Задача успешно создана', response);
             document.getElementById('task-popup').style.display = 'none';
-
             form.reset();
-
             return updateTasksList();
         })
         .catch(function(error) {

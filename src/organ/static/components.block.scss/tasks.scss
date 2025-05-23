@@ -254,6 +254,20 @@
     font-size: 0.8rem;
     color: rgba(0, 0, 0, 0.75);
     margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &:last-child {
+        color: #e74c3c;
+        font-weight: 500;
+      }
+    }
   }
 
   &__card-footer {
@@ -417,6 +431,22 @@
     textarea {
       min-height: 80px;
       resize: vertical;
+    }
+  }
+
+  &__deadline-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #2ecc71;
     }
   }
 

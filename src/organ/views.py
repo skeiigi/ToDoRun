@@ -33,6 +33,7 @@ def tasks(request):
                 task = form.save(commit=False)
                 task.user = request.user
                 task.save()
+                return redirect("tasks")
         elif "task_id" in request.POST:
             task = Tasks.objects.get(
                 id=request.POST.get("task_id"), user=request.user
@@ -243,7 +244,13 @@ def ajax_task_operation(request):
         operation = data.get('operation')
 
         if operation == 'create':
-            form = TaskForm(data)
+            form_data = {
+                'title': data.get('title'),
+                'descriptionn': data.get('descriptionn'),
+                'deadline': data.get('deadline') if data.get('deadline') else None
+            }
+            
+            form = TaskForm(form_data)
             if form.is_valid():
                 task = form.save(commit=False)
                 task.user = request.user
@@ -255,14 +262,15 @@ def ajax_task_operation(request):
                         'title': task.title,
                         'descriptionn': task.descriptionn,
                         'statuss': task.statuss,
-                        'time_create': task.time_create.strftime('%Y-%m-%d %H:%M')
+                        'time_create': task.time_create.strftime('%Y-%m-%d %H:%M'),
+                        'deadline': task.deadline.strftime('%Y-%m-%d') if task.deadline else None
                     }
                 })
             else:
                 return JsonResponse({
                     'status': 'error',
                     'message': 'Ошибка валидации',
-                    'errors': form.errors.get_json_data()
+                    'errors': form.errors.as_json()
                 }, status=400)
 
         elif operation == 'delete':

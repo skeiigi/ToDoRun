@@ -9,6 +9,7 @@ class Tasks(models.Model):
     statuss = models.BooleanField(default=False)
     time_create = models.DateTimeField(auto_now_add=True)
     time_finish = models.DateTimeField(blank=True, null=True)
+    deadline = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.title

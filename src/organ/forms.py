@@ -18,11 +18,12 @@ class TaskStatusForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        fields = ["title", "descriptionn"]
+        fields = ["title", "descriptionn", "deadline"]
 
         labels = {
             "title": "Название",
             "descriptionn": "Описание",
+            "deadline": "Дедлайн",
         }
 
         widgets = {
@@ -35,6 +36,12 @@ class TaskForm(forms.ModelForm):
             "descriptionn": forms.Textarea(
                 attrs={
                     "placeholder": "Опишите задачу",
+                }
+            ),
+            "deadline": forms.DateInput(
+                attrs={
+                        "type": "date",
+                        "class": "task__deadline-input"
                 }
             ),
         }

@@ -42,9 +42,9 @@
               <div class="calendar__day-number">{{ day.day }}</div>
               <div class="calendar__tasks">
                 {% for task in tasks %}
-                  {% if task.time_create.date == day.date %}
+                  {% if task.deadline.date == day.date %}
                     <div class="calendar__task {% if task.statuss %}calendar__task--completed{% endif %}" 
-                         title="{{ task.title }} - {{ task.descriptionn }}">
+                         title="{{ task.title }} - {{ task.descriptionn }} - Дедлайн: {{ task.deadline|date:'H:i' }}">
                       {{ task.title|truncatechars:15 }}
                     </div>
                   {% endif %}
