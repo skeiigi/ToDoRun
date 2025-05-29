@@ -50,13 +50,13 @@ def tasks(request):
         return redirect("tasks")
     
     tasks = Tasks.objects.filter(user=request.user)
-    print("Категории в контексте:", TaskCategory.objects.all())
+    form = TaskForm()  # Создаем форму с пустыми данными
     return render(
         request, 
         "organ/tasks.html", 
         {
             "tasks": tasks, 
-            "form": TaskForm(),
+            "form": form,
             "categories": TaskCategory.objects.all()
         }
     )

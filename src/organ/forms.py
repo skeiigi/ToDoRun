@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from captcha.fields import CaptchaField
-from .models import Tasks, Subtasks
+from .models import TaskCategory, Tasks, Subtasks
 
 
 class TaskStatusForm(forms.ModelForm):
@@ -47,6 +47,12 @@ class TaskForm(forms.ModelForm):
             ),
             "category": forms.Select(attrs={"class": "task__category-select"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(TaskForm, self).__init__(*args, **kwargs)
+        self.fields['category'].queryset = TaskCategory.objects.all()
+        self.fields['category'].required = False
+        self.fields['category'].empty_label = "Без категории"
 
 
 class SubtasksForm(forms.ModelForm):
