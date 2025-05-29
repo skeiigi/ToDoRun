@@ -96,6 +96,7 @@ document.getElementById('task-create-form').addEventListener('submit', function(
         title: form.querySelector('[name="title"]').value,
         descriptionn: form.querySelector('[name="descriptionn"]').value,
         deadline: deadlineInput.value || null,
+        category: form.querySelector('[name="category"]').value || null, // Добавлено
         operation: 'create'
     };
     

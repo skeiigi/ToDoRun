@@ -18,12 +18,13 @@ class TaskStatusForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        fields = ["title", "descriptionn", "deadline"]
+        fields = ["title", "descriptionn", "deadline", "category"]
 
         labels = {
             "title": "Название",
             "descriptionn": "Описание",
             "deadline": "Дедлайн",
+            "category": "Категория",
         }
 
         widgets = {
@@ -44,6 +45,7 @@ class TaskForm(forms.ModelForm):
                         "class": "task__deadline-input"
                 }
             ),
+            "category": forms.Select(attrs={"class": "task__category-select"}),
         }
 
 

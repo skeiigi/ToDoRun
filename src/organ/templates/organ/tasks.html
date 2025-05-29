@@ -44,6 +44,24 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.task__card-category {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.task__popup-category {
+    margin-top: 15px;
+}
+
+.task__category-select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-top: 5px;
+}
 </style>
 
 <main class="home">
@@ -82,14 +100,15 @@
                   <div class="task__cards">
                     {% for task in tasks %}
                     <div class="task__card {% if task.statuss %}task__completed{% endif %}" 
-                         data-task-number="{{ forloop.counter }}"
-                         data-task-title="{{ task.title|escapejs }}"
-                         data-task-description="{{ task.descriptionn|escapejs }}"
-                         data-task-start="{{ task.time_create|date:'d.m.Y H:i' }}"
-                         data-task-end="{{ task.time_finish|date:'d.m.Y H:i' }}"
-                         data-task-deadline="{{ task.deadline|date:'d.m.Y' }}"
-                         data-task-id="{{ task.id }}"
-                         onclick="openTaskDetailsPopup(this)">
+                        data-task-number="{{ forloop.counter }}"
+                        data-task-title="{{ task.title|escapejs }}"
+                        data-task-description="{{ task.descriptionn|escapejs }}"
+                        data-task-start="{{ task.time_create|date:'d.m.Y H:i' }}"
+                        data-task-end="{{ task.time_finish|date:'d.m.Y H:i' }}"
+                        data-task-deadline="{{ task.deadline|date:'d.m.Y' }}"
+                        data-task-category="{% if task.category %}{{ task.category.get_name_display }}{% else %}Без категории{% endif %}"
+                        data-task-id="{{ task.id }}"
+                        onclick="openTaskDetailsPopup(this)">
                       <div class="task__card-number">#{{ forloop.counter }}</div>
                       <div class="task__card-header">
                         <h3 class="task__card-title">{{ task.title }}</h3>
@@ -116,6 +135,15 @@
                         <div>
                           <i class="fas fa-clock"></i>
                           <span>Дедлайн: {{ task.deadline|date:"d.m.Y" }}</span>
+                        </div>
+                        <div class="task__card-category">
+                            <div class="task__card-category">
+                                {% if task.category %}
+                                    {{ task.category.get_name_display }}
+                                {% else %}
+                                    Без категории
+                                {% endif %}
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -146,6 +174,10 @@
               <div class="task__form-field">
                   {{form.deadline}}
               </div>
+              <div class="task__form-field">
+                  <label for="id_category">Категория:</label>
+                  {{form.category}}
+              </div>
               <button type="submit" class="task__submit-btn">Добавить задачу</button>
           </form>
         </div>
@@ -168,6 +200,10 @@
                     <p>Начало: <span id="task-details-start"></span></p>
                     <p>Завершение: <span id="task-details-end"></span></p>
                     <p>Дедлайн: <span id="task-details-deadline"></span></p>
+                    <div class="task__popup-category">
+                        <h3>Категория:</h3>
+                        <p id="task-details-category"></p>
+                    </div>
                 </div>
             </div>
             <div class="task__popup-footer">
@@ -188,6 +224,8 @@
         if (event && event.target.classList.contains('task__status-checkbox')) {
             return;
         }
+
+        document.getElementById('task-details-category').textContent = element.dataset.taskCategory;
 
         document.getElementById('task-details-number').textContent = '#' + element.dataset.taskNumber;
         document.getElementById('task-details-title').textContent = element.dataset.taskTitle;

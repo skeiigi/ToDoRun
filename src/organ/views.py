@@ -19,7 +19,7 @@ from .forms import (
     TaskStatusForm,
     SubtasksForm,
 )
-from .models import Tasks, Subtasks
+from .models import TaskCategory, Tasks, Subtasks
 
 from django.http import JsonResponse
 
@@ -37,20 +37,29 @@ def tasks(request):
         elif "task_id" in request.POST:
             task = Tasks.objects.get(
                 id=request.POST.get("task_id"), user=request.user
-            )  # noqa: E501
+            )
             form = TaskStatusForm(request.POST, instance=task)
             if form.is_valid():
                 task = form.save(commit=False)
+                print("Создана задача с категорией:", task.category)
                 if task.statuss:
                     task.time_finish = datetime.now()
                 else:
                     task.time_finish = None
                 task.save()
         return redirect("tasks")
+    
     tasks = Tasks.objects.filter(user=request.user)
+    print("Категории в контексте:", TaskCategory.objects.all())
     return render(
-        request, "organ/tasks.html", {"tasks": tasks, "form": TaskForm()}
-    )  # noqa: E501
+        request, 
+        "organ/tasks.html", 
+        {
+            "tasks": tasks, 
+            "form": TaskForm(),
+            "categories": TaskCategory.objects.all()
+        }
+    )
 
 
 @login_required
@@ -215,6 +224,8 @@ def delete_account(request):
 
 
 @csrf_exempt
+@require_POST
+@login_required
 def delete_all_tasks(request):
     if request.method == 'POST':
         Tasks.objects.all().delete()
@@ -247,7 +258,8 @@ def ajax_task_operation(request):
             form_data = {
                 'title': data.get('title'),
                 'descriptionn': data.get('descriptionn'),
-                'deadline': data.get('deadline') if data.get('deadline') else None
+                'deadline': data.get('deadline') if data.get('deadline') else None,
+                'category': data.get('category')
             }
             
             form = TaskForm(form_data)
@@ -263,7 +275,9 @@ def ajax_task_operation(request):
                         'descriptionn': task.descriptionn,
                         'statuss': task.statuss,
                         'time_create': task.time_create.strftime('%Y-%m-%d %H:%M'),
-                        'deadline': task.deadline.strftime('%Y-%m-%d') if task.deadline else None
+                        'deadline': task.deadline.strftime('%Y-%m-%d') if task.deadline else None,
+                        'category': task.category.name if task.category else None,
+                        'category_display': task.category.get_name_display() if task.category else 'Без категории'
                     }
                 })
             else:
