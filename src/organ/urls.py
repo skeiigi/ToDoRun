@@ -11,6 +11,7 @@ urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
     path("login/", views.auth_login, name="auth_login"),
     path("register/", views.auth_register, name="auth_register"),
+    path("verify-email/", views.verify_email, name="verify_email"),
     path("about/", cache_page(60 * 15)(views.about), name="about"),
     path("account/", views.account, name="account"),
     path("logout/", LogoutView.as_view(next_page="home"), name="logout"),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path("ajax/check-password/", views.ajax_check_password, name="ajax_check_password"),
     path("ajax/task-operation/", views.ajax_task_operation, name="ajax_task_operation"),
+    path('resend-code/', views.resend_code, name='resend_code'),
 ]

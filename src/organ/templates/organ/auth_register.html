@@ -12,29 +12,71 @@
                 <div class="form-input">
                     <h2 class="form-title">Регистрация</h2>
 
+                    {% if form.non_field_errors %}
+                    <div class="error-message">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
                     <div class="input-container">
                         {{ form.username }}
                         <label for="id_username" class="placeholder">Имя пользователя</label>
+                        {% if form.username.errors %}
+                        <div class="field-error">
+                            {% for error in form.username.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="input-container">
                         {{ form.email }}
                         <label for="id_email" class="placeholder">Электронная почта</label>
+                        {% if form.email.errors %}
+                        <div class="field-error">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="input-container">
                         {{ form.password1 }}
                         <label for="id_password1" class="placeholder">Пароль</label>
+                        {% if form.password1.errors %}
+                        <div class="field-error">
+                            {% for error in form.password1.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="input-container">
                         {{ form.password2 }}
                         <label for="id_password2" class="placeholder">Подтверждение пароля</label>
+                        {% if form.password2.errors %}
+                        <div class="field-error">
+                            {% for error in form.password2.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="input-container captcha-container">
                         {{ form.captcha }}
-                        {{ form.captcha.errors }}
+                        {% if form.captcha.errors %}
+                        <div class="field-error">
+                            {% for error in form.captcha.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div class="button-container">
@@ -43,7 +85,7 @@
 
                     <div class="link-container">
                         <h4>Уже есть аккаунт?</h4>
-                        <a href="{% url 'auth_login' %}" class="register-link" data-transition="slide">Войти</a>
+                        <a href="{% url 'auth_login' %}" class="login-link" data-transition="slide">Войти</a>
                     </div>
                 </div>
             </div>

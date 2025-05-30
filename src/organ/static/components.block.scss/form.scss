@@ -1,0 +1,49 @@
+.form {
+    // ... existing code ...
+
+    .error-message {
+        background-color: rgba(255, 0, 0, 0.1);
+        border: 1px solid #ff0000;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        color: #ff0000;
+        font-size: 0.9rem;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .field-error {
+        color: #ff0000;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        padding-left: 5px;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .input-container {
+        position: relative;
+        align-items: right;
+        margin-bottom: 20px;
+
+        &.error {
+            input {
+                border-color: #ff0000;
+            }
+
+            label {
+                color: #ff0000;
+            }
+        }
+    }
+
+
+    // ... existing code ...
+} 

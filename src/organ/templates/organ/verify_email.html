@@ -1,0 +1,74 @@
+{% extends 'organ/base.html' %}
+
+{% block title %}Подтверждение email{% endblock %}
+
+{% block body %}
+{% load static %}
+<section class="home">
+    <div class="home__container">
+        <form method="post" action="{% url 'verify_email' %}">
+            {% csrf_token %}
+            <div class="form">
+                <div class="form-input">
+                    <h2 class="form-title">Подтверждение email</h2>
+                    
+                    {% if message %}
+                    <div class="info-message">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+
+                    <p class="form-description">Введите код подтверждения, отправленный на ваш email</p>
+
+                    <div class="input-container">
+                        {{ form.code }}
+                        <label for="id_verification_code" class="placeholder">Код подтверждения</label>
+                    </div>
+
+                    {% if form.code.errors %}
+                    <div class="error-message">
+                        {% for error in form.code.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="button-container">
+                        <button type="submit" class="btn btn-form-primary">Подтвердить</button>
+                    </div>
+
+                    <div class="link-container">
+                        <p>Не получили код? <a href="#" onclick="resendCode()">Отправить повторно</a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+function resendCode() {
+    const formData = new FormData();
+    const userId = '{{ user.id|default:"" }}';
+    if (userId) {
+        formData.append('user_id', userId);
+    }
+    
+    fetch('{% url "resend_code" %}', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Новый код отправлен на ваш email');
+        } else {
+            alert('Ошибка при отправке кода: ' + data.message);
+        }
+    });
+}
+</script>
+{% endblock %} 

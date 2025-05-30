@@ -1,30 +1,64 @@
 from datetime import datetime, date
+from calendar import monthrange
+import random
+import smtplib
+from django.utils.timezone import make_aware
 
-from django.views.decorators.cache import cache_page
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.views.decorators.cache import cache_page
+from django.core.mail import send_mail
+from django.contrib.auth import get_user_model
+from django.core.exceptions import PermissionDenied
+from functools import wraps
 
-from calendar import monthrange
-from django.utils.timezone import make_aware
+import logging
+logger = logging.getLogger(__name__)
 
 import json
 
 from .forms import (
     CustomAuthenticationForm,
     RegisterForm,
+    VerificationCodeForm,
     TaskForm,
     TaskStatusForm,
-    SubtasksForm,
+    SubtasksForm
 )
-from .models import TaskCategory, Tasks, Subtasks
+from .models import Tasks, EmailVerification, Subtasks, TaskCategory
+from .services import send_verification_email
 
 from django.http import JsonResponse
 
 
+def email_verification_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('auth_login')
+            
+        verification = EmailVerification.objects.filter(
+            user=request.user,
+            is_verified=True
+        ).first()
+        
+        if not verification:
+            send_verification_email(request.user)
+            verification_form = VerificationCodeForm()
+            return render(request, "organ/verify_email.html", {
+                "form": verification_form,
+                "message": "Ваш email не подтвержден. Мы отправили новый код подтверждения."
+            })
+            
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+
 @login_required
+@email_verification_required
 def tasks(request):
     if request.method == "POST":
         if "title" in request.POST:
@@ -63,6 +97,7 @@ def tasks(request):
 
 
 @login_required
+@email_verification_required
 def delete_task(request, task_id):
     task = get_object_or_404(Tasks, id=task_id, user=request.user)
     task.delete()
@@ -70,6 +105,7 @@ def delete_task(request, task_id):
 
 
 @login_required
+@email_verification_required
 def subtasks(request, task_id):
     task = get_object_or_404(Tasks, id=task_id)
     sbtasks = Subtasks.objects.filter(task=task)
@@ -102,6 +138,7 @@ def subtasks(request, task_id):
 
 
 @login_required
+@email_verification_required
 def delete_subtask(request, subtask_id):
     subtask = get_object_or_404(Subtasks, id=subtask_id)
     task_id = subtask.task.id
@@ -110,11 +147,13 @@ def delete_subtask(request, subtask_id):
 
 
 @login_required
+@email_verification_required
 def account(request):
     return render(request, "organ/account.html")
 
 
 @login_required
+@email_verification_required
 def calendar(request):
     year = int(request.GET.get('year', datetime.now().year))
     month = int(request.GET.get('month', datetime.now().month))
@@ -194,20 +233,62 @@ def auth_login(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
             if user is not None:
+                # Проверяем, подтвержден ли email
+                verification = EmailVerification.objects.filter(
+                    user=user,
+                    is_verified=True
+                ).first()
+                
+                if not verification:
+                    # Если email не подтвержден, отправляем новый код
+                    send_verification_email(user)
+                    login(request, user)
+                    verification_form = VerificationCodeForm()
+                    return render(request, "organ/verify_email.html", {
+                        "form": verification_form,
+                        "message": "Ваш email не подтвержден. Мы отправили новый код подтверждения."
+                    })
+                
                 login(request, user)
-                return redirect("account")
+                return redirect("home")  # Изменено с "account" на "home"
     else:
         form = CustomAuthenticationForm()
     return render(request, "organ/auth_login.html", {"form": form})
 
-
+    
 def auth_register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
+            # Создаем пользователя
             user = form.save()
-            login(request, user)
-            return redirect("account")
+            
+            try:
+                # Отправляем код подтверждения
+                verification = send_verification_email(user)
+                
+                # Авторизуем пользователя
+                login(request, user)
+                
+                # Показываем форму подтверждения
+                verification_form = VerificationCodeForm()
+                return render(request, 'organ/verify_email.html', {
+                    'form': verification_form,
+                    'message': 'Код подтверждения отправлен на ваш email.'
+                })
+                
+            except Exception as e:
+                # Если произошла ошибка при отправке email, удаляем пользователя
+                user.delete()
+                return render(request, 'organ/auth_register.html', {
+                    'form': form,
+                    'register_error': f"Ошибка при отправке email: {str(e)}"
+                })
+        else:
+            return render(request, 'organ/auth_register.html', {
+                'form': form,
+                'register_error': "Пожалуйста, проверьте введённые данные!"
+            })
     else:
         form = RegisterForm()
     return render(request, "organ/auth_register.html", {"form": form})
@@ -249,6 +330,7 @@ def ajax_check_password(request):
 @require_POST
 @csrf_exempt
 @login_required
+@email_verification_required
 def ajax_task_operation(request):
     try:
         data = json.loads(request.body)
@@ -316,3 +398,62 @@ def ajax_task_operation(request):
             'message': str(e),
             'type': type(e).__name__
         }, status=500)
+
+
+@require_POST
+def resend_code(request):
+    try:
+        # Получаем пользователя из контекста или сессии
+        user = request.user if request.user.is_authenticated else None
+        if not user and 'user_id' in request.POST:
+            user = get_user_model().objects.get(id=request.POST['user_id'])
+        
+        if not user:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Пользователь не найден'
+            }, status=400)
+            
+        # Удаляем старые коды
+        EmailVerification.objects.filter(
+            user=user,
+            is_verified=False
+        ).delete()
+        
+        # Отправляем новый код
+        send_verification_email(user)
+        return JsonResponse({'status': 'success'})
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=400)
+
+
+@login_required
+def verify_email(request):
+    if request.method == "POST":
+        form = VerificationCodeForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            
+            # Проверяем код
+            verification = EmailVerification.objects.filter(
+                user=request.user,
+                code=code,
+                is_verified=False
+            ).first()
+            
+            if verification and not verification.is_expired():
+                verification.is_verified = True
+                verification.save()
+                return redirect('home')
+            else:
+                form.add_error('code', 'Неверный или устаревший код подтверждения')
+    else:
+        form = VerificationCodeForm()
+    
+    return render(request, 'organ/verify_email.html', {
+        'form': form,
+        'message': 'Пожалуйста, введите код подтверждения'
+    })

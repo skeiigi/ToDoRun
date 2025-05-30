@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-# import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,6 +42,11 @@ INSTALLED_APPS = [
     "organ",
     "sass_processor",
     'captcha',
+    'djoser',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'users',
+    'django.core.mail'
 ]
 
 STATICFILES_FINDERS = [
@@ -158,3 +162,17 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
 
 # Увеличение размера запроса в целом
 DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'suptodorun@mail.ru'
+EMAIL_HOST_PASSWORD = 'QGiffyxPrEgUSmq8HLrS'  # Здесь нужно указать пароль приложения от Gmail
+DEFAULT_FROM_EMAIL = 'Support ToDoRun <suptodorun@mail.ru>'
+SERVER_EMAIL = EMAIL_HOST_USER
+CORS_ALLOW_ALL_ORIGINS = True  # Только для разработки! В продакшене настройте конкретные домены
+# Настройки для проверки email
+EMAIL_VERIFICATION_REQUIRED = True
+EMAIL_VERIFICATION_TIMEOUT = 24  # часы
