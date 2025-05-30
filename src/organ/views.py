@@ -3,6 +3,7 @@ from calendar import monthrange
 import random
 import smtplib
 from django.utils.timezone import make_aware
+from django.conf import settings
 
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -26,12 +27,15 @@ from .forms import (
     VerificationCodeForm,
     TaskForm,
     TaskStatusForm,
-    SubtasksForm
+    SubtasksForm,
+    PasswordResetRequestForm,
+    SetNewPasswordForm
 )
 from .models import Tasks, EmailVerification, Subtasks, TaskCategory
 from .services import send_verification_email
 
 from django.http import JsonResponse
+from django.contrib import messages
 
 
 def email_verification_required(view_func):
@@ -456,4 +460,141 @@ def verify_email(request):
     return render(request, 'organ/verify_email.html', {
         'form': form,
         'message': 'Пожалуйста, введите код подтверждения'
+    })
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = get_user_model().objects.get(email=email)
+            
+            # Генерируем код для сброса пароля
+            code = EmailVerification.generate_code()
+            
+            # Создаем запись о сбросе пароля
+            verification = EmailVerification.objects.create(
+                user=user,
+                code=code,
+                is_verified=False
+            )
+            
+            # Отправляем email с кодом
+            subject = 'Сброс пароля'
+            message = f'''
+            Здравствуйте, {user.username}!
+            
+            Вы запросили сброс пароля. Для установки нового пароля, пожалуйста, введите следующий код:
+            
+            {code}
+            
+            Код действителен в течение 24 часов.
+            
+            Если вы не запрашивали сброс пароля, проигнорируйте это письмо.
+            
+            С уважением,
+            Команда ToDoRun
+            '''
+            
+            try:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+                
+                # Сохраняем email в сессии для последующего использования
+                request.session['reset_email'] = email
+                
+                return render(request, 'organ/verify_email.html', {
+                    'form': VerificationCodeForm(),
+                    'message': 'Код для сброса пароля отправлен на ваш email.',
+                    'is_password_reset': True
+                })
+                
+            except Exception as e:
+                verification.delete()
+                form.add_error('email', f'Ошибка при отправке email: {str(e)}')
+    else:
+        form = PasswordResetRequestForm()
+    
+    return render(request, 'organ/password_reset_request.html', {
+        'form': form
+    })
+
+def password_reset_confirm(request):
+    if 'reset_email' not in request.session:
+        return redirect('password_reset_request')
+        
+    if request.method == "POST":
+        form = VerificationCodeForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            email = request.session['reset_email']
+            
+            # Проверяем код
+            verification = EmailVerification.objects.filter(
+                user__email=email,
+                code=code,
+                is_verified=False
+            ).first()
+            
+            if verification and not verification.is_expired():
+                # Если код верный, показываем форму для нового пароля
+                verification.is_verified = True
+                verification.save()
+                
+                # Сохраняем email в сессии для следующего шага
+                request.session['reset_email_confirmed'] = email
+                
+                return render(request, 'organ/password_reset_confirm.html', {
+                    'form': SetNewPasswordForm(),
+                    'email': email
+                })
+            else:
+                form.add_error('code', 'Неверный или устаревший код')
+    else:
+        form = VerificationCodeForm()
+    
+    return render(request, 'organ/password_reset_confirm.html', {
+        'form': SetNewPasswordForm,
+        'email': email,
+        'message': 'Введите код для сброса пароля',
+        'is_password_reset': True
+    })
+
+def password_reset_complete(request):
+    if 'reset_email_confirmed' not in request.session:
+        return redirect('password_reset_request')
+        
+    if request.method == "POST":
+        form = SetNewPasswordForm(request.POST)
+        if form.is_valid():
+            email = request.session['reset_email_confirmed']
+            user = get_user_model().objects.get(email=email)
+            
+            # Устанавливаем новый пароль
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            
+            # Удаляем данные из сессии
+            del request.session['reset_email_confirmed']
+            
+            # Удаляем все неиспользованные коды верификации для этого пользователя
+            EmailVerification.objects.filter(
+                user=user,
+                is_verified=False
+            ).delete()
+            
+            # Перенаправляем на страницу входа с сообщением об успехе
+            messages.success(request, 'Пароль успешно изменен. Теперь вы можете войти с новым паролем.')
+            return redirect('auth_login')
+    else:
+        form = SetNewPasswordForm()
+    
+    return render(request, 'organ/password_reset_confirm.html', {
+        'form': form
     })

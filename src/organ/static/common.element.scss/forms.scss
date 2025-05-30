@@ -25,11 +25,15 @@
 .input-container {
   width: 336px;
   position: relative;
+  justify-content: center;
+
   align-items: center;
   margin: 10px 0;
 }
 
 .form input {
+  justify-content: center;
+  align-items: center;
   outline: 0;
   background: rgba(255, 255, 255, 0.5);
   color: rgba(0, 0, 0, 0.75);;

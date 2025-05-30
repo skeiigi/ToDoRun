@@ -6,10 +6,11 @@
 {% load static %}
 <section class="home">
     <div class="home__container">
-        <form method="post" action="{% url 'verify_email' %}">
+        <form method="post" action="{% if email %}{% url 'password_reset_complete' %}{% else %}{% url 'password_reset_confirm' %}{% endif %}">
+
             {% csrf_token %}
             <div class="form">
-                <div class="form-input">
+                <div class="form-input" style="max-width: 400px; margin: 0 auto; padding: 2rem;">
                     <h2 class="form-title">Подтверждение email</h2>
                     
                     {% if message %}
@@ -20,7 +21,7 @@
 
                     <p class="form-description">Введите код подтверждения, отправленный на ваш email</p>
 
-                    <div class="input-container">
+                    <div class="input-container" style="max-width: 400px; margin: 0 auto;">
                         {{ form.code }}
                         <label for="id_verification_code" class="placeholder">Код подтверждения</label>
                     </div>

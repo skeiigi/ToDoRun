@@ -155,3 +155,49 @@ class VerificationCodeForm(forms.Form):
             'class': 'form-control'
         })
     )
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'id': 'id_email',
+            'placeholder': ' ',
+            'class': 'form-control'
+        })
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Пользователь с таким email не найден')
+        return email
+
+
+class SetNewPasswordForm(forms.Form):
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'id': 'id_password1',
+            'placeholder': ' ',
+            'class': 'form-control'
+        })
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'id': 'id_password2',
+            'placeholder': ' ',
+            'class': 'form-control'
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError('Пароли не совпадают')
+
+        if password1 and len(password1) < 8:
+            raise forms.ValidationError('Пароль должен содержать минимум 8 символов')
+
+        return cleaned_data
