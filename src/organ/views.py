@@ -441,25 +441,44 @@ def verify_email(request):
         if form.is_valid():
             code = form.cleaned_data['code']
             
-            # Проверяем код
-            verification = EmailVerification.objects.filter(
-                user=request.user,
-                code=code,
-                is_verified=False
-            ).first()
-            
-            if verification and not verification.is_expired():
-                verification.is_verified = True
-                verification.save()
-                return redirect('home')
+            # Проверяем, является ли это сбросом пароля
+            if 'reset_email' in request.session:
+                email = request.session['reset_email']
+                verification = EmailVerification.objects.filter(
+                    user__email=email,
+                    code=code,
+                    is_verified=False
+                ).first()
+                
+                if verification and not verification.is_expired():
+                    verification.is_verified = True
+                    verification.save()
+                    request.session['reset_email_confirmed'] = email
+                    return render(request, 'organ/password_reset_confirm.html', {
+                        'form': SetNewPasswordForm(),
+                        'email': email
+                    })
             else:
-                form.add_error('code', 'Неверный или устаревший код подтверждения')
+                # Проверяем код для подтверждения email при регистрации
+                verification = EmailVerification.objects.filter(
+                    user=request.user,
+                    code=code,
+                    is_verified=False
+                ).first()
+                
+                if verification and not verification.is_expired():
+                    verification.is_verified = True
+                    verification.save()
+                    return redirect('home')
+            
+            form.add_error('code', 'Неверный или устаревший код подтверждения')
     else:
         form = VerificationCodeForm()
     
     return render(request, 'organ/verify_email.html', {
         'form': form,
-        'message': 'Пожалуйста, введите код подтверждения'
+        'message': 'Пожалуйста, введите код подтверждения',
+        'is_password_reset': 'reset_email' in request.session
     })
 
 

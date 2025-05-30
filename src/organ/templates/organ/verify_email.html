@@ -6,8 +6,7 @@
 {% load static %}
 <section class="home">
     <div class="home__container">
-        <form method="post" action="{% if email %}{% url 'password_reset_complete' %}{% else %}{% url 'password_reset_confirm' %}{% endif %}">
-
+        <form method="post" action="{% if is_password_reset %}{% url 'password_reset_confirm' %}{% else %}{% url 'verify_email' %}{% endif %}">
             {% csrf_token %}
             <div class="form">
                 <div class="form-input" style="max-width: 400px; margin: 0 auto; padding: 2rem;">
